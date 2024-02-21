@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 15:33:30 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/21 16:23:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ int main(int argc, char **argv, char **env)
 		return (1);
 	if (init(&mini, env))
 		return (1);
+		running = 1;
+	while (running)
+	{
+		printf("%s@minishell", mini.user);
+		mini.input = readline("");
+	}
 	freetab(mini.env);
+	free(mini.user);
 	return (0);
 }

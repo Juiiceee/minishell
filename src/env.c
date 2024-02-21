@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 15:13:34 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/21 16:21:27 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	recoenv(char **argv, t_mini *mini)
+int	recoenv(t_mini *mini, char **argv)
 {
 	int	length;
 	int	i;
