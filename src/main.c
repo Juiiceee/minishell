@@ -15,15 +15,23 @@ int	tablength(char **tab)
 int	recoenv(char **argv, t_mini *mini)
 {
 	int	length;
+	int	i;
 
 	length = tablength(argv);
+	i = 0;
 	if (!length)
 		return (1);
-	
-	while (argv)
+	mini->env = ft_calloc(sizeof(char *) * length, 0);
+	if (!mini->env)
+		return (1);
+	while (argv[i])
 	{
-		ft_strdup()
+		mini->env[i] = ft_strdup(argv[i]);
+		if (!mini->env[i])
+			return (1);
+		i++;	
 	}
+	return (0);
 }
 
 #define buffersize 1024
