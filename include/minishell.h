@@ -13,5 +13,8 @@ typedef struct s_mini
 	char **env;
 }	t_mini;
 
+//utilstab.c
+int		tablength(char **tab);
+void	freetab(char **tab);
 
 #endif
