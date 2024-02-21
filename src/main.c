@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 16:23:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/21 16:39:04 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int main(int argc, char **argv, char **env)
 		running = 1;
 	while (running)
 	{
-		printf("%s@minishell", mini.user);
-		mini.input = readline("");
+		mini.userstr = ft_strjoin(mini.user, "@minishell$ ");
+		mini.input = readline(mini.userstr);
+		free(mini.userstr);
+		add_history(mini.input);
 	}
 	freetab(mini.env);
 	free(mini.user);

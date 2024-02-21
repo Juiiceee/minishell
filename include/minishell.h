@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 16:17:26 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/21 16:37:10 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 typedef struct s_mini
 {
+	char	*userstr;
 	char	*user;
 	char	*input;
 	char	**env;
