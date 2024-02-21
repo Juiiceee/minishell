@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include <string.h>
+#include "../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -19,9 +19,13 @@ int main(int argc, char **argv, char **env)
 	{
 		if (!getcwd(hello, sizeof(hello)))
 			perror("getcwd");
-		printf("%s", hello);
+		write(1, &hello, ft_strlen(hello));
 		read(0, buf, buffersize);
-		//if ()
+		/*if (!buf)
+			continue;
+		else
+			*/
+		printf("%s\n", buf);
 	}
 
 	/*pid_t	pid;
