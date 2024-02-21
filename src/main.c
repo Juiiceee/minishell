@@ -1,9 +1,4 @@
-#include <unistd.h>
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "../include/minishell.h"
 
 #define buffersize 1024
 
@@ -13,7 +8,8 @@ int main(int argc, char **argv, char **env)
 	char buf[1024];
 	int	running;
 
-	running = 1;
+	printf("%s", getenv("USER"));
+	/*running = 1;
 
 	while (running)
 	{
@@ -24,9 +20,9 @@ int main(int argc, char **argv, char **env)
 		/*if (!buf)
 			continue;
 		else
-			*/
+			
 		printf("%s\n", buf);
-	}
+	}*/
 
 	/*pid_t	pid;
 	read(0, &hello, 500);
