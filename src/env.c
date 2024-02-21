@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 16:39:04 by lbehr            ###   ########.fr       */
+/*   Created: 2024/02/21 15:13:33 by lbehr             #+#    #+#             */
+/*   Updated: 2024/02/21 16:21:27 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+int	recoenv(t_mini *mini, char **argv)
 {
-	t_mini mini;
-	int	running;
-	(void)argv;
+	int	length;
+	int	i;
 
-	if (argc != 1)
+	length = tablength(argv);
+	i = 0;
+	if (!length)
 		return (1);
-	if (init(&mini, env))
+	mini->env = ft_calloc(sizeof(char *), length + 1);
+	if (!mini->env)
 		return (1);
-		running = 1;
-	while (running)
+	while (argv[i])
 	{
-		mini.userstr = ft_strjoin(mini.user, "@minishell$ ");
-		mini.input = readline(mini.userstr);
-		free(mini.userstr);
-		add_history(mini.input);
+		mini->env[i] = ft_strdup(argv[i]);
+		if (!mini->env[i])
+			return (1);
+		i++;
 	}
-	freetab(mini.env);
-	free(mini.user);
+	mini->env[i] = NULL;
 	return (0);
 }
