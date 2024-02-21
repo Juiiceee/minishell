@@ -1,11 +1,11 @@
 NAME            := minishell
 SRC_DIR			:= src
 OBJ_DIR			:= obj
-SRCS			:= main.c utilstab.c
+SRCS			:= env.c  init.c  main.c  prompt.c  utilstab.c
 SRCS			:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC				:= cc
-#CFLAGS			:= -Wall -Wextra -Werror -g3
+#CFLAGS			:= -Wall -Wextra -Werror -g3 -lreadline
 CFLAGS			:= -g3
 RM				:= rm -rf
 DIR_DUP			= mkdir -p $(@D)
@@ -15,7 +15,7 @@ all		:	$(NAME)
 
 $(NAME) :	$(OBJS)
 	@make -C $(LIBFT) --no-print-directory
-	$(CC) $(OBJS) $(LIBFT)/libft.a -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT)/libft.a -lreadline -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
