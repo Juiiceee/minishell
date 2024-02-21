@@ -8,4 +8,10 @@
 #include <sys/wait.h>
 #include "../libft/libft.h"
 
+typedef struct s_mini
+{
+	char **env;
+}	t_mini;
+
+
 #endif

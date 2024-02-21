@@ -1,14 +1,42 @@
 #include "../include/minishell.h"
 
+int	tablength(char **tab)
+{
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return (0);
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+int	recoenv(char **argv, t_mini *mini)
+{
+	int	length;
+
+	length = tablength(argv);
+	if (!length)
+		return (1);
+	
+	while (argv)
+	{
+		ft_strdup()
+	}
+}
+
 #define buffersize 1024
 
 int main(int argc, char **argv, char **env)
 {
+	t_mini mini;
 	char hello[buffersize];
 	char buf[1024];
 	int	running;
 
-	printf("%s", getenv("USER"));
+	recoenv(env, &mini);
+	printf("%s", mini.env[3]);
 	/*running = 1
 
 	while (running)
@@ -17,7 +45,7 @@ int main(int argc, char **argv, char **env)
 			perror("getcwd");
 		write(1, &hello, ft_strlen(hello));
 		read(0, buf, buffersize);
-		/*if (!buf)
+		if (!buf)
 			continue;
 		else
 			
