@@ -3,6 +3,8 @@
 minishell
 salut
 
+test.c
+
 # Object files
 *.o
 *.ko

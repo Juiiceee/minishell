@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 16:37:10 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/21 17:42:55 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 typedef struct s_mini
 {
+	char	*currentpath;
 	char	*userstr;
 	char	*user;
 	char	*input;
@@ -36,6 +37,7 @@ void	freetab(char **tab);
 
 //env.c
 int		recoenv(t_mini *mini, char **argv);
+int		recocp(t_mini *mini);
 
 //init.c
 int		init(t_mini *mini, char **env);
