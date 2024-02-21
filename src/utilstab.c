@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utilstab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 15:13:46 by lbehr            ###   ########.fr       */
+/*   Created: 2024/02/21 15:13:49 by lbehr             #+#    #+#             */
+/*   Updated: 2024/02/21 15:13:50 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include "../libft/libft.h"
-
-typedef struct s_mini
+int	tablength(char **tab)
 {
-	char **env;
-}	t_mini;
+	int	i;
 
-//utilstab.c
-int		tablength(char **tab);
-void	freetab(char **tab);
+	i = 0;
+	if (!tab)
+		return (0);
+	while (tab[i])
+		i++;
+	return (i);
+}
 
-//env.c
-int	recoenv(char **argv, t_mini *mini);
+void	freetab(char **tab)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}

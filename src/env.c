@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 15:13:46 by lbehr            ###   ########.fr       */
+/*   Created: 2024/02/21 15:13:33 by lbehr             #+#    #+#             */
+/*   Updated: 2024/02/21 15:13:34 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include "../libft/libft.h"
-
-typedef struct s_mini
+int	recoenv(char **argv, t_mini *mini)
 {
-	char **env;
-}	t_mini;
+	int	length;
+	int	i;
 
-//utilstab.c
-int		tablength(char **tab);
-void	freetab(char **tab);
-
-//env.c
-int	recoenv(char **argv, t_mini *mini);
-
-#endif
+	length = tablength(argv);
+	i = 0;
+	if (!length)
+		return (1);
+	mini->env = ft_calloc(sizeof(char *), length + 1);
+	if (!mini->env)
+		return (1);
+	while (argv[i])
+	{
+		mini->env[i] = ft_strdup(argv[i]);
+		if (!mini->env[i])
+			return (1);
+		i++;
+	}
+	mini->env[i] = NULL;
+	return (0);
+}
