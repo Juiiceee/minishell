@@ -9,7 +9,7 @@ int main(int argc, char **argv, char **env)
 	int	running;
 
 	printf("%s", getenv("USER"));
-	/*running = 1;
+	/*running = 1
 
 	while (running)
 	{
