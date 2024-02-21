@@ -6,7 +6,7 @@ SRCS			:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC				:= cc
 #CFLAGS			:= -Wall -Wextra -Werror -g3 -lreadline
-CFLAGS			:= -g3
+CFLAGS			:= -g3 -Iinclude
 RM				:= rm -rf
 DIR_DUP			= mkdir -p $(@D)
 LIBFT			:= libft
