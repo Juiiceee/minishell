@@ -33,9 +33,8 @@ SRC = ft_bzero.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c 
-
-SRCB = 	ft_lstnew.c \
+		ft_putnbr_fd.c \
+		ft_lstnew.c \
 		ft_lstadd_front.c \
 		ft_lstsize.c \
 		ft_lstlast.c \
@@ -59,14 +58,14 @@ CC = cc
 
 INCLUDE = ./
 
+all: $(NAME)
+
 .c.o:
 		$(CC) $(FLAGS) -c $< -o ${<:.c=.o} -I $(INCLUDE)
 
 $(NAME): ${OBJ}
 		$(ARC) $(NAME) $(OBJ)
 		$(LIBRAN) $(NAME)
-
-all: $(NAME) $(bonus)
 
 clean:
 	rm -f $(OBJ) $(OBJB)
@@ -76,12 +75,4 @@ fclean: clean
 
 re: fclean all
 
-bonus: ${OBJB}
-	$(ARC) $(NAME) $(OBJB)
-	$(LIBRAN) $(NAME)
-
-so:
-	$(CC) -nostartfiles -fPIC $(FLAGS) $(SRC)
-	gcc -nostartfiles -shared -o libft.so $(OBJ)
-
-.PHONY : all clean fclean re so bonus
+.PHONY : all clean fclean re

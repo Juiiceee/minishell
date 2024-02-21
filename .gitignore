@@ -1,5 +1,7 @@
 # Prerequisites
 *.d
+minishell
+salut
 
 # Object files
 *.o

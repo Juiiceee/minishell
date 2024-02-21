@@ -1,31 +1,35 @@
-NAME            := pipex
-OBJ_DIR         := obj
-SRCS            := error.c ft_split.c main.c process.c utils.c utilsprocess.c
-OBJS            := $(SRCS:%.c=$(OBJ_DIR)/%.o)
-CC              := cc
-CFLAGS          := -Wall -Wextra -Werror -g3 -MMD -MP
-RM              := rm -rf
-DIR_DUP         = mkdir -p $(@D)
+NAME            := minishell
+SRC_DIR			:= src
+OBJ_DIR			:= obj
+SRCS			:= main.c
+SRCS			:= $(SRCS:%=$(SRC_DIR)/%)
+OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+CC				:= cc
+#CFLAGS			:= -Wall -Wextra -Werror -g3
+RM				:= rm -rf
+DIR_DUP			= mkdir -p $(@D)
+LIBFT			:= libft
 
-all             : $(NAME)
+all		:	$(NAME)
 
-norm    :
-   $(NORM)
+$(NAME) :	$(OBJS)
+	@make -C $(LIBFT) --no-print-directory
+	$(CC) $(OBJS) $(LIBFT)/libft.a -o $(NAME)
 
-$(NAME) :       $(OBJS)
-   $(CC) $(OBJS) -o $(NAME)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(DIR_DUP)
+	$(CC) -c $< $(CFLAGS) -o $@
 
-$(OBJ_DIR)/%.o: %.c
-   $(DIR_DUP)
-   $(CC) -c $< $(CFLAGS) -o $@
+clean	:
+	$(RM) $(OBJ_DIR)
+	make -C $(LIBFT) clean --no-print-directory
 
-clean   :
-   $(RM) $(OBJ_DIR)
+fclean	:	clean
+	$(RM) $(NAME)
+	make -C $(LIBFT) fclean --no-print-directory
 
-fclean  :       clean
-   $(RM) $(NAME)
-
-re      :       fclean all
+re		:	fclean all
+	make -C $(LIBFT) re --no-print-directory
 
 .PHONY: all clean fclean re
 
