@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 17:42:55 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/21 18:02:22 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,8 @@ int		init(t_mini *mini, char **env);
 //prompt.c
 char	*pathenv(char **env, char *find);
 int		recouser(t_mini *mini);
+
+//running.c
+void	running(t_mini *mini);
 
 #endif
