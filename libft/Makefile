@@ -1,5 +1,8 @@
 NAME = libft.a
 
+OBJ_DIR			:= ../obj
+OBJS			:= $(SRC:%.c=$(OBJ_DIR)/%.o)
+
 SRC = ft_bzero.c \
 		ft_isalnum.c \
 		ft_isalpha.c \
@@ -44,9 +47,7 @@ SRC = ft_bzero.c \
 		ft_lstiter.c \
 		ft_lstmap.c
 
-OBJ = $(SRC:.c=.o)
-
-OBJB = $(SRCB:.c=.o)
+OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 FLAGS = -Wall -Wextra -Werror  
 
@@ -60,8 +61,8 @@ INCLUDE = ./
 
 all: $(NAME)
 
-.c.o:
-		$(CC) $(FLAGS) -c $< -o ${<:.c=.o} -I $(INCLUDE)
+$(OBJ_DIR)/%.o: %.c
+	$(CC) -c $< $(CFLAGS) -o $@
 
 $(NAME): ${OBJ}
 		$(ARC) $(NAME) $(OBJ)
