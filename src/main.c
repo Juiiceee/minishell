@@ -13,7 +13,8 @@ int main(int argc, char **argv, char **env)
 	char buf[1024];
 	int	running;
 
-	running = 1;
+	printf("%s", getenv("USER"));
+	/*running = 1;
 
 	while (running)
 	{
@@ -24,9 +25,9 @@ int main(int argc, char **argv, char **env)
 		/*if (!buf)
 			continue;
 		else
-			*/
+			
 		printf("%s\n", buf);
-	}
+	}*/
 
 	/*pid_t	pid;
 	read(0, &hello, 500);
