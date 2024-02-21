@@ -12,6 +12,19 @@ int	tablength(char **tab)
 	return (i);
 }
 
+void	freetab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 int	recoenv(char **argv, t_mini *mini)
 {
 	int	length;
@@ -21,7 +34,7 @@ int	recoenv(char **argv, t_mini *mini)
 	i = 0;
 	if (!length)
 		return (1);
-	mini->env = ft_calloc(sizeof(char *) * length, 0);
+	mini->env = ft_calloc(sizeof(char *), length + 1);
 	if (!mini->env)
 		return (1);
 	while (argv[i])
@@ -29,8 +42,9 @@ int	recoenv(char **argv, t_mini *mini)
 		mini->env[i] = ft_strdup(argv[i]);
 		if (!mini->env[i])
 			return (1);
-		i++;	
+		i++;
 	}
+	mini->env[i] = NULL;
 	return (0);
 }
 
@@ -43,8 +57,10 @@ int main(int argc, char **argv, char **env)
 	char buf[1024];
 	int	running;
 
-	recoenv(env, &mini);
-	printf("%s", mini.env[3]);
+	if (recoenv(env, &mini))
+		return (1);
+	printf("normal : %s\nle miens : %s\n", env[0], mini.env[0]);
+	freetab(mini.env);
 	/*running = 1
 
 	while (running)
