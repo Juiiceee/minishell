@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 14:23:00 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/22 17:34:39 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static	void	createprename(t_mini *mini)
+void	createprename(t_mini *mini)
 {
 	char	*tmp;
 	char	*tmp2;

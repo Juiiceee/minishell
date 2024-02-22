@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 14:39:03 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/22 17:30:07 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 
 typedef enum e_builtins
 {
-	cd,
-	echo,
-	pwd,
-	export,
-	unset,
-	env,
-	exit
+	CD,
+	ECHO,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT
 }	t_builtins;
 
 typedef struct s_mini
@@ -57,12 +57,14 @@ int		init(t_mini *mini, char **env);
 //prompt.c
 char	*pathenv(char **env, char *find);
 int		recouser(t_mini *mini);
-
+void	createprename(t_mini *mini);
+void	prompt();
 //running.c
 void	running(t_mini *mini);
 int		insiderunning(t_mini *mini);
 
 //signal.c
 void	recosignal();
+void	recoSigint(int sig);
 
 #endif

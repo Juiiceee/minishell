@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:32:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 17:14:46 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:57:07 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,22 @@ int	recouser(t_mini *mini)
 			return (1);
 	}
 	return (0);
+}
+
+void	prompt()
+{
+	t_mini	mini;
+
+	write(1, "\n", 1);
+	recocp(&mini);
+	createprename(&mini);
+	mini.input = readline(mini.userstr);
+	if (ft_strlen(mini.input) != 0)
+		add_history(mini.input);
+	free(mini.userstr);
+	free(mini.currentpath);
+	if (!ft_strncmp(mini.input, "cd", 2))
+		chdir("../");
+	else if (!ft_strncmp(mini.input, "exit", 4))
+		printf("exit\n");
 }

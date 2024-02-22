@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:07:36 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 14:28:57 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/22 17:37:05 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	recoSigint(int sig)
 {
-	return;
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	printf("\n");
+	rl_redisplay();
 }
 
 void	recosignal()
