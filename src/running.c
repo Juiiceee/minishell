@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 17:34:39 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/22 18:52:51 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ void	createprename(t_mini *mini)
 
 int	insiderunning(t_mini *mini)
 {
+	int i;
 	recocp(mini);
 	createprename(mini);
 	mini->input = readline(mini->userstr);
-	if (ft_strlen(mini->input) != 0)
-		add_history(mini->input);
 	free(mini->userstr);
 	free(mini->currentpath);
+	if (!mini->input)
+		return (1);
+	if (ft_strlen(mini->input) != 0)
+		add_history(mini->input);
 	if (!ft_strncmp(mini->input, "cd", 2))
 		chdir("../");
 	else if (!ft_strncmp(mini->input, "exit", 4))
