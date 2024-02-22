@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 18:23:38 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/22 10:09:53 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,14 @@ void	running(t_mini *mini)
 		if (ft_strlen(mini->input) != 0)
 			add_history(mini->input);
 		free(mini->userstr);
+		free(mini->currentpath);
+		//free(mini->user);
 		if (!ft_strncmp(mini->input, "cd", 2))
 			chdir("../");
+		else if (!ft_strncmp(mini->input, "exit", 4))
+		{
+			printf("exit\n");
+			break;
+		}
 	}
 }
