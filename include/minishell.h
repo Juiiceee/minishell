@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/21 18:02:22 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/22 14:39:03 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,19 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 #include "../libft/libft.h"
+
+typedef enum e_builtins
+{
+	cd,
+	echo,
+	pwd,
+	export,
+	unset,
+	env,
+	exit
+}	t_builtins;
 
 typedef struct s_mini
 {
@@ -48,5 +60,9 @@ int		recouser(t_mini *mini);
 
 //running.c
 void	running(t_mini *mini);
+int		insiderunning(t_mini *mini);
+
+//signal.c
+void	recosignal();
 
 #endif

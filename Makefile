@@ -1,7 +1,7 @@
 NAME            := minishell
 SRC_DIR			:= src
 OBJ_DIR			:= obj
-SRCS			:= env.c  init.c  main.c  prompt.c  running.c  utilstab.c
+SRCS			:= env.c  init.c  main.c  prompt.c  running.c  utilstab.c  signal.c
 SRCS			:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC				:= cc
