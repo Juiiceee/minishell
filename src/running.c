@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   running.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 18:52:51 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/22 19:24:52 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	insiderunning(t_mini *mini)
 	free(mini->currentpath);
 	if (!mini->input)
 		return (1);
+	ft_tokenizer(mini->input, mini);
 	if (ft_strlen(mini->input) != 0)
 		add_history(mini->input);
 	if (!ft_strncmp(mini->input, "cd", 2))

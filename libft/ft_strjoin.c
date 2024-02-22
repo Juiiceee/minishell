@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:01:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/21 17:14:08 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:30:52 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	if (!s1)
 		ft_strlcpy((char *)s1, "", 0);
+	if (!s2)
+		ft_strlcpy((char *)s2, "", 0);
 	join = malloc((sizeof (char)) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (!join)
 		return (NULL);

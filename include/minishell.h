@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 17:30:07 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/22 19:26:50 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,19 @@ int		insiderunning(t_mini *mini);
 //signal.c
 void	recosignal();
 void	recoSigint(int sig);
+
+//parse_line.c
+char	*squote_parse(char *input, int *index);
+char	*dquote_parse(char *input, int *index);
+char	*var_dquote(char *tmp);
+char	*str_parse(char *input, int *index);
+char	*punct_parse(char *input,int *i);
+
+//utils.c
+char	*free_and_join(char *old, char *new);
+
+//token.c
+void 	ft_tokenizer(char *input, t_mini *mini);
+char	*ft_select_token(char *input, int *i);
 
 #endif
