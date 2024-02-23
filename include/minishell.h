@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 19:26:50 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:44:55 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@
 #include <signal.h>
 #include "../libft/libft.h"
 
+typedef enum e_type
+{
+	CMD,
+	IN_REDIRECT,
+	OU_REDIRECT,
+	APPEND,
+	HERE_DOC,
+	PIPE,
+	DONT_EXIST
+}	t_type;
+
 typedef enum e_builtins
 {
 	CD,
@@ -33,6 +44,19 @@ typedef enum e_builtins
 	ENV,
 	EXIT
 }	t_builtins;
+
+typedef struct s_token
+{
+	char	**global;
+	t_type	data_type;
+	struct s_token *next;
+}	t_token;
+
+
+typedef struct s_exec
+{
+	char	**cmd;
+}	t_exec;
 
 typedef struct s_mini
 {
@@ -76,9 +100,25 @@ char	*punct_parse(char *input,int *i);
 
 //utils.c
 char	*free_and_join(char *old, char *new);
+char	**ft_subtab(char **tab, int start, int len);
+int		ft_tablen(char **tab);
 
-//token.c
+//tokenizer.c
 void 	ft_tokenizer(char *input, t_mini *mini);
 char	*ft_select_token(char *input, int *i);
+t_token *listing_token(char **tmp);
+
+//tokenizing.c
+void	tokenizing_redirect(char **tmp, int *i, t_token **lst);
+
+//punct_handle.c
+char 	*dollar_sign(char *input, int *i);
+char 	*redirect_sign(char *input, int *i);
+char 	*pipe_sign(char *input, int *i);
+
+//lst_utils.c
+t_token	*ms_lstnew(char **content, t_type data);
+void	ms_lstadd_back(t_token **lst, t_token *new);
+t_token	*ms_lstlast(t_token *lst);
 
 #endif

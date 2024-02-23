@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/22 19:32:29 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:08:43 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,14 @@
 
 char	*punct_parse(char *input,int *i)
 {
-	int j;
-	int k;
 	char *tmp;
-
-	j = 0;
-	k = -1; 
-	if (input[j] == '$')
-	{
-		j++;
-		while (isalpha(input[j]) && input[j])
-			j++;
-		tmp = malloc((sizeof (char)) * j);
-		while (++k < j - 1)
-			tmp[k] = input[k + 1];
-		tmp[k] = '\0';
-		*i += ft_strlen(tmp) + 1;
-		if (!getenv(tmp))
-			tmp = ft_strdup("");
-		else 
-			tmp = ft_strdup(getenv(tmp));
-	}
+	
+	if (input[0] == '$')
+		tmp = dollar_sign(input, i);
+	if (input[0] == '>' || input[0] == '<')
+		tmp = redirect_sign(input,  i);
+	if  (input[0] == '|')
+		tmp = pipe_sign(input,  i);
 	return (tmp);
 }
 

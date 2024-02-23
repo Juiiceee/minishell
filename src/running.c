@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 19:24:52 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:28:18 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ void	running(t_mini *mini)
 	while (running)
 	{
 		if (insiderunning(mini))
+		{
+			printf("exit\n");
 			break;
+		}
 	}
 }

@@ -1,16 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   tokenier.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/22 19:25:26 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:47:54 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+t_token *listing_token(char **tmp)
+{
+	t_token *buff;
+	int i;
+
+	i = 0;
+	while (tmp[i])
+	{
+		if (tmp[i][0] == '>' || tmp[i][0] == '<')
+			tokenizing_redirect(tmp, &i, &buff);
+		if (tmp[i][0] == '|')
+			;// tokenizing_pipe(tmp, &i, &buff);
+		if (ft_isalpha(tmp[i][0]))
+			;// tokenizing_char(tmp, &i, &buff);			
+		printf("%s\n", buff->global[0]);
+	}
+	return (NULL);	
+}
 
 char *ft_select_token(char *input, int *i)
 {
@@ -23,9 +42,8 @@ char *ft_select_token(char *input, int *i)
 		return(squote_parse((input + *i + 1), i));
 	else if (ispunct(input[*i]) && !isspace(input[*i]))
 		return(punct_parse(input + *i, i));
-	return "CACA";
+	return (NULL);
 }
-
 
 void ft_tokenizer(char *input, t_mini *mini)
 {
@@ -41,14 +59,14 @@ void ft_tokenizer(char *input, t_mini *mini)
 		if (!isspace(input[i]) && input[i] != '\0')
 		{
 			old = ft_select_token(input, &i);
-			while (!isspace(input[i]) && input[i] != '\0')
+			while (!isspace(input[i]) && input[i] != '\0' && old[0] != '|')
 				old = free_and_join(old, ft_select_token(input, &i));
-			tmp[j++] = old;
+			if (old)
+				tmp[j++] = old;
 		}
-		if (input[i] != '\0')
+		if (input[i] != '\0' && isspace(input[i]))
 			i++;
 	}
 	tmp[j] = 0;
-	for (size_t k = 0; tmp[k]; k++)
-		printf("%s\n", tmp[k]);	
+	listing_token(tmp);
 }
