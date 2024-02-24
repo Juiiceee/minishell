@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/23 19:46:47 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:58:20 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ms_lstadd_back(t_token **lst, t_token *new)
 
 t_token	*ms_lstlast(t_token *lst)
 {
+	if (!lst)
+		return (NULL);
 	while (lst)
 	{
 		if (lst->next == NULL)

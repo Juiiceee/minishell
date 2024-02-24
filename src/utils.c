@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:15:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/23 15:38:10 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:28:23 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ char **ft_subtab(char **tab, int start, int len)
 	sub = malloc((sizeof (char *)) * (len + 1));
 	if (!sub)
 		return (NULL);
-	while (start < len && tab[start])
+	while (i < len && tab[start])
 	{
 		sub[i] = tab[start++];
 		i++;
 	}
-	sub[start] = '\0';
+	sub[start] = 0;
 	return (sub);
 }

@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/23 19:44:55 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:57:21 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*ft_select_token(char *input, int *i);
 t_token *listing_token(char **tmp);
 
 //tokenizing.c
-void	tokenizing_redirect(char **tmp, int *i, t_token **lst);
+t_token	*tokenizing_redirect(char **tmp, int *i, t_token *lst);
 
 //punct_handle.c
 char 	*dollar_sign(char *input, int *i);

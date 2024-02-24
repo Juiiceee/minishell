@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenier.c                                         :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/23 19:47:54 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:07:32 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,27 @@
 
 t_token *listing_token(char **tmp)
 {
-	t_token *buff;
+	t_token *lst;
+	t_token *new;
 	int i;
 
 	i = 0;
 	while (tmp[i])
 	{
 		if (tmp[i][0] == '>' || tmp[i][0] == '<')
-			tokenizing_redirect(tmp, &i, &buff);
-		if (tmp[i][0] == '|')
+			new = tokenizing_redirect(tmp, &i, lst);
+		else if (tmp[i][0] == '|')
 			;// tokenizing_pipe(tmp, &i, &buff);
-		if (ft_isalpha(tmp[i][0]))
-			;// tokenizing_char(tmp, &i, &buff);			
-		printf("%s\n", buff->global[0]);
+		else if (ft_isalpha(tmp[i][0]))
+			;// tokenizing_char(tmp, &i, &buff);
+		if (lst)
+			ms_lstadd_back(&lst, new);
+		else 
+			*lst = *new;	
+		i++;
 	}
+	for (size_t i = 0; new->global[i]; i++)
+		printf("%s\n", new->global[i]);
 	return (NULL);	
 }
 
