@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/24 12:07:32 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:23:58 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,33 @@ t_token *listing_token(char **tmp)
 	t_token *new;
 	int i;
 
+	lst = NULL;
 	i = 0;
 	while (tmp[i])
 	{
 		if (tmp[i][0] == '>' || tmp[i][0] == '<')
-			new = tokenizing_redirect(tmp, &i, lst);
+		{
+			new = tokenizing_redirect(tmp, &i);
+			i += is_splitted(tmp[i]);
+		}
 		else if (tmp[i][0] == '|')
-			;// tokenizing_pipe(tmp, &i, &buff);
-		else if (ft_isalpha(tmp[i][0]))
-			;// tokenizing_char(tmp, &i, &buff);
+			new = tokenizing_pipe(tmp, &i);
+		else
+			new = tokenizing_other(tmp, &i);
 		if (lst)
 			ms_lstadd_back(&lst, new);
 		else 
-			*lst = *new;	
-		i++;
+			lst = new;	
 	}
-	for (size_t i = 0; new->global[i]; i++)
-		printf("%s\n", new->global[i]);
+	int j = 0;
+	for (size_t i = 0; lst; i++)
+	{
+		while (lst->global[j])
+			printf("%s\n", lst->global[j++]);
+		printf("%u\n", lst->data_type);
+		lst = lst->next;
+		j = 0;
+	}
 	return (NULL);	
 }
 

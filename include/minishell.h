@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/24 11:57:21 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:04:46 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ char	*ft_select_token(char *input, int *i);
 t_token *listing_token(char **tmp);
 
 //tokenizing.c
-t_token	*tokenizing_redirect(char **tmp, int *i, t_token *lst);
+t_token	*tokenizing_redirect(char **tmp, int *i);
+t_token *tokenizing_pipe(char **tmp, int *i);
+t_token *tokenizing_other(char **tmp, int *i);
 
 //punct_handle.c
 char 	*dollar_sign(char *input, int *i);
@@ -120,5 +122,6 @@ char 	*pipe_sign(char *input, int *i);
 t_token	*ms_lstnew(char **content, t_type data);
 void	ms_lstadd_back(t_token **lst, t_token *new);
 t_token	*ms_lstlast(t_token *lst);
+int		is_splitted(char *tmp);
 
 #endif

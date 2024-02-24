@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/24 11:58:20 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:10:28 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,21 @@ t_token	*ms_lstlast(t_token *lst)
 		lst = lst->next;
 	}
 	return (lst);
+}
+
+int is_splitted(char *tmp)
+{
+	int i;
+
+	i = 0;
+	if (tmp[0] == '>' || tmp[0] == '<')
+	{
+		while (tmp[i] == '>' || tmp[i] == '<')
+			i++;
+		if (i == ft_strlen(tmp))
+			return(2);
+		else
+			return(1);
+	}
+	return (1);
 }
