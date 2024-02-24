@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:00:02 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/24 14:26:46 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 15:30:19 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_token *tokenizing_other(char **tmp, int *i)
 	j = *i;
 	while (tmp[j])
 	{
-		if (tmp[j][0] == '|' && ft_strlen(tmp[j]) == 1)
+		if ((tmp[j][0] == '|' && ft_strlen(tmp[j]) == 1) || 
+				(tmp[j][0] == '<' || tmp[j][0] == '>'))
 			break;
 		j++;
 	}

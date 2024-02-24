@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/24 14:23:58 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 16:25:24 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,7 @@ t_token *listing_token(char **tmp)
 		else 
 			lst = new;	
 	}
-	int j = 0;
-	for (size_t i = 0; lst; i++)
-	{
-		while (lst->global[j])
-			printf("%s\n", lst->global[j++]);
-		printf("%u\n", lst->data_type);
-		lst = lst->next;
-		j = 0;
-	}
-	return (NULL);	
+	return (lst);	
 }
 
 char *ft_select_token(char *input, int *i)
@@ -62,7 +53,7 @@ char *ft_select_token(char *input, int *i)
 	return (NULL);
 }
 
-void ft_tokenizer(char *input, t_mini *mini)
+t_token *ft_tokenizer(char *input)
 {
 	int i;
 	int j;
@@ -85,5 +76,5 @@ void ft_tokenizer(char *input, t_mini *mini)
 			i++;
 	}
 	tmp[j] = 0;
-	listing_token(tmp);
+	return (listing_token(tmp));
 }

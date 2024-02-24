@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/23 10:28:18 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 16:32:54 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ int	insiderunning(t_mini *mini)
 	free(mini->currentpath);
 	if (!mini->input)
 		return (1);
-	ft_tokenizer(mini->input, mini);
-	if (ft_strlen(mini->input) != 0)
-		add_history(mini->input);
-	if (!ft_strncmp(mini->input, "cd", 2))
-		chdir("../");
-	else if (!ft_strncmp(mini->input, "exit", 4))
-	{
-		printf("exit\n");
-		return 1;
-	}
+	mini->lst = ft_tokenizer(mini->input);
+	ft_exec(mini->lst);
+	// if (ft_strlen(mini->input) != 0)
+	// 	add_history(mini->input);
+	// if (!ft_strncmp(mini->input, "cd", 2))
+	// 	chdir("../");
+	// else if (!ft_strncmp(mini->input, "exit", 4))
+	// {
+	// 	printf("exit\n");
+	// 	return 1;
+	// }
 	return (0);
 }
 

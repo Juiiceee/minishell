@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/24 14:04:46 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/24 16:33:25 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_mini
 	char	*user;
 	char	*input;
 	char	**env;
+	t_token *lst;
 }	t_mini;
 
 //utilstab.c
@@ -104,7 +105,7 @@ char	**ft_subtab(char **tab, int start, int len);
 int		ft_tablen(char **tab);
 
 //tokenizer.c
-void 	ft_tokenizer(char *input, t_mini *mini);
+t_token	*ft_tokenizer(char *input);
 char	*ft_select_token(char *input, int *i);
 t_token *listing_token(char **tmp);
 
@@ -123,5 +124,8 @@ t_token	*ms_lstnew(char **content, t_type data);
 void	ms_lstadd_back(t_token **lst, t_token *new);
 t_token	*ms_lstlast(t_token *lst);
 int		is_splitted(char *tmp);
+
+//exec.c
+void	ft_exec(t_token *lst)
 
 #endif
