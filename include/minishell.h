@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/24 09:58:36 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/24 10:19:36 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				insiderunning(t_mini *mini);
 
 //signal.c
 void			recosignal(void);
-static void		recoSigint(int sig);
-static void		recoSigquit(int sig);
+static void		recosigint(int sig);
+static void		recosigquit(int sig);
 
 #endif

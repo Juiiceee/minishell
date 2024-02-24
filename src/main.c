@@ -6,20 +6,21 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 17:59:51 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/24 10:17:12 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	t_mini mini;
+	t_mini	mini;
+
 	(void)argv;
 	if (argc != 1)
 		return (1);
 	init(&mini, env);
-	recosignal(&mini);
+	recosignal();
 	running(&mini);
 	freetab(mini.env);
 	free(mini.user);

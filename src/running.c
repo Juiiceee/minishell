@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 18:52:51 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/24 10:18:53 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	createprename(t_mini *mini)
 
 int	insiderunning(t_mini *mini)
 {
-	int i;
+	int	i;
+
 	recocp(mini);
 	createprename(mini);
 	mini->input = readline(mini->userstr);
@@ -41,7 +42,7 @@ int	insiderunning(t_mini *mini)
 	else if (!ft_strncmp(mini->input, "exit", 4))
 	{
 		printf("exit\n");
-		return 1;
+		return (1);
 	}
 	return (0);
 }
@@ -54,6 +55,6 @@ void	running(t_mini *mini)
 	while (running)
 	{
 		if (insiderunning(mini))
-			break;
+			break ;
 	}
 }

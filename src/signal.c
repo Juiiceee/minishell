@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:07:36 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/24 10:04:54 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/24 10:19:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static	void	recoSigint(int sig)
+static void	recosigint(int sig)
 {
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -20,15 +20,15 @@ static	void	recoSigint(int sig)
 	rl_redisplay();
 }
 
-static	void	recoSigquit(int sig)
+static void	recosigquit(int sig)
 {
 	rl_replace_line("  ", 2);
 	rl_on_new_line();
 	rl_redisplay();
 }
 
-void	recosignal()
+void	recosignal(void)
 {
-	signal(SIGINT, recoSigint);
-	signal(SIGQUIT, recoSigquit);
+	signal(SIGINT, recosigint);
+	signal(SIGQUIT, recosigquit);
 }
