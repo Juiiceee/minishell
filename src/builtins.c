@@ -6,8 +6,17 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/24 10:17:35 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/24 10:27:17 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	pwd(void)
+{
+	char *pwd;
+
+	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
+	free(pwd);
+}
