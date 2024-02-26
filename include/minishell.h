@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/24 16:33:25 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:33:48 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <fcntl.h>
 #include "../libft/libft.h"
 
 typedef enum e_type
@@ -56,6 +57,9 @@ typedef struct s_token
 typedef struct s_exec
 {
 	char	**cmd;
+	char	**in;
+	char	**out;
+	struct	s_exec *next;
 }	t_exec;
 
 typedef struct s_mini
@@ -126,6 +130,6 @@ t_token	*ms_lstlast(t_token *lst);
 int		is_splitted(char *tmp);
 
 //exec.c
-void	ft_exec(t_token *lst)
+void	ft_exec(t_mini *mini);
 
 #endif
