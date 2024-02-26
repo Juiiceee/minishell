@@ -6,16 +6,16 @@
 #    By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/02/24 16:22:56 by lbehr            ###   ########.fr        #
+#    Updated: 2024/02/26 15:56:26 by lbehr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= pipex
-OBJ_DIR		:= obj
+OBJ_DIR		:= ../obj
 SRCS		:= main.c utils.c ft_split.c
 OBJS		:= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -g3 -MMD -MP
+CFLAGS		:= -Wall -Wextra -Werror -g3
 RM			:= rm -rf
 DIR_DUP		= mkdir -p $(@D)
 
@@ -40,5 +40,3 @@ fclean	:	clean
 re		:	fclean all
 
 .PHONY: all clean fclean re
-
--include $(DEP)

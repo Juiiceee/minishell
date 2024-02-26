@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:55:42 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/26 15:25:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/26 16:37:18 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	parsingcommand(t_pipex *pipex, char **argv, int nb)
 	return (0);
 }
 
-void	process(t_pipex pipex, char **argv, char **env)
+int	process(t_pipex pipex, char **argv, char **env)
 {
 	pipex.pid = fork();
 	if (pipex.pid == 0)
@@ -146,10 +146,16 @@ void	process(t_pipex pipex, char **argv, char **env)
 			dup2(pipex.pipe[2 * pipex.indexpro + 1],1);
 		}
 		closepipe(&pipex);
-		if (parsingcommand(&pipex, argv, 2 + pipex.indexpro)){}
-			//erreur command not found
+		if (parsingcommand(&pipex, argv, 2 + pipex.indexpro))
+		{
+			freetab(pipex.envpath);
+			close(pipex.infile);
+			close(pipex.outfile);
+			return (127);
+		}
 		if (execve(pipex.cmd, pipex.argcmd, env) == -1){}
 	}
+	return (1);
 }
 
 int	main(int argc, char *argv[], char *env[])
@@ -178,10 +184,9 @@ int	main(int argc, char *argv[], char *env[])
 		pipex.indexpro++;
 	}
 	closepipe(&pipex);
-	free(pipex.pipe);
+	closefilepipe(&pipex);
 	freetab(pipex.envpath);
-	close(pipex.infile);
-	close(pipex.outfile);
+	freetab(pipex.argcmd);
 	waitpid(-1, NULL, 0);
 	return (/*WEXITSTATUS(status)*/0);
 }
