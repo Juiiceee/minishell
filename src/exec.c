@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 11:54:34 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/27 11:56:01 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void ft_exec(t_mini *mini)
 			else
 				exe = old;
 		}
-		/*if (exe->in)
+		if (exe->in)
 		{
 			fd[0] = open(exe->in[1], O_RDONLY, 0777);
 			dup2(fd[0], 0);
@@ -65,7 +65,7 @@ void ft_exec(t_mini *mini)
 			fd[1] = open(exe->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 			dup2(fd[1], 1);
 		}
-		else
+		/*else
 		{
 			fd[1] = open("/dev/stdout", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 			dup2(fd[1], 1);
