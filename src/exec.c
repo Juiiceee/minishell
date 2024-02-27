@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 16:10:55 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:53:45 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void exec_node(t_exec *cmd, t_mini *mini)
 	}
 	else
 	{
-		waitpid(pid, NULL, 0);
+		waitpid(-1, NULL, 0);
 		close(mini->pipe[1]);
 		dup2(mini->pipe[0], 0);
 	}
@@ -104,12 +104,18 @@ void last_node(t_exec *cmd, t_mini *mini)
 	if (pid == 0)
 	{
 		if (cmd->in)
+		{
 			cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
+			dup2(cmd->in_fd, 0);
+		}
 		if (cmd->out)
+		{
 			cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			dup2(cmd->out_fd, 1);
+		}
 		execve(ft_strjoin("/usr/bin/", cmd->cmd[0]), cmd->cmd, mini->env);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(-1, NULL, 0);
 	return ;
 }
 
@@ -124,4 +130,5 @@ void	ft_exec(t_mini *mini)
 	}
 	last_node(mini->exe, mini);
 	mini->exe = NULL;
+	waitpid(-1, NULL, 0);
 }

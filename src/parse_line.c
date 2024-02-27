@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/23 12:08:43 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:31:59 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*str_parse(char *input, int *index)
 	char *tmp;
 
 	while (input[++i])
-		if (!isalpha(input[i]))
+		if (!ft_isprint(input[i]))
 			break ;
 	tmp = malloc((sizeof (char)) * i + 1);
 	while (++j <= i)

@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 12:39:40 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:18:53 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ t_token *listing_token(char **tmp)
 char *ft_select_token(char *input, int *i)
 {
 	char *tmp;
-	if (isalpha(input[*i]))
-		return(str_parse(input + *i, i));
+	if (input[*i] == '$' || input[*i] == '|' || input[*i] == '>' || input[*i] == '<')
+		return(punct_parse(input + *i, i));
 	else if (input[*i] == '"')
 		return(dquote_parse((input + *i + 1), i));
 	else if (input[*i] == '\'')
 		return(squote_parse((input + *i + 1), i));
-	else if (ispunct(input[*i]) && !isspace(input[*i]))
-		return(punct_parse(input + *i, i));
+	else if (ft_isprint(input[*i]))
+		return(str_parse(input + *i, i));
 	return (NULL);
 }
 

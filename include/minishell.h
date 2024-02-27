@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 15:52:50 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:57:49 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_mini
 	char	*input;
 	char	**env;
 	int		pipe[2];
-	// int		pipe_nb;
+	int		clear_fd;
 	pid_t	pid;
 	t_token *lst;
 	t_exec *exe;
