@@ -7,6 +7,7 @@ test.c
 
 # Object files
 *.o
+*.d
 *.ko
 *.obj
 *.elf
@@ -56,8 +57,10 @@ Mkfile.old
 dkms.conf
 
 main
-running
-env
+builtins
 init
+env
 prompt
+running
+signal
 utilstab

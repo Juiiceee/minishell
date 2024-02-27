@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:32:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/22 15:57:07 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/24 10:18:25 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	recouser(t_mini *mini)
 	return (0);
 }
 
-void	prompt()
+void	prompt(void)
 {
 	t_mini	mini;
 

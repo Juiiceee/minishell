@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 12:35:54 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:58:59 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,28 +75,29 @@ typedef struct s_mini
 }	t_mini;
 
 //utilstab.c
-int		tablength(char **tab);
-void	freetab(char **tab);
+int				tablength(char **tab);
+void			freetab(char **tab);
 
 //env.c
-int		recoenv(t_mini *mini, char **argv);
-int		recocp(t_mini *mini);
+int				recoenv(t_mini *mini, char **argv);
+int				recocp(t_mini *mini);
 
 //init.c
-int		init(t_mini *mini, char **env);
+int				init(t_mini *mini, char **env);
 
 //prompt.c
-char	*pathenv(char **env, char *find);
-int		recouser(t_mini *mini);
-void	createprename(t_mini *mini);
-void	prompt();
+char			*pathenv(char **env, char *find);
+int				recouser(t_mini *mini);
+void			createprename(t_mini *mini);
+void			prompt(void);
 //running.c
-void	running(t_mini *mini);
-int		insiderunning(t_mini *mini);
+void			running(t_mini *mini);
+int				insiderunning(t_mini *mini);
 
 //signal.c
-void	recosignal();
-void	recoSigint(int sig);
+void			recosignal(void);
+static void		recosigint(int sig);
+static void		recosigquit(int sig);
 
 //parse_line.c
 char	*squote_parse(char *input, int *index);
