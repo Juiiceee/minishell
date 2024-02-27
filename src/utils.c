@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:15:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 11:11:59 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/27 15:46:59 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,29 @@ void	closepipe(t_mini *mini)
 {
 	close(mini->pipe[0]);
 	close(mini->pipe[1]);
+}
+
+/*char **duptab(char **dup, int lenght)
+{
+	char **dst;
+
+	
+}*/
+
+int	isvar(char **env, char *var)
+{
+	int	check;
+	int	lenght;
+	int	i;
+
+	i = 0;
+	check = 1;
+	if (!env || !env[0])
+		return (-1);
+	lenght = ft_strlen(var);
+	while (check && env[i])
+		check = ft_strncmp(var, env[i++], lenght);
+	if (check == 0 && env[i])
+		return (i);
+	return (-1);
 }

@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 12:53:18 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/27 15:12:48 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	pwd(void)
+void	PWD(void)
 {
 	char *pwd;
 
@@ -21,7 +21,7 @@ void	pwd(void)
 	free(pwd);
 }
 
-void	env(char **envp)
+void	ENV(char **envp)
 {
 	if (!envp)
 		return ;
@@ -29,7 +29,7 @@ void	env(char **envp)
 		printf("%s\n",*(envp)++);
 }
 
-void	cd(char **cmd, char **envp)
+void	CD(char **cmd, char **envp)
 {
 	int	tablen;
 
@@ -40,4 +40,14 @@ void	cd(char **cmd, char **envp)
 		chdir(pathenv(envp, "HOME"));
 	else
 		chdir(cmd[1]);
+}
+void	EXIT()
+{
+	printf("exit\n");
+	exit(0);//error
+}
+
+void	EXPORT(t_mini *mini)
+{
+	
 }
