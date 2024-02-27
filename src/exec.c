@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 13:17:43 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:34:06 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,11 @@ void ft_exec(t_mini *mini)
 	while (tmp)
 	{
 		exe_lstadd_back(&mini->exe, exe_lstnew(tmp));
-		while (tmp->data_type != PIPE)
-			if (tmp->next == NULL)
-				break ;
-			else 
-				tmp = tmp->next;
-		if (tmp->data_type == PIPE)
-			if (tmp->next == NULL)
-				break ;
-			else 
-				tmp = tmp->next;
-		if (tmp->next == NULL)
+		while (tmp->data_type != PIPE && tmp->next != NULL)
+			tmp = tmp->next;
+		if (tmp->data_type == PIPE && tmp->next)
+			tmp = tmp->next;
+		else 
 			break ;
-	}
-	for (size_t i = 0; mini->exe ; i++)
-	{
-		printf("%s\n", mini->exe->cmd[0]);
-		if (mini->exe->in)
-		printf("%s\n", mini->exe->in[0]);
-		if (mini->exe->out)
-		printf("%s\n", mini->exe->out[0]);
-		mini->exe = mini->exe->next;
 	}
 }

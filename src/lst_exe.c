@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 13:06:42 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:33:11 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_exec	*exe_lstnew(t_token *tmp)
 {
 	t_exec	*newlst;
 
-	printf("%s", tmp->global[0]);
 	newlst = malloc(sizeof (*newlst));
 	init_new_null(newlst);
 	if (!newlst)
