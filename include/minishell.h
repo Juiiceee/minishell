@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 13:58:36 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/27 14:21:53 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ typedef struct s_mini
 	char	*user;
 	char	*input;
 	char	**env;
-	int		pipe[2];
+	int		*pipe;
+	int		pipe_nb;
 	pid_t	pid;
 	t_token *lst;
 	t_exec *exe;
@@ -141,6 +142,7 @@ void	exe_lstadd_back(t_exec **lst, t_exec *new);
 t_exec	*exe_lstlast(t_exec *lst);
 
 //exec.c
+void	ft_parse_exec(t_mini *mini);
 void	ft_exec(t_mini *mini);
 
 #endif

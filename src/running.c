@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 11:37:16 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/27 14:20:53 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	insiderunning(t_mini *mini)
 	mini->lst = ft_tokenizer(mini->input);
 	if (ft_strlen(mini->input) != 0)
 		add_history(mini->input);
-	ft_exec(mini);
+	ft_parse_exec(mini);
+	
 	closepipe(mini);
 	waitpid(-1, NULL, 0);
 	return (0);
