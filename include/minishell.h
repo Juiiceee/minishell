@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/26 16:57:58 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/27 11:11:56 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_mini
 	char	*user;
 	char	*input;
 	char	**env;
+	int		pipe[2];
+	pid_t	pid;
 	t_token *lst;
 }	t_mini;
 
@@ -108,6 +110,7 @@ char	*punct_parse(char *input,int *i);
 char	*free_and_join(char *old, char *new);
 char	**ft_subtab(char **tab, int start, int len);
 int		ft_tablen(char **tab);
+void	closepipe(t_mini *mini);
 
 //tokenizer.c
 t_token	*ft_tokenizer(char *input);
