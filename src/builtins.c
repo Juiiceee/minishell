@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 12:14:23 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/27 12:53:18 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,23 @@ void	pwd(void)
 	free(pwd);
 }
 
-void	env(char **env)
+void	env(char **envp)
 {
-	if (!env)
+	if (!envp)
 		return ;
-	while (*env)
-		printf("%s\n",*(env)++);
+	while (*envp)
+		printf("%s\n",*(envp)++);
+}
+
+void	cd(char **cmd, char **envp)
+{
+	int	tablen;
+
+	tablen = tablength(cmd);
+	if (tablen > 2)
+		return ;//error
+	else if (tablen == 1)
+		chdir(pathenv(envp, "HOME"));
+	else
+		chdir(cmd[1]);
 }
