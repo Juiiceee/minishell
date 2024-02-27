@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:15:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/24 12:36:05 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:11:59 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,10 @@ char **ft_subtab(char **tab, int start, int len)
 	}
 	sub[i] = 0;
 	return (sub);
+}
+
+void	closepipe(t_mini *mini)
+{
+	close(mini->pipe[0]);
+	close(mini->pipe[1]);
 }

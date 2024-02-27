@@ -56,11 +56,18 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-main
-builtins
-init
-env
-prompt
-running
-signal
 utilstab
+builtins
+env
+init
+main
+prompt
+signal
+exec
+lst_utils
+parse_line
+punct_handle
+running
+tokenizer
+tokenizing
+utils
