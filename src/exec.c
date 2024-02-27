@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/26 16:37:39 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:17:43 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,52 +15,32 @@
 void ft_exec(t_mini *mini)
 {
 	t_token *tmp;
-	t_exec	*exe;
-	t_exec	*old;
-	int pipe;
-	int fd[2];
 	
 	tmp = mini->lst;
-	exe = NULL;
-	pipe = 0;
+	mini->exe = NULL;
 	while (tmp)
 	{
-		old = malloc(sizeof (*exe));
-		old->in = NULL;
-		old->out = NULL;
-		while (tmp && tmp->data_type != PIPE)
-		{
-			if (tmp->data_type == CMD)
-				old->cmd = tmp->global;
-			if (tmp->data_type == IN_REDIRECT)
-				old->in = tmp->global;
-			if (tmp->data_type == OU_REDIRECT)
-				old->out = tmp->global;
-			if (!tmp->next)
+		exe_lstadd_back(&mini->exe, exe_lstnew(tmp));
+		while (tmp->data_type != PIPE)
+			if (tmp->next == NULL)
 				break ;
-			tmp = tmp->next;
-		}
+			else 
+				tmp = tmp->next;
 		if (tmp->data_type == PIPE)
-		{
-			pipe++;
-			tmp = tmp->next;
-		}
-		else
-			tmp = tmp->next;
-		if (exe)
-			exe->next = old;
-		else
-			exe = old;
+			if (tmp->next == NULL)
+				break ;
+			else 
+				tmp = tmp->next;
+		if (tmp->next == NULL)
+			break ;
 	}
-	if (exe->in)
+	for (size_t i = 0; mini->exe ; i++)
 	{
-		fd[0] = open(exe->in[1], O_RDONLY, 0777);
-		dup2(fd[0], 0);
+		printf("%s\n", mini->exe->cmd[0]);
+		if (mini->exe->in)
+		printf("%s\n", mini->exe->in[0]);
+		if (mini->exe->out)
+		printf("%s\n", mini->exe->out[0]);
+		mini->exe = mini->exe->next;
 	}
-	if (exe->out)
-	{
-		fd[1] = open(exe->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		dup2(fd[1], 1);
-	}
-	execve(ft_strjoin("/usr/bin/", exe->cmd[0]), exe->cmd, mini->env);
 }

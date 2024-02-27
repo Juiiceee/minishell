@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/26 16:33:48 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:35:54 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_exec
 	char	**cmd;
 	char	**in;
 	char	**out;
+	int		builtin;
 	struct	s_exec *next;
 }	t_exec;
 
@@ -70,6 +71,7 @@ typedef struct s_mini
 	char	*input;
 	char	**env;
 	t_token *lst;
+	t_exec *exe;
 }	t_mini;
 
 //utilstab.c
@@ -123,11 +125,16 @@ char 	*dollar_sign(char *input, int *i);
 char 	*redirect_sign(char *input, int *i);
 char 	*pipe_sign(char *input, int *i);
 
-//lst_utils.c
-t_token	*ms_lstnew(char **content, t_type data);
-void	ms_lstadd_back(t_token **lst, t_token *new);
-t_token	*ms_lstlast(t_token *lst);
+//lst_tok.c
+t_token	*tok_lstnew(char **content, t_type data);
+void	tok_lstadd_back(t_token **lst, t_token *new);
+t_token	*tok_lstlast(t_token *lst);
 int		is_splitted(char *tmp);
+
+//lst_exe.c
+t_exec	*exe_lstnew(t_token *tmp);
+void	exe_lstadd_back(t_exec **lst, t_exec *new);
+t_exec	*exe_lstlast(t_exec *lst);
 
 //exec.c
 void	ft_exec(t_mini *mini);

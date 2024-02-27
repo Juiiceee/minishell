@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   lst_tok.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/24 16:21:44 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:19:34 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_token	*ms_lstnew(char **content, t_type data)
+t_token	*tok_lstnew(char **content, t_type data)
 {
 	t_token	*newlst;
 
@@ -25,11 +25,11 @@ t_token	*ms_lstnew(char **content, t_type data)
 	return (newlst);
 }
 
-void	ms_lstadd_back(t_token **lst, t_token *new)
+void	tok_lstadd_back(t_token **lst, t_token *new)
 {
 	t_token	*last;
 
-	last = ms_lstlast(*lst);
+	last = tok_lstlast(*lst);
 	if (*lst)
 	{
 		last->next = new;
@@ -38,7 +38,7 @@ void	ms_lstadd_back(t_token **lst, t_token *new)
 		*lst = new;
 }
 
-t_token	*ms_lstlast(t_token *lst)
+t_token	*tok_lstlast(t_token *lst)
 {
 	if (!lst)
 		return (NULL);
