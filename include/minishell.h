@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 14:58:59 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:02:28 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ typedef struct s_mini
 	char	*user;
 	char	*input;
 	char	**env;
+	int		*pipe;
+	int		pipe_nb;
+	pid_t	pid;
 	t_token *lst;
 	t_exec *exe;
 }	t_mini;
@@ -110,6 +113,7 @@ char	*punct_parse(char *input,int *i);
 char	*free_and_join(char *old, char *new);
 char	**ft_subtab(char **tab, int start, int len);
 int		ft_tablen(char **tab);
+void	closepipe(t_mini *mini);
 
 //tokenizer.c
 t_token	*ft_tokenizer(char *input);
@@ -138,6 +142,7 @@ void	exe_lstadd_back(t_exec **lst, t_exec *new);
 t_exec	*exe_lstlast(t_exec *lst);
 
 //exec.c
+void	ft_parse_exec(t_mini *mini);
 void	ft_exec(t_mini *mini);
 
 #endif
