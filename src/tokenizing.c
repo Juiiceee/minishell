@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:00:02 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 12:39:26 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:23:07 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_token	*tokenizing_redirect(char **tmp, int *i)
 		j++;
 	if (j > 2)
 		return(tok_lstnew(ft_subtab(tmp, *i, 1), DONT_EXIST));	
-	else if (j == ft_strlen(tmp[*i]))
+	else if (j == (int)ft_strlen(tmp[*i]))
 		if (tmp[*i][0] == '<')
 			return (tok_lstnew(ft_subtab(tmp, *i, 2), IN_REDIRECT));
 		else
 			return (tok_lstnew(ft_subtab(tmp, *i, 2), OU_REDIRECT));
-	else if (j != ft_strlen(tmp[*i]))
+	else if (j != (int)ft_strlen(tmp[*i]))
 	{
 		buff = malloc((sizeof (char *)) * 3);
 		buff[0] = ft_substr(tmp[*i], 0, j);

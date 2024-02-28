@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 14:20:53 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 10:19:25 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	createprename(t_mini *mini)
 
 int	insiderunning(t_mini *mini)
 {
-	int	i;
-
 	recocp(mini);
 	createprename(mini);
 	mini->input = readline(mini->userstr);
@@ -39,9 +37,9 @@ int	insiderunning(t_mini *mini)
 	if (ft_strlen(mini->input) != 0)
 		add_history(mini->input);
 	ft_parse_exec(mini);
-	
-	closepipe(mini);
-	waitpid(-1, NULL, 0);
+	ft_exec(mini);
+	dup2(mini->clear_fd, 0);
+	// closepipe(mini);
 	return (0);
 }
 

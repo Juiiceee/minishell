@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 14:21:53 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 10:19:12 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ typedef struct s_exec
 {
 	char	**cmd;
 	char	**in;
+	int		in_fd;
 	char	**out;
+	int		out_fd;
 	int		builtin;
 	struct	s_exec *next;
 }	t_exec;
@@ -70,8 +72,8 @@ typedef struct s_mini
 	char	*user;
 	char	*input;
 	char	**env;
-	int		*pipe;
-	int		pipe_nb;
+	int		pipe[2];
+	int		clear_fd;
 	pid_t	pid;
 	t_token *lst;
 	t_exec *exe;
@@ -99,8 +101,6 @@ int				insiderunning(t_mini *mini);
 
 //signal.c
 void			recosignal(void);
-static void		recosigint(int sig);
-static void		recosigquit(int sig);
 
 //parse_line.c
 char	*squote_parse(char *input, int *index);
@@ -144,5 +144,7 @@ t_exec	*exe_lstlast(t_exec *lst);
 //exec.c
 void	ft_parse_exec(t_mini *mini);
 void	ft_exec(t_mini *mini);
+void 	last_node(t_exec *cmd, t_mini *mini);
+void	exec_node(t_exec *cmd, t_mini *mini);
 
 #endif

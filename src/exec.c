@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 14:22:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/27 16:53:45 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,88 @@ void	ft_parse_exec(t_mini *mini)
 
 	tmp = mini->lst;
 	mini->exe = NULL;
-	mini->pipe_nb = 0;
 	while (tmp)
 	{
 		exe_lstadd_back(&mini->exe, exe_lstnew(tmp));
 		while (tmp->data_type != PIPE && tmp->next != NULL)
 			tmp = tmp->next;
 		if (tmp->data_type == PIPE && tmp->next)
-		{
 			tmp = tmp->next;
-			mini->pipe_nb++;
-		}
 		else 
 			break ;
 	}
-	mini->pipe = malloc(sizeof(int) * (mini->pipe_nb * 2));
+	// mini->pipe = malloc(sizeof(int) * (mini->pipe_nb * 2));
+}
+
+void exec_node(t_exec *cmd, t_mini *mini)
+{
+	pid_t	pid;
+
+	if (pipe(mini->pipe) == -1)
+		return ;
+	pid = fork();
+	if (pid == -1)
+		return ;
+	if (pid == 0)
+	{
+		if (cmd->in)
+		{
+			cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
+			dup2(cmd->in_fd, 0);
+		}
+		if (cmd->out)
+		{
+			cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			dup2(cmd->out_fd, 1);
+		}
+		else
+			dup2(mini->pipe[1], 1);
+		close(mini->pipe[0]);
+		execve(ft_strjoin("/usr/bin/", cmd->cmd[0]), cmd->cmd, mini->env);
+	}
+	else
+	{
+		waitpid(-1, NULL, 0);
+		close(mini->pipe[1]);
+		dup2(mini->pipe[0], 0);
+	}
+}
+
+void last_node(t_exec *cmd, t_mini *mini)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		return ;
+	if (pid == 0)
+	{
+		if (cmd->in)
+		{
+			cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
+			dup2(cmd->in_fd, 0);
+		}
+		if (cmd->out)
+		{
+			cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			dup2(cmd->out_fd, 1);
+		}
+		execve(ft_strjoin("/usr/bin/", cmd->cmd[0]), cmd->cmd, mini->env);
+	}
+	waitpid(-1, NULL, 0);
+	return ;
 }
 
 void	ft_exec(t_mini *mini)
 {
+	if (!mini->exe)
+		return ;
 	while (mini->exe->next != NULL)
 	{
-		exec_node(mini->exe, mini->exe->next);
+		exec_node(mini->exe, mini);
 		mini->exe = mini->exe->next;
 	}
-}
-
-void exec_node(t_exec *first, t_exec *second)
-{
-	
+	last_node(mini->exe, mini);
+	mini->exe = NULL;
+	waitpid(-1, NULL, 0);
 }
