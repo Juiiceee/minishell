@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 15:42:46 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 18:13:09 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_mini
 	char	*user;
 	char	*input;
 	t_list	*env;
+	char	**tabenv;
 	int		pipe[2];
 	int		clear_fd;
 	pid_t	pid;
@@ -80,6 +81,7 @@ typedef struct s_mini
 
 //utilstab.c
 int				tablength(char **tab);
+void	lsttotab(t_mini *mini);
 
 //free.c
 void			freetab(char **tab);
