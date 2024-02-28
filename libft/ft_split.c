@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:35:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/20 13:02:16 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:32:22 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
+	if (!s)
+		return (NULL);
 	wordcount = ft_countword(s, c);
 	splitter = malloc(sizeof(char *) * (wordcount + 1));
 	if (!splitter)

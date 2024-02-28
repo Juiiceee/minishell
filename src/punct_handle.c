@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/23 12:10:10 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:16:28 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char 	*pipe_sign(char *input, int *i)
 {
 	int j;
 	char *tmp;
-
 
 	j = 0;
 	while (input[j] == '|')
@@ -53,14 +52,11 @@ char 	*dollar_sign(char *input, int *i)
 		return (ft_strdup("$"));
 	while (isalpha(input[j]) && input[j])
 		j++;
-	tmp = malloc((sizeof (char)) * j);
-	while (++k < j - 1)
-		tmp[k] = input[k + 1];
-	tmp[k] = '\0';
+	tmp = ft_substr(input, 1, j);
 	*i += ft_strlen(tmp);
 	if (!getenv(tmp))
-		return (free(tmp), NULL);
+		return (free(tmp), ft_strdup(""));
 	else 
-		tmp = ft_strdup(getenv(tmp));
+		tmp = free_and_join(ft_strdup("$"), ft_strdup(getenv(tmp)));
 	return(tmp);
 }

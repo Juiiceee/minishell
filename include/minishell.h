@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 10:19:12 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 15:03:56 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	closepipe(t_mini *mini);
 t_token	*ft_tokenizer(char *input);
 char	*ft_select_token(char *input, int *i);
 t_token *listing_token(char **tmp);
+int		input_size(char *input);
 
 //tokenizing.c
 t_token	*tokenizing_redirect(char **tmp, int *i);
@@ -144,7 +145,13 @@ t_exec	*exe_lstlast(t_exec *lst);
 //exec.c
 void	ft_parse_exec(t_mini *mini);
 void	ft_exec(t_mini *mini);
-void 	last_node(t_exec *cmd, t_mini *mini);
-void	exec_node(t_exec *cmd, t_mini *mini);
+int		last_node(t_exec *cmd, t_mini *mini);
+int		exec_node(t_exec *cmd, t_mini *mini);
+
+//escape.c
+int	escape_word(char *input, int *i);
+int	escape_quote(char *input, int *i);
+int	escape_redirect(char *input, int *i);
+
 
 #endif

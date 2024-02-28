@@ -3,14 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/28 10:23:20 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 16:34:09 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	input_size(char *input)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (input[i])
+	{
+		if (input[i] == '<' || input[i] == '>')
+			j += escape_redirect(input, &i);
+		else if (input[i] == '|')
+		{
+			while(input[i] == '|')
+				i++;
+			j++;
+		}
+		else if (input[i] == '\'' || input[i] == '\"')
+			j += escape_quote(input, &i);
+		else 
+			j += escape_word(input, &i);
+		while (isspace(input[i]))
+			i++;
+	}
+	return (j);
+}
+
+void split_env(char *old, char **tmp, int *j)
+{
+	char **spli;
+	int i;
+
+	i = 0;	
+	spli = ft_split(old + 1, ' ');
+	if (!spli)
+		return ;	
+	while (i <= ft_tablen(spli) - 1)
+	{
+		tmp[*j] = ft_strdup(spli[i]);
+		*j += 1;
+		i++;
+	}
+	tmp[*j] = NULL;
+}
 
 t_token *listing_token(char **tmp)
 {
@@ -56,19 +101,26 @@ t_token *ft_tokenizer(char *input)
 {
 	int i;
 	int j;
-	char *tmp[1024];
+	char **tmp;
 	char *old;
 	
 	j = 0;
 	i = 0;
+	tmp = malloc((sizeof (char *)) * input_size(input) + 99991);
 	while(input[i] != '\0')
 	{
 		if (!isspace(input[i]) && input[i] != '\0')
 		{
+			for (size_t i = 0; i < 10; i++)
+			{
+				printf("OLD == %s\n", tmp[i]);
+			}
 			old = ft_select_token(input, &i);
+			if (old[0] == '$')
+				split_env(old, tmp, &j);
 			while (!isspace(input[i]) && input[i] != '\0' && old[0] != '|')
 				old = free_and_join(old, ft_select_token(input, &i));
-			if (old)
+			if (old && old[0] != '$')
 				tmp[j++] = old;
 		}
 		if (input[i] != '\0' && isspace(input[i]))
