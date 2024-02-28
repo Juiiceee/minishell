@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:15:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/28 10:37:03 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 10:39:07 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	ft_tablen(char **tab)
 
 char **ft_subtab(char **tab, int start, int len)
 {
-	int	i;
-	char			**sub;
+	int		i;
+	char	**sub;
 
 	i = 0;
 	if (!tab)

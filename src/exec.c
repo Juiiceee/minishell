@@ -3,43 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 16:53:45 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:04:24 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/*int	parsingcommand(t_pipex *pipex, char **argv, int nb)
+int	parsingcommand(t_mini *mini, t_exec *cmd)
 {
 	char	*tmp;
+	char	*tmp1;
+	char	**envpath;
 	int		i;
 
 	i = 0;
-	if (ft_strlen(argv[nb]) == 0)
-		return (0);
-	pipex->argcmd = ft_split(argv[nb], ' ');
-	if (access(pipex->argcmd[0], X_OK))
+	envpath = ft_split(pathenv(mini->env, "PATH"), ':');
+	if (!envpath)
+		return (1);
+	if (access(cmd->cmd[0], X_OK))
 	{ 
-		if (!pipex->envpath)
-			return (0);
-		while (pipex->envpath[i])
+		while (envpath[i])
 		{
-			tmp = ft_strjoin(pipex->envpath[i], "/");
-			pipex->cmd = ft_strjoin(tmp, pipex->argcmd[0]);
+			tmp = ft_strjoin(envpath[i], "/");
+			tmp1 = ft_strjoin(tmp, cmd->cmd[0]);
 			free(tmp);
-			if (!access(pipex->cmd, X_OK))
-				return (1);
-			free(pipex->cmd);
+			if (!access(tmp1, X_OK))
+			{
+				free(cmd->cmd[0]);
+				cmd->cmd[0] = ft_strdup(tmp1);
+				free(tmp1);
+				return (0);
+			}
+			free(tmp1);
 			i++;
 		}
-		return (0);
+		return (1);
 	}
-	pipex->cmd = ft_strdup(pipex->argcmd[0]);
-	return (1);
-}*/
+	return (0);
+}
 
 void	ft_parse_exec(t_mini *mini)
 {
