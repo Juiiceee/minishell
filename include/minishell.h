@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 10:19:12 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 14:18:20 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_token
 	struct s_token *next;
 }	t_token;
 
-
 typedef struct s_exec
 {
 	char	**cmd;
@@ -71,7 +70,7 @@ typedef struct s_mini
 	char	*userstr;
 	char	*user;
 	char	*input;
-	char	**env;
+	t_list	*env;
 	int		pipe[2];
 	int		clear_fd;
 	pid_t	pid;
@@ -91,7 +90,7 @@ int				recocp(t_mini *mini);
 int				init(t_mini *mini, char **env);
 
 //prompt.c
-char			*pathenv(char **env, char *find);
+char			*pathenv(t_mini *mini, char *find);
 int				recouser(t_mini *mini);
 void			createprename(t_mini *mini);
 void			prompt(void);

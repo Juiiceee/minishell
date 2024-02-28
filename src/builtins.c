@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 15:12:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 14:19:37 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	PWD(void)
+/*void	PWD(void)
 {
 	char *pwd;
 
@@ -50,4 +50,4 @@ void	EXIT()
 void	EXPORT(t_mini *mini)
 {
 	
-}
+}*/

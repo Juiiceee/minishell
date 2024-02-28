@@ -6,24 +6,11 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/28 11:49:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 12:35:31 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	isslach(char *cmd)
-{
-	if (!cmd)
-		return (1);
-	while (cmd)
-	{
-		if (cmd == '/')
-			return (0);
-		cmd++;
-	}
-	return (1);
-}
 
 int	parsingcommand(t_exec *cmd, t_mini *mini)
 {
@@ -38,7 +25,7 @@ int	parsingcommand(t_exec *cmd, t_mini *mini)
 		return (1);
 	if (access(cmd->cmd[0], X_OK))
 	{
-		if (!ft_strchr(cmd, '/'))
+		if (!ft_strchr(cmd->cmd[0], '/'))
 		{
 			while (envpath[i])
 			{

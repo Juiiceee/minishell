@@ -6,28 +6,28 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:32:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/24 10:18:25 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 14:18:51 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*pathenv(char **env, char *find)
+char	*pathenv(t_mini *mini, char *find)
 {
 	int	check;
 	int	lenght;
 
 	check = 1;
-	if (!env || !env[0])
+	if (!mini->env || !mini->env->content)
 		return (NULL);
 	lenght = ft_strlen(find);
-	while (check && *env)
+	while (check && mini->env->next)
 	{
-		env++;
-		check = ft_strncmp(find, *env, lenght);
+		mini->env = mini->env->next;
+		check = ft_strncmp(find, (char *)mini->env->content, lenght);
 	}
-	if (check == 0 && *env != NULL)
-		return (*env + (lenght + 1));
+	if (check == 0)
+		return ((char *)mini->env->content + (lenght + 1));
 	return (NULL);
 }
 
