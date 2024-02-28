@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:15:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 11:11:59 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 10:20:59 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	ft_tablen(char **tab)
 
 char **ft_subtab(char **tab, int start, int len)
 {
-	unsigned int	i;
+	int	i;
 	char			**sub;
 
 	i = 0;
 	if (!tab)
 		return (NULL);
-	if (start >= (unsigned int)ft_tablen(tab))
+	if (start >= ft_tablen(tab))
 		return (ft_calloc(1, 1));
 	if (len > ft_tablen(tab))
 		len = ft_tablen(tab);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 16:57:49 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:19:12 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ int				insiderunning(t_mini *mini);
 
 //signal.c
 void			recosignal(void);
-static void		recosigint(int sig);
-static void		recosigquit(int sig);
 
 //parse_line.c
 char	*squote_parse(char *input, int *index);

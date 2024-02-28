@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   running.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 17:00:57 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:19:25 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	createprename(t_mini *mini)
 
 int	insiderunning(t_mini *mini)
 {
-	int	i;
-
 	recocp(mini);
 	createprename(mini);
 	mini->input = readline(mini->userstr);
