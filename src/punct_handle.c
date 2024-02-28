@@ -42,17 +42,15 @@ char 	*redirect_sign(char *input, int *i)
 char 	*dollar_sign(char *input, int *i)
 {
 	int		j;
-	int		k;
 	char	*tmp;
 
 	j = 1;
-	k = -1;
 	*i += 1;
 	if (isspace(input[1]))
 		return (ft_strdup("$"));
 	while (isalpha(input[j]) && input[j])
 		j++;
-	tmp = ft_substr(input, 1, j);
+	tmp = ft_substr(input, 1, j - 1);
 	*i += ft_strlen(tmp);
 	if (!getenv(tmp))
 		return (free(tmp), ft_strdup(""));

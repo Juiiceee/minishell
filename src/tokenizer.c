@@ -51,7 +51,7 @@ void split_env(char *old, char **tmp, int *j)
 	while (i <= ft_tablen(spli) - 1)
 	{
 		tmp[*j] = ft_strdup(spli[i]);
-		*j += 1;
+		*j = *j + 1;
 		i++;
 	}
 	tmp[*j] = NULL;
@@ -111,10 +111,6 @@ t_token *ft_tokenizer(char *input)
 	{
 		if (!isspace(input[i]) && input[i] != '\0')
 		{
-			for (size_t i = 0; i < 10; i++)
-			{
-				printf("OLD == %s\n", tmp[i]);
-			}
 			old = ft_select_token(input, &i);
 			if (old[0] == '$')
 				split_env(old, tmp, &j);
