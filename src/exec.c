@@ -6,13 +6,26 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/28 11:04:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 11:49:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	parsingcommand(t_mini *mini, t_exec *cmd)
+int	isslach(char *cmd)
+{
+	if (!cmd)
+		return (1);
+	while (cmd)
+	{
+		if (cmd == '/')
+			return (0);
+		cmd++;
+	}
+	return (1);
+}
+
+int	parsingcommand(t_exec *cmd, t_mini *mini)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -24,21 +37,25 @@ int	parsingcommand(t_mini *mini, t_exec *cmd)
 	if (!envpath)
 		return (1);
 	if (access(cmd->cmd[0], X_OK))
-	{ 
-		while (envpath[i])
+	{
+		if (!ft_strchr(cmd, '/'))
 		{
-			tmp = ft_strjoin(envpath[i], "/");
-			tmp1 = ft_strjoin(tmp, cmd->cmd[0]);
-			free(tmp);
-			if (!access(tmp1, X_OK))
+			while (envpath[i])
 			{
-				free(cmd->cmd[0]);
-				cmd->cmd[0] = ft_strdup(tmp1);
+				tmp = ft_strjoin(envpath[i], "/");
+				tmp1 = ft_strjoin(tmp, cmd->cmd[0]);
+				free(tmp);
+				if (!access(tmp1, X_OK))
+				{
+					free(cmd->cmd[0]);
+					cmd->cmd[0] = ft_strdup(tmp1);
+					freetab(envpath);
+					free(tmp1);
+					return (0);
+				}
 				free(tmp1);
-				return (0);
+				i++;
 			}
-			free(tmp1);
-			i++;
 		}
 		return (1);
 	}
@@ -88,7 +105,9 @@ void exec_node(t_exec *cmd, t_mini *mini)
 		else
 			dup2(mini->pipe[1], 1);
 		close(mini->pipe[0]);
-		execve(ft_strjoin("/usr/bin/", cmd->cmd[0]), cmd->cmd, mini->env);
+		if (parsingcommand(cmd, mini))
+			return (printf("Command not found <3\n"), 0);
+		execve(cmd->cmd[0], cmd->cmd, mini->env);
 	}
 	else
 	{
