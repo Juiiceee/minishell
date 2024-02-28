@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 14:18:20 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 15:42:46 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ typedef struct s_mini
 
 //utilstab.c
 int				tablength(char **tab);
+
+//free.c
 void			freetab(char **tab);
+void			freelst(t_list *lst);
 
 //env.c
 int				recoenv(t_mini *mini, char **argv);
@@ -94,6 +97,7 @@ char			*pathenv(t_mini *mini, char *find);
 int				recouser(t_mini *mini);
 void			createprename(t_mini *mini);
 void			prompt(void);
+
 //running.c
 void			running(t_mini *mini);
 int				insiderunning(t_mini *mini);

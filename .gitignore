@@ -2,6 +2,7 @@
 *.d
 minishell
 salut
+pipexbonus
 
 test.c
 
