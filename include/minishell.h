@@ -171,6 +171,8 @@ void	ft_pwd(void);
 void	ft_env(t_mini *mini);
 void	ft_cd(char **cmd, t_mini *mini);
 void	ft_exit(void);
+void	ft_export(char **cmd, t_mini *mini);
+
 
 
 #endif

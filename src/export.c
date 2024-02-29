@@ -13,7 +13,6 @@ void	modifievaluelst(t_list **st, char *find, char *new)
 	{
 		tmp = ft_strjoin(find, "=");
 		lst->content = ft_strjoin(tmp, new);
-		free(tmp);
 	}
 	return ;
 }
@@ -30,9 +29,7 @@ void	addvaluelst(t_mini *mini, char *find, char *new)
 	{
 		tmp1 = ft_strjoin(tmp, new);
 		ft_lstadd_back(&mini->env, ft_lstnew(tmp1));
-		free(tmp1);
 	}
-	free(tmp);
 }
 
 void	lstchangevalue(t_mini *mini, char *find, char *new)
@@ -46,20 +43,17 @@ void	lstchangevalue(t_mini *mini, char *find, char *new)
 	if (!st || !st->content)
 		return ;
 	lenght = ft_strlen(find);
-	if (!ft_strncmp(find, (char *)st->content, lenght))
+	while (check && st->next != NULL)
 	{
-		modifievaluelst(&st, find, new);
-		return ;
-	}
-	while (check && st)
-	{
-		st = st->next;
 		check = ft_strncmp(find, (char *)st->content, lenght);
+		if (check == 0)
+			break ;
+		st = st->next;
 	}
+	check = ft_strncmp(find, (char *)st->content, lenght);
 	if (check == 0)
-	{
 		modifievaluelst(&st, find, new);
-		return ;
-	}
-	addvaluelst(mini, find, new);
+	else
+		addvaluelst(mini, find, new);
+	return ;
 }

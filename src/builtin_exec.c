@@ -21,7 +21,7 @@ void	exec_builtins(char **cmd, t_mini *mini)
 	if (!ft_strncmp(cmd[0], "pwd", 3))
 		ft_pwd();
 	if (!ft_strncmp(cmd[0], "export", 6))
-		return ;
+		ft_export(cmd, mini);
 	if (!ft_strncmp(cmd[0], "unset", 5))
 		return ;
 	if (!ft_strncmp(cmd[0], "env", 3))

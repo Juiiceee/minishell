@@ -23,10 +23,17 @@ void	ft_pwd(void)
 
 void	ft_env(t_mini *mini)
 {
+	t_list *str;
+
+	str = mini->env;
 	if (!mini->env)
 		return ;
-	// while (t_mini *mini)
-	// 	printf("%s\n",*(envp)++);
+	while (str->next != NULL)
+	{
+	 	printf("%s\n", (char *)str->content);
+		str = str->next;
+	}
+	printf("%s\n", (char *)str->content);
 }
 
 void	ft_cd(char **cmd, t_mini *mini)
@@ -47,7 +54,20 @@ void	ft_exit(void)
 	exit(0);//error
 }
 
-// void	EXPORT(t_mini *mini)
-// {
-	
-// }
+void ft_export(char **cmd, t_mini *mini)
+{
+	size_t	j;
+	size_t	i;
+
+	i = 0;
+	j = 1;
+	while (cmd[j])
+	{
+		while (cmd[j][i] != '=' && cmd[j][i])
+			i++;
+		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
+			lstchangevalue(mini, ft_substr(cmd[j], 0, i),  ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+		i = 0;
+		j++;
+	}
+}
