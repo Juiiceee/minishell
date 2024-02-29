@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:30:29 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 15:31:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 11:51:07 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	freelst(t_list *lst)
 
 	while (lst)
 	{
+		free(lst->content);
 		tmp = lst;
 		lst = lst->next;
 		free(tmp);

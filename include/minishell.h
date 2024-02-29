@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 18:13:09 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 12:11:55 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ typedef struct s_mini
 
 //utilstab.c
 int				tablength(char **tab);
-void	lsttotab(t_mini *mini);
+void			lsttotab(t_mini *mini);
+void			refreshtab(t_mini *mini);
 
 //free.c
 void			freetab(char **tab);

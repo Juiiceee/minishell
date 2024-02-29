@@ -9,7 +9,7 @@ int	recoenv(t_mini *mini, char **argv)
 	if (!argv)
 		return (1);
 	while (argv[i])
-		ft_lstadd_back(&mini->env, ft_lstnew((char *)argv[i++]));
+		ft_lstadd_back(&mini->env, ft_lstnew(ft_strdup(argv[i++])));
 	return (0);
 }
 
@@ -65,7 +65,7 @@ void	modifievaluelst(t_list **st, char *find, char *new)
 	t_list	*lst;
 
 	lst = *st;
-	//free(lst->content);
+	free(lst->content);
 	if (ft_strlen(new) == 0)
 		lst->content = ft_strjoin(find, "=");
 	else
@@ -121,12 +121,11 @@ void	lstchangevalue(t_mini *mini, char *find, char *new)
 		return ;
 	}
 	addvaluelst(mini, find, new);
-	return ;
 }
 
 void	refreshtab(t_mini *mini)
 {
-	if (!mini->tabenv)
+	if (mini->tabenv)
 		freetab(mini->tabenv);
 	lsttotab(mini);
 	if (!mini->tabenv)
@@ -147,6 +146,86 @@ int main(int argc, char **argv, char **envp)
 	refreshtab(&mini);
 	printf("tab apres =|%s| \n", mini.tabenv[0]);
 	printf("lst apres =|%s|", (char *)mini.env->content);
+	//ft_lstfree(mini.env);
 	freelst(mini.env);
 	freetab(mini.tabenv);
+	/*pid_t	pid = fork();
+	printf("avant%s\n", getcwd(NULL, 0));
+	char *oui[] = {"/bin/cd", ""}
+	if (pid == 0)
+	{
+		//chdir(getenv("HOME"));
+		
+		printf("dans l'enfant %s\n", getcwd(NULL, 0));
+		exit(0);
+	}
+	waitpid(pid, NULL, 0);
+	printf("apres %s\n", getcwd(NULL, 0));*/
 }
+/*
+typedef struct s_mini
+{
+	char	*currentpath;
+	char	*userstr;
+	char	*user;
+	char	*input;
+	t_list	*env;
+	char	**tabenv;
+	int		pipe[2];
+	int		clear_fd;
+	pid_t	pid;
+	t_token *lst;
+	t_exec *exe;
+}	t_mini;
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*newlst;
+
+	newlst = malloc(sizeof (*newlst));
+	if (!newlst)
+		return (NULL);
+	newlst->content = content;
+	newlst->next = NULL;
+	return (newlst);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
+
+	last = ft_lstlast(*lst);
+	if (*lst)
+	{
+		last->next = new;
+	}
+	else
+		*lst = new;
+}
+
+int	recoenv(t_mini *mini, char **argv)
+{
+	int	i;
+
+	mini->env = NULL;
+	i = 0;
+	if (!argv)
+		return (1);
+	while (argv[i])
+		ft_lstadd_back(&mini->env, ft_lstnew(ft_strdup((char *)argv[i++])));
+	return (0);
+}
+int main()
+{
+	char *sa[] = {"cou=sasacou", "fe=sasaur", "PATH=/home/lbehr/bin:/home/lbehr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", NULL};
+	recoenv(&mini, sa);
+}
+
+
+*/
