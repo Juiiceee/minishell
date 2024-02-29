@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 12:32:45 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 13:28:07 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_exit(void)
 	exit(0);//error
 }
 
-// void	EXPORT(t_mini *mini)
-// {
-	
-// }
+void	ft_export(t_mini *mini, char *variable, char *value)
+{
+	export(mini, variable, value);
+}

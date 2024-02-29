@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 13:23:17 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 13:23:54 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int				tablength(char **tab);
 void			lsttotab(t_mini *mini);
 void			refreshtab(t_mini *mini);
 
-//free.c
+// free.c
 void			freetab(char **tab);
 void			freelst(t_list *lst);
 
@@ -95,7 +95,7 @@ int				recocp(t_mini *mini);
 // init.c
 int				init(t_mini *mini, char **env);
 
-//prompt.c
+// prompt.c
 char			*pathenv(t_mini *mini, char *find);
 int				recouser(t_mini *mini);
 void			createprename(t_mini *mini);
@@ -107,7 +107,7 @@ int				insiderunning(t_mini *mini);
 // signal.c
 void			recosignal(void);
 
-//export.c
+// export.c
 void			modifievaluelst(t_list **st, char *find, char *new);
 void			addvaluelst(t_mini *mini, char *find, char *new);
 void			export(t_mini *mini, char *find, char *new);
