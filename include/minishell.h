@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 11:42:34 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:24:10 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_token
 	struct s_token *next;
 }	t_token;
 
-
 typedef struct s_exec
 {
 	char	**cmd;
@@ -71,7 +70,8 @@ typedef struct s_mini
 	char	*userstr;
 	char	*user;
 	char	*input;
-	char	**env;
+	t_list	*env;
+	char	**tabenv;
 	int		pipe[2];
 	int		clear_fd;
 	pid_t	pid;
@@ -81,7 +81,12 @@ typedef struct s_mini
 
 // utilstab.c
 int				tablength(char **tab);
+void			lsttotab(t_mini *mini);
+void			refreshtab(t_mini *mini);
+
+//free.c
 void			freetab(char **tab);
+void			freelst(t_list *lst);
 
 // env.c
 int				recoenv(t_mini *mini, char **argv);
@@ -90,8 +95,8 @@ int				recocp(t_mini *mini);
 // init.c
 int				init(t_mini *mini, char **env);
 
-// prompt.c
-char			*pathenv(char **env, char *find);
+//prompt.c
+char			*pathenv(t_mini *mini, char *find);
 int				recouser(t_mini *mini);
 void			createprename(t_mini *mini);
 void			prompt(void);
@@ -101,6 +106,11 @@ int				insiderunning(t_mini *mini);
 
 // signal.c
 void			recosignal(void);
+
+//export.c
+void	modifievaluelst(t_list **st, char *find, char *new);
+void	addvaluelst(t_mini *mini, char *find, char *new);
+void	lstchangevalue(t_mini *mini, char *find, char *new);
 
 // parse_line.c
 char	*squote_parse(char *input, int *index);

@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/29 12:11:41 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:25:41 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-// int	isslach(char *cmd)
-// {
-// 	if (!cmd)
-// 		return (1);
-// 	while (cmd)
-// 	{
-// 		if (cmd == '/')
-// 			return (0);
-// 		cmd++;
-// 	}
-// 	return (1);
-// }
 
 int	parsingcommand(t_exec *cmd, t_mini *mini)
 {

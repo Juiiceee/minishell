@@ -2,8 +2,8 @@
 *.d
 minishell
 salut
+pipexbonus
 
-test.c
 
 # Object files
 *.o

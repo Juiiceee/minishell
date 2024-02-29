@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:49 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 12:18:35 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/28 18:14:14 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,23 @@ int	tablength(char **tab)
 	return (i);
 }
 
-void	freetab(char **tab)
+void	lsttotab(t_mini *mini)
 {
 	int	i;
+	t_list	*st;
+	t_list	*lst;
 
+	st = mini->env;
+	lst = mini->env;
 	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
+	mini->tabenv = malloc((sizeof(char *) * (ft_lstsize(lst) + 1)));
+	if (!mini->tabenv)
+		return ;
+	while (st)
+	{
+		mini->tabenv[i] = ft_strdup((char *)st->content);
+		i++;
+		st = st->next;
+	}
+	mini->tabenv[i] = NULL;
 }

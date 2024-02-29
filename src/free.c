@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:13:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 14:12:36 by lbehr            ###   ########.fr       */
+/*   Created: 2024/02/28 15:30:29 by lbehr             #+#    #+#             */
+/*   Updated: 2024/02/29 11:51:07 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	recoenv(t_mini *mini, char **argv)
+void	freelst(t_list *lst)
+{
+	t_list *tmp;
+
+	while (lst)
+	{
+		free(lst->content);
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
+	}
+}
+
+void	freetab(char **tab)
 {
 	int	i;
 
-	mini->env = NULL;
 	i = 0;
-	if (!argv)
-		return (1);
-	while (argv[i])
-		ft_lstadd_back(&mini->env, ft_lstnew((char *)argv[i++]));
-	return (0);
-}
-
-int	recocp(t_mini *mini)
-{
-	mini->currentpath = getcwd(NULL, 1024);
-	if (!mini->currentpath)
-		return (1);
-	return (0);
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }
