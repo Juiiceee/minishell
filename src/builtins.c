@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 13:28:07 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 13:44:30 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@ void	ft_pwd(void)
 	free(pwd);
 }
 
-void	ft_env(t_mini *mini)
+void	ft_env(t_list *lst)
 {
-	if (!mini->env)
+	t_list	*st;
+
+	st = lst;
+	if (!st)
 		return ;
-	// while (t_mini *mini)
-	// 	printf("%s\n",*(envp)++);
+	while (st)
+	{
+		printf("%s\n",(char *)st->content);
+		st = st->next;
+	}
 }
 
 void	ft_cd(char **cmd, t_mini *mini)

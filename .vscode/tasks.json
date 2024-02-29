@@ -10,7 +10,7 @@
                 "test.c",
 				"libft/*.c",
 				"src/free.c",
-				"src/utilstab.c",
+				"src/env.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
