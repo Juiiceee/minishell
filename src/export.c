@@ -35,7 +35,7 @@ void	addvaluelst(t_mini *mini, char *find, char *new)
 	free(tmp);
 }
 
-void	lstchangevalue(t_mini *mini, char *find, char *new)
+void	export(t_mini *mini, char *find, char *new)
 {
 	int	check;
 	int	lenght;

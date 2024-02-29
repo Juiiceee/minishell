@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 12:31:41 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 13:17:44 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void			recosignal(void);
 //export.c
 void	modifievaluelst(t_list **st, char *find, char *new);
 void	addvaluelst(t_mini *mini, char *find, char *new);
-void	lstchangevalue(t_mini *mini, char *find, char *new);
+void	export(t_mini *mini, char *find, char *new);
 
 // parse_line.c
 char	*squote_parse(char *input, int *index);
