@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 12:11:55 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 12:15:28 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,13 @@ int				insiderunning(t_mini *mini);
 
 //signal.c
 void			recosignal(void);
+
+//builtins.c
+
+//export.c
+void	modifievaluelst(t_list **st, char *find, char *new);
+void	addvaluelst(t_mini *mini, char *find, char *new);
+void	lstchangevalue(t_mini *mini, char *find, char *new);
 
 //parse_line.c
 char	*squote_parse(char *input, int *index);
