@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/27 15:12:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 12:12:39 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	PWD(void)
+void	ft_pwd(void)
 {
 	char *pwd;
 
@@ -21,7 +21,7 @@ void	PWD(void)
 	free(pwd);
 }
 
-void	ENV(char **envp)
+void	ft_env(char **envp)
 {
 	if (!envp)
 		return ;
@@ -29,7 +29,7 @@ void	ENV(char **envp)
 		printf("%s\n",*(envp)++);
 }
 
-void	CD(char **cmd, char **envp)
+void	ft_cd(char **cmd, char **envp)
 {
 	int	tablen;
 
@@ -41,13 +41,13 @@ void	CD(char **cmd, char **envp)
 	else
 		chdir(cmd[1]);
 }
-void	EXIT()
+void	ft_exit(void)
 {
 	printf("exit\n");
 	exit(0);//error
 }
 
-void	EXPORT(t_mini *mini)
-{
+// void	EXPORT(t_mini *mini)
+// {
 	
-}
+// }

@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/27 13:33:11 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:16:55 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,27 @@ void init_new_null(t_exec *new)
 	new->next = NULL;
 }
 
+int is_a_builtin(char *cmd)
+{
+	if (!ft_strncmp(cmd, "echo", 4))
+		return (1);
+	if (!ft_strncmp(cmd, "cd", 2))
+		return (1);
+	if (!ft_strncmp(cmd, "pwd", 3))
+		return (1);
+	if (!ft_strncmp(cmd, "export", 6))
+		return (1);
+	if (!ft_strncmp(cmd, "unset", 5))
+		return (1);
+	if (!ft_strncmp(cmd, "env", 3))
+		return (1);
+	if (!ft_strncmp(cmd, "exit", 4))
+		return (1);
+	if (!ft_strncmp(cmd, "meow", 4))
+		return (1);
+	return (0);
+}
+
 t_exec	*exe_lstnew(t_token *tmp)
 {
 	t_exec	*newlst;
@@ -31,6 +52,9 @@ t_exec	*exe_lstnew(t_token *tmp)
 		return (NULL);
 	while (tmp && tmp->data_type != PIPE)
 	{
+		if (tmp->data_type == CMD)
+			if (is_a_builtin(tmp->global[0]))
+				newlst->builtin = 1;
 		if (tmp->data_type == CMD)
 			newlst->cmd = tmp->global;
 		if (tmp->data_type == IN_REDIRECT)

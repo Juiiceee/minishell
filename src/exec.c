@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/28 14:37:16 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:11:41 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,34 +81,39 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 
 	if (pipe(mini->pipe) == -1)
 		return (1);
-	pid = fork();
-	if (pid == -1)
-		return (1);
-	if (pid == 0)
+	if (cmd->builtin == 1)
+		exec_builtins(cmd->cmd, mini->env);
+	else 
 	{
-		if (cmd->in)
+		pid = fork();
+		if (pid == -1)
+			return (1);
+		if (pid == 0)
 		{
-			cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
-			dup2(cmd->in_fd, 0);
-		}
-		if (cmd->out)
-		{
-			cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			dup2(cmd->out_fd, 1);
+			if (cmd->in)
+			{
+				cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
+				dup2(cmd->in_fd, 0);
+			}
+			if (cmd->out)
+			{
+				cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				dup2(cmd->out_fd, 1);
+			}
+			else
+				dup2(mini->pipe[1], 1);
+			close(mini->pipe[0]);
+			if (!parsingcommand(cmd, mini))
+				execve(cmd->cmd[0], cmd->cmd, mini->env);
+			printf("Command not found <3\n");
+			exit (127);
 		}
 		else
-			dup2(mini->pipe[1], 1);
-		close(mini->pipe[0]);
-		if (!parsingcommand(cmd, mini))
-			execve(cmd->cmd[0], cmd->cmd, mini->env);
-		printf("Command not found <3\n");
-		exit (127);
-	}
-	else
-	{
-		waitpid(-1, NULL, 0);
-		close(mini->pipe[1]);
-		dup2(mini->pipe[0], 0);
+		{
+			waitpid(-1, NULL, 0);
+			close(mini->pipe[1]);
+			dup2(mini->pipe[0], 0);
+		}
 	}
 	return (0);
 }
@@ -117,27 +122,32 @@ int	last_node(t_exec *cmd, t_mini *mini)
 {
 	pid_t	pid;
 
-	pid = fork();
-	if (pid == -1)
-		return (1);
-	if (pid == 0)
+	if (cmd->builtin == 1)
+		exec_builtins(cmd->cmd, mini->env);
+	else 
 	{
-		if (cmd->in)
+		pid = fork();
+		if (pid == -1)
+			return (1);
+		if (pid == 0)
 		{
-			cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
-			dup2(cmd->in_fd, 0);
+			if (cmd->in)
+			{
+				cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
+				dup2(cmd->in_fd, 0);
+			}
+			if (cmd->out)
+			{
+				cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				dup2(cmd->out_fd, 1);
+			}
+			if (!parsingcommand(cmd, mini))
+				execve(cmd->cmd[0], cmd->cmd, mini->env);
+			printf("Command not found <3\n");
+			exit (127);
 		}
-		if (cmd->out)
-		{
-			cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			dup2(cmd->out_fd, 1);
-		}
-		if (!parsingcommand(cmd, mini))
-			execve(cmd->cmd[0], cmd->cmd, mini->env);
-		printf("Command not found <3\n");
-		exit (127);
+		waitpid(-1, NULL, 0);
 	}
-	waitpid(-1, NULL, 0);
 	return (0);
 }
 

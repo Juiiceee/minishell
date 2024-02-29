@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 15:03:56 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:42:34 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,79 +79,88 @@ typedef struct s_mini
 	t_exec *exe;
 }	t_mini;
 
-//utilstab.c
+// utilstab.c
 int				tablength(char **tab);
 void			freetab(char **tab);
 
-//env.c
+// env.c
 int				recoenv(t_mini *mini, char **argv);
 int				recocp(t_mini *mini);
 
-//init.c
+// init.c
 int				init(t_mini *mini, char **env);
 
-//prompt.c
+// prompt.c
 char			*pathenv(char **env, char *find);
 int				recouser(t_mini *mini);
 void			createprename(t_mini *mini);
 void			prompt(void);
-//running.c
+// running.c
 void			running(t_mini *mini);
 int				insiderunning(t_mini *mini);
 
-//signal.c
+// signal.c
 void			recosignal(void);
 
-//parse_line.c
+// parse_line.c
 char	*squote_parse(char *input, int *index);
 char	*dquote_parse(char *input, int *index);
 char	*var_dquote(char *tmp);
 char	*str_parse(char *input, int *index);
 char	*punct_parse(char *input,int *i);
 
-//utils.c
+// utils.c
 char	*free_and_join(char *old, char *new);
 char	**ft_subtab(char **tab, int start, int len);
 int		ft_tablen(char **tab);
 void	closepipe(t_mini *mini);
 
-//tokenizer.c
+// tokenizer.c
 t_token	*ft_tokenizer(char *input);
 char	*ft_select_token(char *input, int *i);
 t_token *listing_token(char **tmp);
 int		input_size(char *input);
 
-//tokenizing.c
+// tokenizing.c
 t_token	*tokenizing_redirect(char **tmp, int *i);
 t_token *tokenizing_pipe(char **tmp, int *i);
 t_token *tokenizing_other(char **tmp, int *i);
 
-//punct_handle.c
+// punct_handle.c
 char 	*dollar_sign(char *input, int *i);
 char 	*redirect_sign(char *input, int *i);
 char 	*pipe_sign(char *input, int *i);
 
-//lst_tok.c
+// lst_tok.c
 t_token	*tok_lstnew(char **content, t_type data);
 void	tok_lstadd_back(t_token **lst, t_token *new);
 t_token	*tok_lstlast(t_token *lst);
 int		is_splitted(char *tmp);
 
-//lst_exe.c
+// lst_exe.c
 t_exec	*exe_lstnew(t_token *tmp);
 void	exe_lstadd_back(t_exec **lst, t_exec *new);
 t_exec	*exe_lstlast(t_exec *lst);
 
-//exec.c
+// exec.c
 void	ft_parse_exec(t_mini *mini);
 void	ft_exec(t_mini *mini);
 int		last_node(t_exec *cmd, t_mini *mini);
 int		exec_node(t_exec *cmd, t_mini *mini);
 
-//escape.c
+// escape.c
 int	escape_word(char *input, int *i);
 int	escape_quote(char *input, int *i);
 int	escape_redirect(char *input, int *i);
+
+// builtin_exec.c
+void	exec_builtins(char **cmd, char **env);
+
+// builtins.c
+void	ft_pwd(void);
+void	ft_env(char **envp);
+void	ft_cd(char **cmd, char **envp);
+void	ft_exit(void);
 
 
 #endif
