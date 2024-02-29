@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/24 10:17:12 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 12:39:11 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	main(int argc, char **argv, char **env)
 	init(&mini, env);
 	recosignal();
 	running(&mini);
-	freetab(mini.env);
+	freelst(mini.env);
+	freetab(mini.tabenv);
 	free(mini.user);
 	return (0);
 }

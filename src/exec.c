@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/29 12:25:41 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 13:04:18 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parsingcommand(t_exec *cmd, t_mini *mini)
 	i = 0;
 	if (ft_strchr(cmd->cmd[0], '/') != NULL)
 		return (0);
-	envpath = ft_split(pathenv(mini->env, "PATH"), ':');
+	envpath = ft_split(pathenv(mini, "PATH"), ':');
 	if (!envpath)
 		return (1);
 	while (envpath[i])
@@ -69,7 +69,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 	if (pipe(mini->pipe) == -1)
 		return (1);
 	if (cmd->builtin == 1)
-		exec_builtins(cmd->cmd, mini->env);
+		exec_builtins(cmd->cmd, mini);
 	else 
 	{
 		pid = fork();
@@ -91,7 +91,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 				dup2(mini->pipe[1], 1);
 			close(mini->pipe[0]);
 			if (!parsingcommand(cmd, mini))
-				execve(cmd->cmd[0], cmd->cmd, mini->env);
+				execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 			printf("Command not found <3\n");
 			exit (127);
 		}
@@ -110,7 +110,7 @@ int	last_node(t_exec *cmd, t_mini *mini)
 	pid_t	pid;
 
 	if (cmd->builtin == 1)
-		exec_builtins(cmd->cmd, mini->env);
+		exec_builtins(cmd->cmd, mini);
 	else 
 	{
 		pid = fork();
@@ -129,7 +129,7 @@ int	last_node(t_exec *cmd, t_mini *mini)
 				dup2(cmd->out_fd, 1);
 			}
 			if (!parsingcommand(cmd, mini))
-				execve(cmd->cmd[0], cmd->cmd, mini->env);
+				execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 			printf("Command not found <3\n");
 			exit (127);
 		}

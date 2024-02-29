@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:32:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 12:11:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 12:40:11 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ char	*pathenv(t_mini *mini, char *find)
 
 int	recouser(t_mini *mini)
 {
-	mini->user = ft_strdup(pathenv(mini->env, "USER"));
+	mini->user = ft_strdup(pathenv(mini, "USER"));
 	if (!mini->user)
 	{
-		mini->user = ft_strdup(pathenv(mini->env, "LOGNAME"));
+		mini->user = ft_strdup(pathenv(mini, "LOGNAME"));
 		if (!mini->user)
 			return (1);
 	}

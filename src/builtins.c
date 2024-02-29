@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 12:25:02 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 12:32:45 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	ft_pwd(void)
 	free(pwd);
 }
 
-void	ft_env(char **envp)
+void	ft_env(t_mini *mini)
 {
-	if (!envp)
+	if (!mini->env)
 		return ;
-	while (*envp)
-		printf("%s\n",*(envp)++);
+	// while (t_mini *mini)
+	// 	printf("%s\n",*(envp)++);
 }
 
-void	ft_cd(char **cmd, char **envp)
+void	ft_cd(char **cmd, t_mini *mini)
 {
 	int	tablen;
 
@@ -37,7 +37,7 @@ void	ft_cd(char **cmd, char **envp)
 	if (tablen > 2)
 		return ;//error
 	else if (tablen == 1)
-		chdir(pathenv(envp, "HOME"));
+		chdir(pathenv(mini, "HOME"));
 	else
 		chdir(cmd[1]);
 }

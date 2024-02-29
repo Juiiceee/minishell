@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 12:24:10 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/02/29 12:31:41 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,12 +164,12 @@ int	escape_quote(char *input, int *i);
 int	escape_redirect(char *input, int *i);
 
 // builtin_exec.c
-void	exec_builtins(char **cmd, char **env);
+void	exec_builtins(char **cmd, t_mini *mini);
 
 // builtins.c
 void	ft_pwd(void);
-void	ft_env(char **envp);
-void	ft_cd(char **cmd, char **envp);
+void	ft_env(t_mini *mini);
+void	ft_cd(char **cmd, t_mini *mini);
 void	ft_exit(void);
 
 

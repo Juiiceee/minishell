@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:33:07 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 12:49:25 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:05:07 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	init(t_mini *mini, char **env)
 		return (1);
 	if (recouser(mini))
 		return (1);
+	lsttotab(mini);
 	mini->clear_fd = dup(0);
 	return (0);
 }
