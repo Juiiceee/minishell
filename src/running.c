@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 12:56:30 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:58:01 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	insiderunning(t_mini *mini)
 	free(mini->currentpath);
 	if (!mini->input)
 		return (1);
-	mini->lst = ft_tokenizer(mini->input);
+	mini->lst = ft_tokenizer(mini->input, mini);
 	if (ft_strlen(mini->input) != 0)
 		add_history(mini->input);
 	ft_parse_exec(mini);

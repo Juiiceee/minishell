@@ -6,18 +6,22 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/28 13:47:32 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:24:09 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*punct_parse(char *input,int *i)
+char	*punct_parse(char *input, int *i, t_mini *mini, int *j)
 {
 	char *tmp;
 	
 	if (input[0] == '$')
-		tmp = dollar_sign(input, i);
+	{
+		tmp = dollar_sign(input, i, mini);
+		if (ft_strlen(tmp))
+			tmp = split_env(tmp, mini->tabcmd, j);
+	}
 	if (input[0] == '>' || input[0] == '<')
 		tmp = redirect_sign(input,  i);
 	if  (input[0] == '|')
@@ -32,7 +36,7 @@ char	*str_parse(char *input, int *index)
 	char *tmp;
 
 	while (input[++i])
-		if (!ft_isprint(input[i]) || input[i] == '\'' || input[i] == '"')
+		if (!ft_isprint(input[i]) || input[i] == '\'' || input[i] == '"' || input[i] == '$')
 			break ;
 	tmp = malloc((sizeof (char)) * i + 1);
 	while (++j <= i)

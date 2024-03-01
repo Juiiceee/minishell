@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/01 12:36:04 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:18:34 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_mini
 	char	*input;
 	t_list	*env;
 	char	**tabenv;
+	char	**tabcmd;
 	int		pipe[2];
 	int		clear_fd;
 	pid_t	pid;
@@ -117,7 +118,7 @@ char			*squote_parse(char *input, int *index);
 char			*dquote_parse(char *input, int *index);
 char			*var_dquote(char *tmp);
 char			*str_parse(char *input, int *index);
-char			*punct_parse(char *input, int *i);
+char			*punct_parse(char *input,int *i, t_mini *mini, int *j);
 
 // utils.c
 char			*free_and_join(char *old, char *new);
@@ -126,10 +127,12 @@ int				ft_tablen(char **tab);
 void			closepipe(t_mini *mini);
 
 // tokenizer.c
-t_token			*ft_tokenizer(char *input);
-char			*ft_select_token(char *input, int *i);
+t_token			*ft_tokenizer(char *input, t_mini *mini);
+char			*ft_select_token(char *input, int *i, t_mini *mini, int *j);
 t_token			*listing_token(char **tmp);
-int				input_size(char *input);
+int				input_size(char *input, t_mini *mini);
+char			*split_env(char *old, char **tmp, int *j);
+
 
 // tokenizing.c
 t_token			*tokenizing_redirect(char **tmp, int *i);
@@ -137,7 +140,7 @@ t_token			*tokenizing_pipe(char **tmp, int *i);
 t_token			*tokenizing_other(char **tmp, int *i);
 
 // punct_handle.c
-char			*dollar_sign(char *input, int *i);
+char			*dollar_sign(char *input, int *i, t_mini *mini);
 char			*redirect_sign(char *input, int *i);
 char			*pipe_sign(char *input, int *i);
 
