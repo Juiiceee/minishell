@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:30:29 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/01 11:23:43 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 15:17:45 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ void free_list_element(t_list **lst, t_list *element)
 		return;
 	}
 	prev = *lst;
-	while (!prev->next && prev->next != element)
+	while (prev->next && prev->next != element)
 		prev = prev->next;
-	
 	if (prev->next == element)
 	{
 		prev->next = element->next;

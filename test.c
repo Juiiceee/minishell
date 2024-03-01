@@ -18,7 +18,7 @@ void free_list_element(t_list **lst, t_list *element)
 		return;
 	}
 	prev = *lst;
-	while (!prev->next && prev->next != element)
+	while (prev->next && prev->next != element)
 		prev = prev->next;
 	if (prev->next == element)
 	{
@@ -32,6 +32,7 @@ void	unset(t_mini *mini, char *find)
 	int	check;
 	t_list *st;
 	char	*tmp;
+
 	st = mini->env;
 	check = 1;
 	if (!st || !st->content)
@@ -48,6 +49,21 @@ void	unset(t_mini *mini, char *find)
 	if (check == 0)
 		free_list_element(&mini->env, st);
 	return ;
+}
+
+void	ft_env(t_mini *mini)
+{
+	t_list *str;
+
+	str = mini->env;
+	if (!mini->env)
+		return ;
+	while (str->next != NULL)
+	{
+	 	printf("%s\n", (char *)str->content);
+		str = str->next;
+	}
+	printf("%s\n", (char *)str->content);
 }
 
 /*void	ft_env(t_list *lst)
@@ -69,10 +85,11 @@ int main(int argc, char **argv, char **envp)
 	t_mini mini;
 
 	char *sa[] = {"coucou", "sa=lut", "feur", NULL};
-	recoenv(&mini, sa);
+	recoenv(&mini, envp);
+	//ft_env(&mini);
 	//t_list	*st = mini.env->next;
-	unset(&mini, "sa");
-	printf("%s", (char *)mini.env->next->content);
+	unset(&mini, "COLORTERM");
+	ft_env(&mini);
 	/*pid_t	pid = fork();
 	printf("avant%s\n", getcwd(NULL, 0));
 	char *oui[] = {"/bin/cd", ""}
