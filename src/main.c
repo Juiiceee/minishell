@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 12:39:11 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 11:14:00 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+/*int	main(int argc, char **argv, char **env)
 {
 	t_mini	mini;
 
@@ -26,4 +26,4 @@ int	main(int argc, char **argv, char **env)
 	freetab(mini.tabenv);
 	free(mini.user);
 	return (0);
-}
+}*/

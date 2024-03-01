@@ -9,8 +9,8 @@
                 "-g",
                 "test.c",
 				"libft/*.c",
-				"src/free.c",
-				"src/env.c",
+				"src/*.c",
+				"-lreadline",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

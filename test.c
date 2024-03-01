@@ -1,32 +1,31 @@
 #include "include/minishell.h"
 
-typedef struct s_list
+/*typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}	t_list;
+}	t_list;*/
 
 void free_list_element(t_list **lst, t_list *element)
 {
-    if (*lst == NULL || element == NULL)
-        return;
-    
-    if (*lst == element)
-    {
-        *lst = element->next;
-        free(element);
-        return;
-    }
-    
-    t_list *prev = *lst;
-    while (prev->next != NULL && prev->next != element)
-        prev = prev->next;
-    
-    if (prev->next == element)
-    {
-        prev->next = element->next;
-        free(element);
-    }
+	t_list	*prev;
+	if (!*lst || !element)
+		return;
+	if (*lst == element)
+	{
+		*lst = element->next;
+		free(element);
+		return;
+	}
+	prev = *lst;
+	while (!prev->next && prev->next != element)
+		prev = prev->next;
+	
+	if (prev->next == element)
+	{
+		prev->next = element->next;
+		free(element);
+	}
 }
 
 
@@ -56,7 +55,7 @@ void free_list_element(t_list **lst, t_list *element)
 	return ;
 }*/
 
-void	ft_env(t_list *lst)
+/*void	ft_env(t_list *lst)
 {
 	t_list	*st;
 
@@ -68,7 +67,7 @@ void	ft_env(t_list *lst)
 		printf("%s\n",(char *)st->content);
 		st = st->next;
 	}
-}
+}*/
 
 int main(int argc, char **argv, char **envp)
 {
@@ -76,7 +75,9 @@ int main(int argc, char **argv, char **envp)
 
 	char *sa[] = {"coucou", "salut", "feur", NULL};
 	recoenv(&mini, sa);
-	
+	//t_list	*st = mini.env->next;
+	free_list_element(&mini.env, mini.env->next);
+	printf("%s", (char *)mini.env->next->content);
 	/*pid_t	pid = fork();
 	printf("avant%s\n", getcwd(NULL, 0));
 	char *oui[] = {"/bin/cd", ""}

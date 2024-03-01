@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:30:29 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 11:51:07 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 11:23:43 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,26 @@ void	freetab(char **tab)
 	while (tab[i])
 		free(tab[i++]);
 	free(tab);
+}
+
+void free_list_element(t_list **lst, t_list *element)
+{
+	t_list	*prev;
+	if (!*lst || !element)
+		return;
+	if (*lst == element)
+	{
+		*lst = element->next;
+		free(element);
+		return;
+	}
+	prev = *lst;
+	while (!prev->next && prev->next != element)
+		prev = prev->next;
+	
+	if (prev->next == element)
+	{
+		prev->next = element->next;
+		free(element);
+	}
 }
