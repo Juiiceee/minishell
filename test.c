@@ -20,7 +20,6 @@ void free_list_element(t_list **lst, t_list *element)
 	prev = *lst;
 	while (!prev->next && prev->next != element)
 		prev = prev->next;
-	
 	if (prev->next == element)
 	{
 		prev->next = element->next;
@@ -28,32 +27,28 @@ void free_list_element(t_list **lst, t_list *element)
 	}
 }
 
-
-/*void	unset(t_mini *mini, char *find)
+void	unset(t_mini *mini, char *find)
 {
 	int	check;
-	int	lenght;
 	t_list *st;
-
+	char	*tmp;
 	st = mini->env;
 	check = 1;
 	if (!st || !st->content)
 		return ;
-	lenght = ft_strlen(find);
-	while (check && st->next != NULL)
+	tmp = ft_strjoin(find, "=");
+	while (check && st->next)
 	{
-		check = ft_strncmp(find, (char *)st->content, lenght);
+		check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
 		if (check == 0)
 			break ;
 		st = st->next;
 	}
-	check = ft_strncmp(find, (char *)st->content, lenght);
+	check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
 	if (check == 0)
-		modifievaluelst(&st, find, new);
-	else
-		addvaluelst(mini, find, new);
+		free_list_element(&mini->env, st);
 	return ;
-}*/
+}
 
 /*void	ft_env(t_list *lst)
 {
@@ -73,10 +68,10 @@ int main(int argc, char **argv, char **envp)
 {
 	t_mini mini;
 
-	char *sa[] = {"coucou", "salut", "feur", NULL};
+	char *sa[] = {"coucou", "sa=lut", "feur", NULL};
 	recoenv(&mini, sa);
 	//t_list	*st = mini.env->next;
-	free_list_element(&mini.env, mini.env->next);
+	unset(&mini, "sa");
 	printf("%s", (char *)mini.env->next->content);
 	/*pid_t	pid = fork();
 	printf("avant%s\n", getcwd(NULL, 0));
