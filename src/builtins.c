@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/01 10:17:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 10:56:48 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_pwd(void)
 	free(pwd);
 }
 
-void	ft_env(t_list *lst)
+void	ft_env(t_mini *mini)
 {
 	t_list *str;
 
@@ -66,8 +66,9 @@ void ft_export(char **cmd, t_mini *mini)
 		while (cmd[j][i] != '=' && cmd[j][i])
 			i++;
 		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
-			lstchangevalue(mini, ft_substr(cmd[j], 0, i),  ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+			export(mini, ft_substr(cmd[j], 0, i),  ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
 		i = 0;
 		j++;
 	}
+	refreshtab(mini);
 }

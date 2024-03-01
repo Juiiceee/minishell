@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 13:36:31 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 10:23:22 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	modifievaluelst(t_list **st, char *find, char *new)
 	t_list	*lst;
 
 	lst = *st;
-	free(lst->content);
+	//free(lst->content);
 	if (ft_strlen(new) == 0)
 		lst->content = ft_strjoin(find, "=");
 	else

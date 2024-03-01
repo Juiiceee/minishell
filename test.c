@@ -30,7 +30,7 @@ void free_list_element(t_list **lst, t_list *element)
 }
 
 
-void	unset(t_mini *mini, char *find)
+/*void	unset(t_mini *mini, char *find)
 {
 	int	check;
 	int	lenght;
@@ -38,26 +38,23 @@ void	unset(t_mini *mini, char *find)
 
 	st = mini->env;
 	check = 1;
-	if (!st || !st->content || ft_strlen(find) == 0)
+	if (!st || !st->content)
 		return ;
 	lenght = ft_strlen(find);
-	if (!ft_strncmp(find, (char *)st->content, lenght))
+	while (check && st->next != NULL)
 	{
-		modifievaluelst(&st, find, new);
-		return ;
-	}
-	while (check && st)
-	{
-		st = st->next;
 		check = ft_strncmp(find, (char *)st->content, lenght);
+		if (check == 0)
+			break ;
+		st = st->next;
 	}
+	check = ft_strncmp(find, (char *)st->content, lenght);
 	if (check == 0)
-	{
 		modifievaluelst(&st, find, new);
-		return ;
-	}
-	addvaluelst(mini, find, new);
-}
+	else
+		addvaluelst(mini, find, new);
+	return ;
+}*/
 
 void	ft_env(t_list *lst)
 {
@@ -77,7 +74,9 @@ int main(int argc, char **argv, char **envp)
 {
 	t_mini mini;
 
-	recoenv(&mini, envp);
+	char *sa[] = {"coucou", "salut", "feur", NULL};
+	recoenv(&mini, sa);
+	
 	/*pid_t	pid = fork();
 	printf("avant%s\n", getcwd(NULL, 0));
 	char *oui[] = {"/bin/cd", ""}

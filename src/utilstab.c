@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:49 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 18:14:14 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 10:56:17 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,13 @@ void	lsttotab(t_mini *mini)
 		st = st->next;
 	}
 	mini->tabenv[i] = NULL;
+}
+
+void	refreshtab(t_mini *mini)
+{
+	if (mini->tabenv)
+		freetab(mini->tabenv);
+	lsttotab(mini);
+	if (!mini->tabenv)
+		return ;
 }
