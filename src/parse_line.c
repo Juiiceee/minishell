@@ -32,7 +32,7 @@ char	*str_parse(char *input, int *index)
 	char *tmp;
 
 	while (input[++i])
-		if (!ft_isprint(input[i]))
+		if (!ft_isprint(input[i]) || input[i] == '\'' || input[i] == '"')
 			break ;
 	tmp = malloc((sizeof (char)) * i + 1);
 	while (++j <= i)

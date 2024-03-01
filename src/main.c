@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **env)
 	init(&mini, env);
 	recosignal();
 	running(&mini);
-	freelst(mini.env);
+	//freelst(mini.env);
 	freetab(mini.tabenv);
 	free(mini.user);
 	return (0);

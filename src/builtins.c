@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 13:44:30 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 10:17:48 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,17 @@ void	ft_pwd(void)
 
 void	ft_env(t_list *lst)
 {
-	t_list	*st;
+	t_list *str;
 
-	st = lst;
-	if (!st)
+	str = mini->env;
+	if (!mini->env)
 		return ;
-	while (st)
+	while (str->next != NULL)
 	{
-		printf("%s\n",(char *)st->content);
-		st = st->next;
+	 	printf("%s\n", (char *)str->content);
+		str = str->next;
 	}
+	printf("%s\n", (char *)str->content);
 }
 
 void	ft_cd(char **cmd, t_mini *mini)
@@ -53,7 +54,20 @@ void	ft_exit(void)
 	exit(0);//error
 }
 
-void	ft_export(t_mini *mini, char *variable, char *value)
+void ft_export(char **cmd, t_mini *mini)
 {
-	export(mini, variable, value);
+	size_t	j;
+	size_t	i;
+
+	i = 0;
+	j = 1;
+	while (cmd[j])
+	{
+		while (cmd[j][i] != '=' && cmd[j][i])
+			i++;
+		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
+			lstchangevalue(mini, ft_substr(cmd[j], 0, i),  ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+		i = 0;
+		j++;
+	}
 }
