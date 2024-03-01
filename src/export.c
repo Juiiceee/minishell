@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/01 10:23:22 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 12:55:10 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,20 @@ void	addvaluelst(t_mini *mini, char *find, char *new)
 void	export(t_mini *mini, char *find, char *new)
 {
 	int	check;
-	int	lenght;
 	t_list *st;
 
 	st = mini->env;
 	check = 1;
 	if (!st || !st->content)
 		return ;
-	lenght = ft_strlen(find);
 	while (check && st->next != NULL)
 	{
-		check = ft_strncmp(find, (char *)st->content, lenght);
+		check = ft_strncmp(find, (char *)st->content, ft_strlen((char *)st->content));
 		if (check == 0)
 			break ;
 		st = st->next;
 	}
-	check = ft_strncmp(find, (char *)st->content, lenght);
+	check = ft_strncmp(find, (char *)st->content, ft_strlen((char *)st->content));
 	if (check == 0)
 		modifievaluelst(&st, find, new);
 	else

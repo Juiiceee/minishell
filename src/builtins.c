@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/01 10:56:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/01 12:27:16 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void ft_export(char **cmd, t_mini *mini)
 		while (cmd[j][i] != '=' && cmd[j][i])
 			i++;
 		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
-			export(mini, ft_substr(cmd[j], 0, i),  ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+			export(mini, ft_substr(cmd[j], 0, i), ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
 		i = 0;
 		j++;
 	}
