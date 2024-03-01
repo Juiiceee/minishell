@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:30:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/01 13:41:11 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:02:40 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ void	ft_echo(char **cmd)
 	i = 1;
 	n = 0;
 	cmd_len = ft_tablen(cmd);
-	if (!ft_strncmp(cmd[1], "-n", ft_strlen(cmd[1])))
-		n++;
+	if (cmd[1])
+		if (!ft_strncmp(cmd[1], "-n", ft_strlen(cmd[1])))
+		{
+			i++;
+			n++;
+		}
 	while (i < cmd_len - 1)
 		printf("%s ", cmd[i++]);
 	if (cmd[i])
