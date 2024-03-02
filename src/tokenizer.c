@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 11:14:39 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 13:13:58 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,20 @@ t_token *listing_token(char **tmp)
 	return (lst);	
 }
 
-char *ft_select_token(char *input, int *i)
+char *ft_select_token(t_mini *mini, int *i)
 {
-	if (input[*i] == '$' || input[*i] == '|' || input[*i] == '>' || input[*i] == '<')
-		return(punct_parse(input + *i, i));
-	else if (input[*i] == '"')
-		return(dquote_parse((input + *i + 1), i));
-	else if (input[*i] == '\'')
-		return(squote_parse((input + *i + 1), i));
-	else if (ft_isprint(input[*i]))
-		return(str_parse(input + *i, i));
+	if (mini->input[*i] == '$' || mini->input[*i] == '|' || mini->input[*i] == '>' || mini->input[*i] == '<')
+		return(punct_parse(mini->input + *i, i));
+	else if (mini->input[*i] == '"')
+		return(dquote_parse((mini->input + *i + 1), i));
+	else if (mini->input[*i] == '\'')
+		return(squote_parse((mini->input + *i + 1), i));
+	else if (ft_isprint(mini->input[*i]))
+		return(str_parse(mini->input + *i, i));
 	return (NULL);
 }
 
-t_token *ft_tokenizer(char *input)
+t_token *ft_tokenizer(t_mini *mini)
 {
 	int i;
 	int j;
@@ -106,20 +106,20 @@ t_token *ft_tokenizer(char *input)
 	
 	j = 0;
 	i = 0;
-	tmp = malloc((sizeof (char *)) * input_size(input) + 99991);
-	while(input[i] != '\0')
+	tmp = malloc((sizeof (char *)) * input_size(mini->input) + 99991);
+	while(mini->input[i] != '\0')
 	{
-		if (!isspace(input[i]) && input[i] != '\0')
+		if (!isspace(mini->input[i]) && mini->input[i] != '\0')
 		{
-			old = ft_select_token(input, &i);
+			old = ft_select_token(mini, &i);
 			if (old[0] == '$')
 				split_env(old, tmp, &j);
-			while (!isspace(input[i]) && input[i] != '\0' && old[0] != '|')
-				old = free_and_join(old, ft_select_token(input, &i));
+			while (!isspace(mini->input[i]) && mini->input[i] != '\0' && old[0] != '|')
+				old = free_and_join(old, ft_select_token(mini, &i));
 			if (old && old[0] != '$')
 				tmp[j++] = old;
 		}
-		if (input[i] != '\0' && isspace(input[i]))
+		if (mini->input[i] != '\0' && isspace(mini->input[i]))
 			i++;
 	}
 	tmp[j] = 0;

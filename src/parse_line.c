@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/28 13:47:32 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/02 13:17:21 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*punct_parse(char *input,int *i)
 	if (input[0] == '$')
 		tmp = dollar_sign(input, i);
 	if (input[0] == '>' || input[0] == '<')
-		tmp = redirect_sign(input,  i);
+		tmp = redirect_sign(input, i);
 	if  (input[0] == '|')
-		tmp = pipe_sign(input,  i);
+		tmp = pipe_sign(input, i);
 	return (tmp);
 }
 

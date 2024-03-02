@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/02 11:15:10 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 13:10:51 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	createprename(t_mini *mini)
 	char	*tmp;
 	char	*tmp2;
 
-	tmp = ft_strjoin(getenv("USER"), "@minishell:");
+	tmp = ft_strjoin(pathenv(mini, "USER"), "@minishell:");
 	tmp2 = ft_strjoin(tmp, mini->currentpath);
 	free(tmp);
 	mini->userstr = ft_strjoin(tmp2, "$ ");
@@ -35,7 +35,7 @@ int	insiderunning(t_mini *mini)
 	free(mini->currentpath);
 	if (!mini->input)
 		return (1);
-	mini->lst = ft_tokenizer(mini->input);
+	mini->lst = ft_tokenizer(mini);
 	if (ft_strlen(mini->input) != 0)
 		add_history(mini->input);
 	ft_parse_exec(mini);

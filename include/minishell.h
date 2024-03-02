@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/02 10:26:03 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 13:12:09 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int				ft_tablen(char **tab);
 void			closepipe(t_mini *mini);
 
 // tokenizer.c
-t_token			*ft_tokenizer(char *input);
-char			*ft_select_token(char *input, int *i);
+t_token			*ft_tokenizer(t_mini *mini);
+char			*ft_select_token(t_mini *mini, int *i);
 t_token			*listing_token(char **tmp);
 int				input_size(char *input);
 

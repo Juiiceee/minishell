@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:32:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/29 12:40:11 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 13:04:32 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,22 @@
 char	*pathenv(t_mini *mini, char *find)
 {
 	int	check;
-	int	lenght;
 	t_list *st;
 
 	st = mini->env;
 	check = 1;
 	if (!st || !st->content)
 		return (NULL);
-	lenght = ft_strlen(find);
-	if (!ft_strncmp(find, (char *)st->content, lenght))
-		return ((char *)st->content + (lenght + 1));
-	while (check && st)
+	while (check && st->next != NULL)
 	{
+		check = ft_strncmp(find, (char *)st->content, ft_strlen(find));
+		if (check == 0)
+			break ;
 		st = st->next;
-		check = ft_strncmp(find, (char *)st->content, lenght);
 	}
+	check = ft_strncmp(find, (char *)st->content, ft_strlen(find));
 	if (check == 0)
-		return ((char *)st->content + (lenght + 1));
+		return ((char *)st->content + (ft_strlen(find) + 1));
 	return (NULL);
 }
 
