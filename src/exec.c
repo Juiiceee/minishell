@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 11:29:42 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 15:41:57 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,5 +157,5 @@ void	ft_exec(t_mini *mini)
 	}
 	last_node(mini->exe, mini);
 	mini->exe = NULL;
-	waitpid(-1, &exitstatus, 0);
+	// waitpid(-1, NULL, 0);
 }

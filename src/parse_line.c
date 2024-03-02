@@ -6,18 +6,22 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 13:17:21 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 15:42:42 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*punct_parse(char *input,int *i)
+char	*punct_parse(char *input, int *i, t_mini *mini, int *j)
 {
 	char *tmp;
 	
 	if (input[0] == '$')
-		tmp = dollar_sign(input, i);
+	{
+		tmp = dollar_sign(input, i, mini);
+		if (ft_strlen(tmp))
+			tmp = split_env(tmp, mini->tabcmd, j);
+	}
 	if (input[0] == '>' || input[0] == '<')
 		tmp = redirect_sign(input, i);
 	if  (input[0] == '|')
@@ -32,7 +36,7 @@ char	*str_parse(char *input, int *index)
 	char *tmp;
 
 	while (input[++i])
-		if (!ft_isprint(input[i]) || input[i] == '\'' || input[i] == '"')
+		if (!ft_isprint(input[i]) || input[i] == '\'' || input[i] == '"' || input[i] == '$')
 			break ;
 	tmp = malloc((sizeof (char)) * i + 1);
 	while (++j <= i)
@@ -53,7 +57,7 @@ char *var_dquote(char *tmp)
 	while (tmp[i] != '$')
 		i++;
 	j = i + 1;
-	while (isalpha(tmp[j]) && tmp[j])
+	while (ft_isalnum(tmp[j]) && tmp[j])
 		j++;
 	newtmp = ft_substr(tmp, i + 1, j - i - 1);
 	buff = ft_substr(tmp, j, ft_strlen(tmp) - j);
@@ -82,9 +86,9 @@ char	*dquote_parse(char *input, int *index)
 	while (++j <= i)
 		tmp[j] = input[j];
 	tmp[j - 1] = '\0';
-	j = 0;
-	while (tmp[j])
-		if (tmp[j++] == '$')
+	j = -1;
+	while (tmp[++j] != 0)
+		if (tmp[j] == '$')
 			tmp = var_dquote(tmp);
 	*index = *index + i + 2;
 	return (tmp);
