@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/01 16:24:09 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:22:15 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char *var_dquote(char *tmp)
 	while (tmp[i] != '$')
 		i++;
 	j = i + 1;
-	while (isalpha(tmp[j]) && tmp[j])
+	while (ft_isalnum(tmp[j]) && tmp[j])
 		j++;
 	newtmp = ft_substr(tmp, i + 1, j - i - 1);
 	buff = ft_substr(tmp, j, ft_strlen(tmp) - j);
@@ -86,9 +86,9 @@ char	*dquote_parse(char *input, int *index)
 	while (++j <= i)
 		tmp[j] = input[j];
 	tmp[j - 1] = '\0';
-	j = 0;
-	while (tmp[j])
-		if (tmp[j++] == '$')
+	j = -1;
+	while (tmp[++j] != 0)
+		if (tmp[j] == '$')
 			tmp = var_dquote(tmp);
 	*index = *index + i + 2;
 	return (tmp);

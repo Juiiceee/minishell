@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/01 12:28:35 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/02 12:56:32 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,5 @@ void	ft_exec(t_mini *mini)
 	}
 	last_node(mini->exe, mini);
 	mini->exe = NULL;
-	waitpid(-1, NULL, 0);
+	// waitpid(-1, NULL, 0);
 }

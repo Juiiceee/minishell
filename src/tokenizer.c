@@ -6,38 +6,39 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/01 16:37:25 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/02 15:34:22 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// int	input_size(char *input, t_mini *mini)
-// {
-// 	int i;
-// 	int j;
+int	input_size(char *input, t_mini *mini)
+{
+	(void) mini;
+	int i;
+	int j;
 
-// 	i = 0;
-// 	j = 0;
-// 	while (input[i])
-// 	{
-// 		if (input[i] == '<' || input[i] == '>')
-// 			j += escape_redirect(input, &i);
-// 		else if (input[i] == '|')
-// 		{
-// 			while(input[i] == '|')
-// 				i++;
-// 			j++;
-// 		}
-// 		else if (input[i] == '\'' || input[i] == '\"')
-// 			j += escape_quote(input, &i);
-// 		else 
-// 			j += escape_word(input, &i);
-// 		while (isspace(input[i]))
-// 			i++;
-// 	}
-// 	return (j);
-// }
+	i = 0;
+	j = 0;
+	while (input[i])
+	{
+		if (input[i] == '<' || input[i] == '>')
+			j += escape_redirect(input, &i);
+		else if (input[i] == '|')
+		{
+			while(input[i] == '|')
+				i++;
+			j++;
+		}
+		else if (input[i] == '\'' || input[i] == '\"')
+			j += escape_quote(input, &i);
+		else 
+			j += escape_word(input, &i);
+		while (isspace(input[i]))
+			i++;
+	}
+	return (j);
+}
 
 char	*split_env(char *old, char **tmp, int *j)
 {
@@ -108,7 +109,8 @@ t_token *ft_tokenizer(char *input, t_mini *mini)
 	
 	j = 0;
 	i = 0;
-	mini->tabcmd = malloc((sizeof (char *)) * 99991);
+	mini->tabcmd = malloc((sizeof (char *)) * (input_size(input, mini) + 1));
+	mini->tabcmd[input_size(input, mini)] = 0;
 	while(input[i] != '\0')
 	{
 		if (!isspace(input[i]) && input[i] != '\0')
@@ -124,6 +126,5 @@ t_token *ft_tokenizer(char *input, t_mini *mini)
 		if (input[i] != '\0' && isspace(input[i]))
 			i++;
 	}
-	mini->tabcmd[j] = 0;
 	return (listing_token(mini->tabcmd));
 }
