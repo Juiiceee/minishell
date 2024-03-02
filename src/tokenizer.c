@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 15:43:52 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 15:57:56 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ t_token *ft_tokenizer(char *input, t_mini *mini)
 	
 	j = 0;
 	i = 0;
-	mini->tabcmd = malloc((sizeof (char *)) * (input_size(input, mini) + 1));
-	mini->tabcmd[input_size(input, mini)] = 0;
+	mini->tabcmd = ft_calloc(sizeof (char *), (input_size(input, mini) + 1));
 	while(input[i] != '\0')
 	{
 		if (!isspace(mini->input[i]) && mini->input[i] != '\0')
