@@ -88,26 +88,18 @@ void	ft_env(t_mini *mini)
 	recoenv(&mini, envp);
 }*/
 
-#include <stdio.h>
-#include <signal.h>
-#define _GNU_SOURCE
-
-void handler(int signum) {
-    printf("Received signal: %d\n", signum);
-	exit(0);
-    // Retrieve more information from the siginfo_t structure if needed
-}
-
 int main() {
-   	struct sigaction sa;
-    sa.sa_flags = SA_SIGINFO;
-    sa.sa_sigaction = handler;
-    sigemptyset(&sa.sa_mask);
-    printf("%d\n",sigaction(SIGINT, &sa, NULL));
-	
-	while (1)
-		;
-	
-    // Rest of the code...
-    return 0;
+	int	i = 10;
+	int	j = 20;
+
+	if (j == 20)
+	{
+		printf("Je suis a 20\n");
+		if (i == 10)
+		{
+			printf("Je suis a 10\n");
+			break;
+		}
+	}
+return 0;
 }

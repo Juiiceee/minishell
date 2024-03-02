@@ -6,11 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 10:30:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 11:29:42 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+extern int	exitstatus;
 
 int	parsingcommand(t_exec *cmd, t_mini *mini)
 {
@@ -80,12 +82,18 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 			if (cmd->in)
 			{
 				cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
-				dup2(cmd->in_fd, 0);
+				if (!cmd->in_fd)
+					exitstatus = 1;
+				else
+					dup2(cmd->in_fd, 0);
 			}
 			if (cmd->out)
 			{
 				cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-				dup2(cmd->out_fd, 1);
+				if (!cmd->out_fd)
+					exitstatus = 1;
+				else
+					dup2(cmd->out_fd, 1);
 			}
 			else
 				dup2(mini->pipe[1], 1);
@@ -149,5 +157,5 @@ void	ft_exec(t_mini *mini)
 	}
 	last_node(mini->exe, mini);
 	mini->exe = NULL;
-	waitpid(-1, NULL, 0);
+	waitpid(-1, &exitstatus, 0);
 }
