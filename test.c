@@ -6,7 +6,7 @@
 	struct s_list	*next;
 }	t_list;*/
 
-void free_list_element(t_list **lst, t_list *element)
+/*void free_list_element(t_list **lst, t_list *element)
 {
 	t_list	*prev;
 	if (!*lst || !element)
@@ -64,7 +64,7 @@ void	ft_env(t_mini *mini)
 		str = str->next;
 	}
 	printf("%s\n", (char *)str->content);
-}
+}*/
 
 /*void	ft_env(t_list *lst)
 {
@@ -80,26 +80,34 @@ void	ft_env(t_mini *mini)
 	}
 }*/
 
-int main(int argc, char **argv, char **envp)
+/*int main(int argc, char **argv, char **envp)
 {
 	t_mini mini;
 
 	char *sa[] = {"coucou", "sa=lut", "feur", NULL};
 	recoenv(&mini, envp);
-	//ft_env(&mini);
-	//t_list	*st = mini.env->next;
-	unset(&mini, "COLORTERM");
-	ft_env(&mini);
-	/*pid_t	pid = fork();
-	printf("avant%s\n", getcwd(NULL, 0));
-	char *oui[] = {"/bin/cd", ""}
-	if (pid == 0)
-	{
-		//chdir(getenv("HOME"));
-		
-		printf("dans l'enfant %s\n", getcwd(NULL, 0));
-		exit(0);
-	}
-	waitpid(pid, NULL, 0);
-	printf("apres %s\n", getcwd(NULL, 0));*/
+}*/
+
+#include <stdio.h>
+#include <signal.h>
+#define _GNU_SOURCE
+
+void handler(int signum) {
+    printf("Received signal: %d\n", signum);
+	exit(0);
+    // Retrieve more information from the siginfo_t structure if needed
+}
+
+int main() {
+   	struct sigaction sa;
+    sa.sa_flags = SA_SIGINFO;
+    sa.sa_sigaction = handler;
+    sigemptyset(&sa.sa_mask);
+    printf("%d\n",sigaction(SIGINT, &sa, NULL));
+	
+	while (1)
+		;
+	
+    // Rest of the code...
+    return 0;
 }

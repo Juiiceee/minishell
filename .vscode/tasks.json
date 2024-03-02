@@ -7,9 +7,8 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "test.c",
-				"libft/*.c",
-				"src/env.c",
+				"../libft/*.c",
+				"*.c",
 				"-lreadline",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"

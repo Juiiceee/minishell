@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/01 14:49:50 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/02 10:26:03 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,11 +168,11 @@ int				escape_redirect(char *input, int *i);
 void			exec_builtins(char **cmd, t_mini *mini);
 
 // builtins.c
-void	ft_pwd(void);
-void	ft_env(t_mini *mini);
-void	ft_cd(char **cmd, t_mini *mini);
-void	ft_exit(void);
-void	ft_export(char **cmd, t_mini *mini);
+void			ft_pwd(void);
+void			ft_env(t_mini *mini);
+void			ft_cd(char **cmd, t_mini *mini);
+void			ft_exit(void);
+void			ft_export(char **cmd, t_mini *mini);
 
 // builtins2.c
 void			ft_unset(char **cmd, t_mini *mini);
