@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/03 12:52:00 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 13:36:45 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,17 @@ char 	*dollar_sign(char *input, int *i, t_mini *mini)
 	*i += 1;
 	if (isspace(input[1]))
 		return (ft_strdup("$"));
-	else if (input[1] == '?')
-		return (free_and_join(ft_strdup("$"), ft_itoa(mini->exitstatus)));
-	while (isalpha(input[j]) && input[j])
+	if (input[1] == '?')
+		j++;
+	while ((isalpha(input[j]) && input[j]))
 		j++;
 	tmp = ft_substr(input, 1, j - 1);
 	*i += ft_strlen(tmp);
+	if (input[1] == '?')
+		return (free_and_join(ft_strdup("$"), ft_itoa(mini->exitstatus)));
 	if (!getenv(tmp))
 		return (free(tmp), ft_strdup(""));
-	else 
+	else
 		tmp = free_and_join(ft_strdup("$"), ft_strdup(getenv(tmp)));
 	return(tmp);
 }
