@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/03 14:14:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 16:15:51 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void ft_export(char **cmd, t_mini *mini)
 	{
 		printf()
 	}*/
+	if (!cmd[1])
+		return (exportsolo(mini));
 	while (cmd[j])
 	{
 		while (cmd[j][i] != '=' && cmd[j][i])

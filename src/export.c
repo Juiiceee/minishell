@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/03 14:06:35 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 16:18:17 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,16 @@ int	ft_strnb(char *str, char c)
 		str++;
 	}
 	return (nb);
+}
+
+void	exportsolo(t_mini *mini)
+{
+	t_list	*st;
+
+	st = mini->env;
+	while (st)
+	{
+		printf("declare -x %s\n", (char *)st->content);
+		st = st->next;
+	}
 }

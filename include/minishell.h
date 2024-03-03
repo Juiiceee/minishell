@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/03 14:06:32 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 16:14:08 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void			modifievaluelst(t_list **st, char *find, char *new);
 void			addvaluelst(t_mini *mini, char *find, char *new);
 void			export(t_mini *mini, char *find, char *new);
 int				ft_strnb(char *str, char c);
+void			exportsolo(t_mini *mini);
 
 // parse_line.c
 char			*squote_parse(char *input, int *index);
