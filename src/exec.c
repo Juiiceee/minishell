@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/03 12:47:22 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 13:56:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,18 @@ int	last_node(t_exec *cmd, t_mini *mini)
 			if (cmd->in)
 			{
 				cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
+				if (!cmd->in_fd)
+					mini->exitstatus = 1;
 				dup2(cmd->in_fd, 0);
 			}
 			if (cmd->out)
 			{
 				cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				if (!cmd->out_fd)
+					mini->exitstatus = 1;
 				dup2(cmd->out_fd, 1);
 			}
+			
 			if (!parsingcommand(cmd, mini))
 				execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 			printf("%s: command not found\n", cmd->cmd[0]);
