@@ -6,18 +6,18 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:07:36 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/02 12:48:43 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 12:03:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	exitstatus;
+int	signalexit;
 
 static void	recosigint(int sig)
 {
 	(void)sig;
-	exitstatus = 130;
+	signalexit = 130;
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	printf("\n");

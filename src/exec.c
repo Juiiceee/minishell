@@ -6,13 +6,11 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 15:41:57 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 12:47:22 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-extern int	exitstatus;
 
 int	parsingcommand(t_exec *cmd, t_mini *mini)
 {
@@ -83,7 +81,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 			{
 				cmd->in_fd = open(cmd->in[1], O_RDONLY, 0644);
 				if (!cmd->in_fd)
-					exitstatus = 1;
+					mini->exitstatus = 1;
 				else
 					dup2(cmd->in_fd, 0);
 			}
@@ -91,7 +89,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 			{
 				cmd->out_fd = open(cmd->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 				if (!cmd->out_fd)
-					exitstatus = 1;
+					mini->exitstatus = 1;
 				else
 					dup2(cmd->out_fd, 1);
 			}
@@ -105,7 +103,8 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 		}
 		else
 		{
-			waitpid(-1, NULL, 0);
+			waitpid(-1, &mini->exitstatus, 0);
+			mini->exitstatus = WEXITSTATUS(mini->exitstatus);
 			close(mini->pipe[1]);
 			dup2(mini->pipe[0], 0);
 		}
@@ -141,7 +140,8 @@ int	last_node(t_exec *cmd, t_mini *mini)
 			printf("%s: command not found\n", cmd->cmd[0]);
 			exit (127);
 		}
-		waitpid(-1, NULL, 0);
+		waitpid(-1, &mini->exitstatus, 0);
+		mini->exitstatus = WEXITSTATUS(mini->exitstatus);
 	}
 	return (0);
 }

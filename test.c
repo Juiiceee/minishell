@@ -1,4 +1,4 @@
-#include "include/minishell.h"
+//#include "include/minishell.h"
 
 /*typedef struct s_list
 {
@@ -88,18 +88,25 @@ void	ft_env(t_mini *mini)
 	recoenv(&mini, envp);
 }*/
 
-int main() {
-	int	i = 10;
-	int	j = 20;
+#include <stdio.h>
 
-	if (j == 20)
+static	void	echo()
+{
+	printf("COUCOU");
+}
+
+int main() {
+	echo();
+	/*pid_t	pid;
+	int	status;
+
+	pid = fork();
+	if (pid == 0)
 	{
-		printf("Je suis a 20\n");
-		if (i == 10)
-		{
-			printf("Je suis a 10\n");
-			break;
-		}
+		exit(127);
 	}
-return 0;
+	waitpid(pid, &status, 0);
+	printf("%d\n",status);
+	printf("%d", WEXITSTATUS(status));
+	return 0;*/
 }
