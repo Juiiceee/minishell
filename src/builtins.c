@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/03 16:43:08 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 17:23:36 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,18 @@ void	ft_cd(char **cmd, t_mini *mini)
 
 	tablen = tablength(cmd);
 	if (tablen > 2)
-		return ;//error
+	{
+		mini->exitstatus = 1;
+		return ((void)ft_printerr("cd: too many arguments\n"));
+	}
 	else if (tablen == 1)
 		chdir(pathenv(mini, "HOME"));
 	else
-		chdir(cmd[1]);
+		if (chdir(cmd[1]) == -1)
+		{
+			mini->exitstatus = 1;
+			return ((void)ft_printerr("cd: %s: No such file or directory\n", cmd[1]));
+		}
 }
 void	ft_exit(void)
 {
