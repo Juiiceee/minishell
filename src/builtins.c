@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 17:23:36 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 17:48:26 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,24 @@ void	ft_cd(char **cmd, t_mini *mini)
 			return ((void)ft_printerr("cd: %s: No such file or directory\n", cmd[1]));
 		}
 }
-void	ft_exit(void)
+void	ft_exit(t_mini *mini, char *str)
 {
+	int	i;
+
+	i = 0;
 	printf("exit\n");
-	exit(0);//error
+	if (!str)
+		exit(mini->exitstatus);
+	while (str[i])
+	{
+		if (!ft_isdigit(*str))
+		{
+			ft_printerr("exit: %s: numeric argument required\n", str);
+			exit(2);
+		}
+		i++;
+	}
+	exit(ft_atoi(str));
 }
 
 void ft_export(char **cmd, t_mini *mini)
