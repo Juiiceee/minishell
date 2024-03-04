@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:30:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 15:41:27 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 12:36:27 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_echo(char **cmd)
 	i = 1;
 	n = 0;
 	cmd_len = ft_tablen(cmd);
-	if (cmd[1])
+	if (cmd[1] && ft_strlen(cmd[1]))
 		if (!ft_strncmp(cmd[1], "-n", ft_strlen(cmd[1])))
 		{
 			i++;

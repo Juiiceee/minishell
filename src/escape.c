@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:35:23 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 14:49:05 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:33:21 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	escape_dolar(char *input, int *i)
 	tmp = ft_substr(input, *i + 1, j - *i - 1);
 	*i = j;
 	var = getenv(tmp);
+	if (!var)
+		return(free(tmp), 1);
 	free (tmp);
 	tab = ft_split(var, ' ');
 	if (!tab)
 		return (free(var), 0);
 	j = ft_tablen(tab);
 	ft_free(tab);
-	if (j == 0)
-		j++;
 	return (j);
 }
 
