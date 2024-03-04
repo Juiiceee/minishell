@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_pointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:14:46 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 13:39:02 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:47:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printerr.h"
+#include "ft_printerr.h"
 
 static int	lennum(size_t n)
 {

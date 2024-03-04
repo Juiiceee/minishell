@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unbr.c                                       :+:      :+:    :+:   */
+/*   print_nbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:10:11 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 13:39:02 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:47:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printerr.h"
+#include "ft_printerr.h"
 
 static int	lennum(long n)
 {
@@ -34,7 +34,7 @@ static int	lennum(long n)
 	return (count);
 }
 
-int	print_unbr(unsigned int nb)
+int	print_nbr(int nb)
 {
 	long	n;
 	int		ret;

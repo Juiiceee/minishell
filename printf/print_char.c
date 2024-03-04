@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   print_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 10:07:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 13:39:02 by mda-cunh         ###   ########.fr       */
+/*   Created: 2023/11/20 10:07:08 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/03/04 15:47:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printerr.h"
+#include "ft_printerr.h"
 
-int	print_str(char *str)
+int	print_char(char c)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-	{
-		write(2, "(null)", 6);
-		return (6);
-	}
-	while (str[i])
-		print_char(str[i++]);
-	return (i);
+	write(2, &c, 1);
+	return (1);
 }
