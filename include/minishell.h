@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/02 15:39:50 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 16:14:08 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_mini
 	char	*user;
 	char	*input;
 	t_list	*env;
+	int		exitstatus;
 	char	**tabenv;
 	char	**tabcmd;
 	int		pipe[2];
@@ -100,11 +101,12 @@ int				init(t_mini *mini, char **env);
 // prompt.c
 char			*pathenv(t_mini *mini, char *find);
 int				recouser(t_mini *mini);
-void			createprename(t_mini *mini);
-void			prompt(void);
+
 // running.c
 void			running(t_mini *mini);
+void			createprename(t_mini *mini);
 int				insiderunning(t_mini *mini);
+int				updateexit(t_mini *mini, int nb);
 
 // signal.c
 void			recosignal(void);
@@ -113,6 +115,8 @@ void			recosignal(void);
 void			modifievaluelst(t_list **st, char *find, char *new);
 void			addvaluelst(t_mini *mini, char *find, char *new);
 void			export(t_mini *mini, char *find, char *new);
+int				ft_strnb(char *str, char c);
+void			exportsolo(t_mini *mini);
 
 // parse_line.c
 char			*squote_parse(char *input, int *index);

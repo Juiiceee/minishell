@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/02 15:43:07 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/03 12:51:37 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,10 @@ void	running(t_mini *mini)
 			break;
 		}
 	}
+}
+
+int	updateexit(t_mini *mini, int nb)
+{
+	mini->exitstatus = nb;
+	return (nb);
 }
