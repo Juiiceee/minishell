@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 17:05:15 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 23:10:57 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ typedef enum e_type
 	CMD,
 	IN_REDIRECT,
 	OU_REDIRECT,
-	APPEND,
-	HERE_DOC,
 	PIPE,
 	DONT_EXIST
 }	t_type;
@@ -58,9 +56,7 @@ typedef struct s_exec
 {
 	char			**cmd;
 	char			**in;
-	int				in_fd;
 	char			**out;
-	int				out_fd;
 	int				builtin;
 	struct s_exec	*next;
 }	t_exec;
@@ -197,6 +193,11 @@ void			ft_tokclean(t_token **lst);
 void			ft_envclean(t_list **lst);
 
 // here_doc.c
+int				heredoc(char *limiter);
+
+// redirect.c
+void			input(t_mini *mini, t_exec *exec);
+void			output(t_mini *mini, t_exec *exec);
 
 
 

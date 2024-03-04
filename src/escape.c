@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:35:23 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 12:33:21 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:39:12 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	escape_redirect(char *input, int *i)
 {
-	while (!ft_isalpha(input[*i]) && input[*i])
-		*i = *i + 1;
-	while (ft_isalpha(input[*i]) && input[*i])
+	while (input[*i] == '<' || input[*i] == '>')
 		*i = *i + 1;
 	return (1);
 }

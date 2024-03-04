@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   punct_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 12:19:27 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 23:35:45 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ char 	*redirect_sign(char *input, int *i)
 	j = 0;
 	while (input[j] == '<' || input[j] == '>')
 		j++;
-	*i += j;
 	tmp = ft_substr(input, 0,  j);
+	*i = *i + j;
 	return (tmp);
 }
 
