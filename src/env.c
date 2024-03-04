@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/02/28 14:12:36 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 16:04:00 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 int	recoenv(t_mini *mini, char **argv)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	mini->env = NULL;
 	i = 0;
 	if (!argv)
 		return (1);
 	while (argv[i])
-		ft_lstadd_back(&mini->env, ft_lstnew((char *)argv[i++]));
+	{
+		tmp = ft_strdup((char *)argv[i++]);
+		if (!tmp)
+			return (1);
+		ft_lstadd_back(&mini->env, ft_lstnew(tmp));
+	}
 	return (0);
 }
 
