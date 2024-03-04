@@ -1,20 +1,14 @@
-#include "include/minishell.h"
+/*#}include "include/minishell.h"
 
-int	echo()
+void	heredoc()
 {
-	printf("COUCOU");
-	return (15);
-}
-
-void	truc()
-{
-	return ((void)echo());
+	b
 }
 
 int main(int argc, char **argv, char **envp)
 {
-	truc();
-	/*pid_t	pid;
+
+	pid_t	pid;
 	int	status;
 	char *sa[] = {"/bin/cat", "dsdasd", NULL};
 
@@ -25,5 +19,5 @@ int main(int argc, char **argv, char **envp)
 	}
 	waitpid(pid, &status, 0);
 	printf("%d", WEXITSTATUS(status));
-	return 0;*/
-}
+	return 0;
+}*/

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 15:42:42 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 12:11:58 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ char	*dquote_parse(char *input, int *index)
 		tmp[j] = input[j];
 	tmp[j - 1] = '\0';
 	j = -1;
-	while (tmp[++j] != 0)
-		if (tmp[j] == '$')
+	while (input[++j] != 0)
+		if (input[j] == '$')
 			tmp = var_dquote(tmp);
 	*index = *index + i + 2;
 	return (tmp);
