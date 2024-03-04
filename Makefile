@@ -1,4 +1,4 @@
-NAME            := minishell
+NAME			:= minishell
 SRC_DIR			:= src
 OBJ_DIR			:= obj
 SRCS			:= builtin_exec.c builtins2.c builtins.c env.c escape.c exec.c export.c free.c heredoc.c init.c lst_exe.c lst_free.c lst_tok.c main.c parse_line.c prompt.c punct_handle.c running.c signal.c tokenizer.c tokenizing.c unset.c utils.c utilstab.c
