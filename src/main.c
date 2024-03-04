@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 14:42:19 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:34:43 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv, char **env)
 	init(&mini, env);
 	recosignal();
 	running(&mini);
-	freelst(mini.env);
 	freetab(mini.tabenv);
 	free(mini.user);
 	return (0);

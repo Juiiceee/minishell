@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:06:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 15:14:23 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:52:27 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_execlear(t_exec **lst, void (*del)(char **))
 	while (actual)
 	{
 		sav = actual->next;
-		(*del)(actual->cmd);
+		if (actual->cmd)
+			(*del)(actual->cmd);
 		if (actual->in)
 			(*del)(actual->in);
 		if (actual->out)
@@ -59,12 +60,12 @@ void	ft_envclean(t_list **lst)
 	if (!lst)
 		return ;
 	actual = *lst;
-	while (actual)
+	while (actual->next != NULL)
 	{
 		sav = actual->next;
-		free(actual->content);
 		free(actual);
 		actual = sav;
 	}
+	free(actual);
 	*lst = NULL;
 }
