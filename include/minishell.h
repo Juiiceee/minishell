@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/03 16:14:08 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 14:41:08 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <signal.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "../printf/ft_printerr.h"
 
 typedef enum e_type
 {
@@ -190,6 +191,10 @@ void			unset(t_mini *mini, char *find);
 // builtins2.c
 void			ft_echo(char **cmd);
 
+// lst_free.c
+void			ft_execlear(t_exec **lst, void (*del)(char **));
+void			ft_tokclean(t_token **lst);
+void			ft_envclean(t_list **lst);
 
 
 

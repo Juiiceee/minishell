@@ -1,7 +1,7 @@
 NAME            := minishell
 SRC_DIR			:= src
 OBJ_DIR			:= obj
-SRCS			:= builtin_exec.c builtins2.c builtins.c env.c escape.c exec.c export.c free.c init.c lst_exe.c lst_tok.c main.c parse_line.c prompt.c punct_handle.c running.c signal.c tokenizer.c tokenizing.c unset.c utils.c utilstab.c
+SRCS			:= builtin_exec.c  builtins.c  escape.c  export.c  init.c     lst_free.c  main.c        prompt.c        running.c  tokenizer.c   unset.c  utilstab.c  builtins2.c     env.c       exec.c    free.c    lst_exe.c  lst_tok.c   parse_line.c  punct_handle.c  signal.c   tokenizing.c  utils.c
 SRCS			:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC				:= cc
@@ -14,8 +14,9 @@ LIBFT			:= libft
 all		:	$(NAME)
 
 $(NAME) :	$(OBJS)
+	@make -C printf --no-print-directory
 	@make -C $(LIBFT) --no-print-directory
-	$(CC) $(OBJS) $(LIBFT)/libft.a -lreadline -o $(NAME)
+	$(CC) $(OBJS) printf/libftprinterr.a $(LIBFT)/libft.a -lreadline -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)

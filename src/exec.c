@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/03 13:56:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 15:13:23 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_parse_exec(t_mini *mini)
 		else 
 			break ;
 	}
+	ft_tokclean(&mini->lst);
 }
 
 int	exec_node(t_exec *cmd, t_mini *mini)
@@ -98,7 +99,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 			close(mini->pipe[0]);
 			if (!parsingcommand(cmd, mini))
 				execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
-			printf("%s: command not found\n", cmd->cmd[0]);
+			ft_printerr("%s: command not found\n", cmd->cmd[0]);
 			exit (127);
 		}
 		else
@@ -138,11 +139,10 @@ int	last_node(t_exec *cmd, t_mini *mini)
 				if (!cmd->out_fd)
 					mini->exitstatus = 1;
 				dup2(cmd->out_fd, 1);
-			}
-			
+			}	
 			if (!parsingcommand(cmd, mini))
 				execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
-			printf("%s: command not found\n", cmd->cmd[0]);
+			ft_printerr("%s: command not found\n", cmd->cmd[0]);
 			exit (127);
 		}
 		waitpid(-1, &mini->exitstatus, 0);
@@ -153,14 +153,17 @@ int	last_node(t_exec *cmd, t_mini *mini)
 
 void	ft_exec(t_mini *mini)
 {
-	if (!mini->exe)
+	t_exec *tmp_exe;
+
+	tmp_exe = mini->exe;
+	if (!tmp_exe)
 		return ;
-	while (mini->exe->next != NULL)
+	while (tmp_exe->next != NULL)
 	{
-		exec_node(mini->exe, mini);
-		mini->exe = mini->exe->next;
+		exec_node(tmp_exe, mini);
+		tmp_exe = tmp_exe->next;
 	}
-	last_node(mini->exe, mini);
-	mini->exe = NULL;
+	last_node(tmp_exe, mini);
+	ft_execlear(&mini->exe, *ft_free);
 	// waitpid(-1, NULL, 0);
 }

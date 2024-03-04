@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 14:42:19 by mda-cunh         ###   ########.fr       */
+/*   Created: 2023/11/20 10:07:55 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/03/04 13:39:02 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../ft_printerr.h"
 
-int	main(int argc, char **argv, char **env)
+int	print_str(char *str)
 {
-	t_mini	mini;
+	int	i;
 
-	(void)argv;
-	if (argc != 1)
-		return (1);
-	init(&mini, env);
-	recosignal();
-	running(&mini);
-	freelst(mini.env);
-	freetab(mini.tabenv);
-	free(mini.user);
-	return (0);
+	i = 0;
+	if (!str)
+	{
+		write(2, "(null)", 6);
+		return (6);
+	}
+	while (str[i])
+		print_char(str[i++]);
+	return (i);
 }
