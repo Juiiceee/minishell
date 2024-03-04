@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 14:41:08 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:05:15 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,8 @@ void			ft_echo(char **cmd);
 void			ft_execlear(t_exec **lst, void (*del)(char **));
 void			ft_tokclean(t_token **lst);
 void			ft_envclean(t_list **lst);
+
+// here_doc.c
 
 
 
