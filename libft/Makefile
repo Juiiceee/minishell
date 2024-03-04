@@ -1,7 +1,6 @@
 NAME = libft.a
 
 OBJ_DIR			:= ../obj
-OBJS			:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 SRC = ft_bzero.c \
 		ft_isalnum.c \

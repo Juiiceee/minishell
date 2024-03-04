@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_lhex.c                                       :+:      :+:    :+:   */
+/*   print_unbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 10:13:38 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 13:39:02 by mda-cunh         ###   ########.fr       */
+/*   Created: 2023/11/20 10:10:11 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/03/04 15:47:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printerr.h"
+#include "ft_printerr.h"
 
-static void	ft_putchar(char c)
-{
-	write(2, &c, 1);
-}
-
-static int	lennum(unsigned int n)
+static int	lennum(long n)
 {
 	int	count;
 
@@ -31,29 +26,34 @@ static int	lennum(unsigned int n)
 		n *= -1;
 		count++;
 	}
-	while (n >= 16)
+	while (n >= 10)
 	{
-		n /= 16;
+		n /= 10;
 		count++;
 	}
 	return (count);
 }
 
-int	print_lhex(unsigned int nbr)
+int	print_unbr(unsigned int nb)
 {
-	char	*base;
+	long	n;
 	int		ret;
 
-	base = "0123456789abcdef";
-	ret = lennum(nbr);
-	if (nbr < 0)
+	n = (long) nb;
+	ret = lennum(nb);
+	if (n < 0)
 	{
-		nbr *= -1;
+		n *= -1;
+		print_char('-');
 	}
-	if (nbr >= 16)
+	if (n >= 10)
 	{
-		print_lhex(nbr / 16);
+		print_nbr(n / 10);
+		print_nbr(n % 10);
 	}
-	ft_putchar(base[nbr % 16]);
+	else
+	{
+		print_char(n + 48);
+	}
 	return (ret);
 }

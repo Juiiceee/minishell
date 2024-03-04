@@ -1,34 +1,37 @@
 NAME = libftprinterr.a
 
+OBJ_DIR			:= ../obj
+
 SRC = ft_printerr.c \
 		ft_printerr_utils.c \
-		./format/print_char.c \
-		./format/print_lhex.c \
-		./format/print_uhex.c \
-		./format/print_nbr.c \
-		./format/print_unbr.c \
-		./format/print_pointer.c \
-		./format/print_str.c \
+		print_char.c \
+		print_lhex.c \
+		print_uhex.c \
+		print_nbr.c \
+		print_unbr.c \
+		print_pointer.c \
+		print_str.c 
 
-SRCB = 
-
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 FLAGS = -Wall -Wextra -Werror  
 
 ARC = ar rcs
 
+LIBRAN = ranlib
+
 CC = cc
 
 INCLUDE = ft_printerr.h
 
-.c.o:
-		$(CC) $(FLAGS) -c $< -o ${<:.c=.o} -I $(INCLUDE)
+all: $(NAME)
+
+$(OBJ_DIR)/%.o: %.c
+	$(CC) -c $< $(CFLAGS) -o $@
 
 $(NAME): $(OBJ)
 		$(ARC) $(NAME) $(OBJ)
-
-all: $(NAME)
+		$(LIBRAN) $(NAME)
 
 clean:
 	rm -f $(OBJ)
