@@ -48,7 +48,7 @@ SRC = ft_bzero.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 ARC = ar rc
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:06:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 16:06:22 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 16:35:31 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ void	ft_envclean(t_list **lst)
 	while (actual->next != NULL)
 	{
 		sav = actual->next;
+		free(actual->content);
 		free(actual);
 		actual = sav;
 	}
+	free(actual->content);
 	free(actual);
 	*lst = NULL;
 }
