@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:30:52 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 17:13:26 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/04 17:29:29 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	exec_builtins(char **cmd, t_mini *mini)
 {
 	if (!ft_strncmp(cmd[0], "echo", 4))
 		ft_echo(cmd);
-	if (!ft_strncmp(cmd[0], "cd", 2))
+	else if (!ft_strncmp(cmd[0], "cd", 2))
 		ft_cd(cmd, mini);
 	else if (!ft_strncmp(cmd[0], "pwd", 3))
 		ft_pwd();
