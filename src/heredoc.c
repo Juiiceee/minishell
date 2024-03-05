@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 17:02:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/05 09:53:41 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	heredoc(char *limiter)
 	char	*tmp;
 
 	unlink(".heredoc");
-	heredoc = open(".heredoc", O_WRONLY | O_CREAT | O_APPEND, 0644);
+	heredoc = open(".heredoc", O_WRONLY | O_CREAT | O_APPEND);
 	if (!heredoc)
 		return (perror("open heredoc"), 1);
 	while (1)
@@ -62,6 +62,5 @@ int	heredoc(char *limiter)
 		write(heredoc, tmp, ft_strlen(tmp));
 		free(tmp);
 	}
-	close(heredoc);
-	return (0);
+	return (heredoc);
 }
