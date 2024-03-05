@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 15:32:30 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:44:09 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	heredoc(char *limiter)
 	char	*tmp;
 
 	unlink(".heredoc");
-	heredoc = open(".heredoc", O_WRONLY | O_CREAT | O_APPEND, 0644);
+	heredoc = open(".heredoc", O_WRONLY | O_CREAT | O_APPEND);
 	if (!heredoc)
 		return (perror("open heredoc"), 1);
 	while (1)
