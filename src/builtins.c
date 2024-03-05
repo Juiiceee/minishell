@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 13:35:26 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/05 16:36:22 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,31 @@ void	ft_env(t_mini *mini)
 
 void	ft_cd(char **cmd, t_mini *mini)
 {
-	int	tablen;
+	char	*pwd;
 
-	tablen = tablength(cmd);
-	if (tablen > 2)
+	if (tablength(cmd) > 2)
 	{
 		mini->exitstatus = 1;
 		return ((void)ft_printerr("cd: too many arguments\n"));
 	}
-	else if (tablen == 1)
+	else if (tablength(cmd) == 1)
+	{
+		pwd = getcwd(NULL, 0);
+		export(mini, "PWD", pwd);
+		free(pwd);
 		chdir(pathenv(mini, "HOME"));
+		export(mini, "PWD", pathenv(mini, "HOME"));
+	}
+	else if (cmd[1][0] == '-' && ft_strlen(cmd[1]) == 1)
+	{
+		if (execcd(mini, pathenv(mini, "OLDPWD")))
+			return ;
+	}
 	else
-		if (chdir(cmd[1]) == -1)
-		{
-			mini->exitstatus = 1;
-			return ((void)ft_printerr("cd: %s: No such file or directory\n", cmd[1]));
-		}
+	{
+		if (execcd(mini, cmd[1]))
+			return ;
+	}
 }
 void	ft_exit(t_mini *mini, char **cmd)
 {
