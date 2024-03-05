@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:18:05 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 23:46:09 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:26:56 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	input(t_mini *mini, t_exec *exec)
 			if (!fd)
 				mini->exitstatus = 1;
 			else 
+			{
 				dup2(fd, 0);
+				close(fd);
+			}
 		}
 		else if (ft_strlen(exec->in[0]) == 1)
 		{
@@ -32,7 +35,10 @@ void	input(t_mini *mini, t_exec *exec)
 			if (!fd)
 				mini->exitstatus = 1;
 			else 
+			{
 				dup2(fd, 0);
+				close(fd);
+			}
 		}	
 	}
 }

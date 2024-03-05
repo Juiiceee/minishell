@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 23:56:02 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:56:10 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 		return (1);
 	if (pid == 0)
 	{
-		input(mini, cmd);
-		output(mini, cmd);
 		close(mini->pipe[0]);
 		if (!cmd->out)
 			dup2(mini->pipe[1], 1);
-		if (!parsingcommand(cmd, mini))
+		if (cmd->builtin == 1)
+			exec_builtins(cmd, mini);
+		else if (!parsingcommand(cmd, mini))
 			execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 		ft_printerr("%s: command not found\n", cmd->cmd[0]);
 		ft_free(mini->tabenv);
@@ -107,9 +107,9 @@ int	last_node(t_exec *cmd, t_mini *mini)
 		return (1);
 	if (pid == 0)
 	{
-		input(mini, cmd);
-		output(mini, cmd);
-		if (!parsingcommand(cmd, mini))
+		if (cmd->builtin == 1)
+			exec_builtins(cmd, mini);
+		else if (!parsingcommand(cmd, mini))
 			execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 		ft_free(mini->tabenv);
 		ft_printerr("%s: command not found\n", cmd->cmd[0]);
@@ -132,9 +132,13 @@ void	ft_exec(t_mini *mini)
 		return ;
 	while (tmp_exe->next != NULL)
 	{
+		input(mini, tmp_exe);
+		output(mini, tmp_exe);
 		exec_node(tmp_exe, mini);
 		tmp_exe = tmp_exe->next;
 	}
+	input(mini, tmp_exe);
+	output(mini, tmp_exe);
 	last_node(tmp_exe, mini);
 	ft_execlear(&mini->exe, *ft_free);
 	free(mini->tabcmd);

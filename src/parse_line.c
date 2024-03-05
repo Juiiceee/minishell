@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 17:46:12 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:39:14 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 char	*punct_parse(char *input, int *i, t_mini *mini, int *j)
 {
 	char *tmp;
-	
 	if (input[0] == '$')
 	{
 		tmp = dollar_sign(input, i, mini);
-		if (ft_strlen(tmp))
+		if (ft_strlen(tmp) > 1)
 			tmp = split_env(tmp, mini->tabcmd, j);
 	}
 	if (input[0] == '>' || input[0] == '<')
@@ -99,7 +98,7 @@ char	*squote_parse(char *input, int *index)
 	int i = -1;
 	int j = -1;
 	char *tmp;
-
+	
 	while (input[++i])
 		if (input[i] == '\'')
 			break ;

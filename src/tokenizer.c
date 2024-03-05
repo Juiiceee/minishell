@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 23:43:37 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:27:42 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*split_env(char *old, char **tmp, int *j)
 	i = 1;
 	spli = ft_split(old + 1, ' ');
 	if (!spli)
-		return (NULL);	
+		return (NULL);
 	while (i <= ft_tablen(spli) - 1)
 	{
 		tmp[tmp_j] = ft_strdup(spli[i]);
@@ -115,7 +115,7 @@ t_token *ft_tokenizer(char *input, t_mini *mini)
 		if (!isspace(mini->input[i]) && mini->input[i] != '\0')
 		{
 			old = ft_select_token(input, &i, mini, &j);
-			if (old && old[0] != '$')
+			if (old)
 				mini->tabcmd[j] = old;
 			while (!isspace(input[i]) && input[i] != '\0' && old[0] != '|')
 				mini->tabcmd[j] = free_and_join(mini->tabcmd[j], ft_select_token(input, &i, mini, &j));
@@ -125,9 +125,5 @@ t_token *ft_tokenizer(char *input, t_mini *mini)
 		if (mini->input[i] != '\0' && isspace(mini->input[i]))
 			i++;
 	}
-	// for (size_t i = 0; mini->tabcmd[i] ; i++)
-	// {
-	// 	printf("%s\n", mini->tabcmd[i]);
-	// }
 	return (listing_token(mini->tabcmd));
 }

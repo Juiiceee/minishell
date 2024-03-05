@@ -6,28 +6,26 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:30:52 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 17:29:29 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:43:12 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	exec_builtins(char **cmd, t_mini *mini)
+void	exec_builtins(t_exec *exec, t_mini *mini)
 {
-	if (!ft_strncmp(cmd[0], "echo", 4))
-		ft_echo(cmd);
-	else if (!ft_strncmp(cmd[0], "cd", 2))
-		ft_cd(cmd, mini);
-	else if (!ft_strncmp(cmd[0], "pwd", 3))
+	if (!ft_strncmp(exec->cmd[0], "echo", 4))
+		ft_echo(exec->cmd);
+	else if (!ft_strncmp(exec->cmd[0], "cd", 2))
+		ft_cd(exec->cmd, mini);
+	else if (!ft_strncmp(exec->cmd[0], "pwd", 3))
 		ft_pwd();
-	else if (!ft_strncmp(cmd[0], "export", 6))
-		ft_export(cmd, mini);
-	else if (!ft_strncmp(cmd[0], "unset", 5))
-		ft_unset(cmd, mini);
-	else if (!ft_strncmp(cmd[0], "env", 3))
+	else if (!ft_strncmp(exec->cmd[0], "export", 6))
+		ft_export(exec->cmd, mini);
+	else if (!ft_strncmp(exec->cmd[0], "unset", 5))
+		ft_unset(exec->cmd, mini);
+	else if (!ft_strncmp(exec->cmd[0], "env", 3))
 		ft_env(mini);
-	else if (!ft_strncmp(cmd[0], "exit", 4))
+	else if (!ft_strncmp(exec->cmd[0], "exit", 4))
 		ft_exit();
-	else if (!ft_strncmp(cmd[0], "meow", 4))
-		return ;
 }
