@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 16:33:20 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/05 16:38:23 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void			exportsolo(t_mini *mini);
 
 // cd.c
 int				execcd(t_mini *mini, char *path);
-
 
 // parse_line.c
 char			*squote_parse(char *input, int *index);
