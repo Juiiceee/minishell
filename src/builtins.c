@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 17:48:26 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/05 13:35:26 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,31 @@ void	ft_cd(char **cmd, t_mini *mini)
 			return ((void)ft_printerr("cd: %s: No such file or directory\n", cmd[1]));
 		}
 }
-void	ft_exit(t_mini *mini, char *str)
+void	ft_exit(t_mini *mini, char **cmd)
 {
 	int	i;
 
 	i = 0;
-	printf("exit\n");
-	if (!str)
-		exit(mini->exitstatus);
-	while (str[i])
+	if (tablength(cmd) > 2)
 	{
-		if (!ft_isdigit(*str))
+		mini->exitstatus = 1;
+		return ((void)ft_printerr("cd: too many arguments\n"));
+	}
+	printf("exit\n");
+	if (!cmd[1])
+		exit(mini->exitstatus);
+	if (cmd[1][0] == '+' || cmd[1][0] == '-')
+		i++;
+	while (cmd[1][i])
+	{
+		if (!ft_isdigit(cmd[1][i]))
 		{
-			ft_printerr("exit: %s: numeric argument required\n", str);
+			ft_printerr("exit: %s: numeric argument required\n", cmd[1]);
 			exit(2);
 		}
 		i++;
 	}
-	exit(ft_atoi(str));
+	exit(ft_atoi(cmd[1]));
 }
 
 void ft_export(char **cmd, t_mini *mini)
@@ -82,14 +89,12 @@ void ft_export(char **cmd, t_mini *mini)
 
 	i = 0;
 	j = 1;
-	/*if (ft_strnb(cmd[j],'=') > 1)
-	{
-		printf()
-	}*/
 	if (!cmd[1])
 		return (exportsolo(mini));
 	while (cmd[j])
 	{
+		if (ft_checkexport(cmd, mini, j))
+			return ;
 		while (cmd[j][i] != '=' && cmd[j][i])
 			i++;
 		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
