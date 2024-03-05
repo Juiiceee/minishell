@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 17:29:45 by lbehr            ###   ########.fr       */
+/*   Created: 2024/03/05 16:29:47 by lbehr             #+#    #+#             */
+/*   Updated: 2024/03/05 16:32:48 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	execcd(t_mini *mini, char *path)
 {
-	t_mini	mini;
+	char *pwd;
 
-	(void)argv;
-	if (argc != 1)
-		return (1);
-	init(&mini, env);
-	recosignal();
-	running(&mini);
-	freetab(mini.tabenv);
-	free(mini.user);
-	return (mini.exitstatus);
+	pwd = getcwd(NULL, 0);
+	if (chdir(path) == -1)
+	{
+		mini->exitstatus = 1;
+		free(pwd);
+		return ((void)ft_printerr("cd: %s: No such file or directory\n", path), 1);
+	}
+	export(mini, "OLDPWD", pwd);
+	free(pwd);
+	pwd = getcwd(NULL, 0);
+	export(mini, "PWD", pwd);
+	free(pwd);
+	return (0);
 }

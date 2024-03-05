@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/03 16:18:17 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/05 14:52:05 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,35 @@ void	export(t_mini *mini, char *find, char *new)
 	return ;
 }
 
-int	ft_strnb(char *str, char c)
+int	ft_checkexport(char **cmd, t_mini *mini, size_t j)
 {
-	int	nb;
+	size_t	i;
 
-	nb = 0;
-	if (!str)
-		return (0);
-	while (!*str)
+	i = 0;
+	if (cmd[j][0] == '=')
 	{
-		if (*str == c)
-			nb++;
-		str++;
+		while (cmd[j][i])
+			i++;
+		mini->exitstatus = 1;
+			return ((void)ft_printerr("`%s': not a valid identifier", ft_substr(cmd[j], 0, i)), 1);
 	}
-	return (nb);
+	while (cmd[j][i] != '=' && cmd[j][i])
+	{
+		if (!ft_isalpha(cmd[j][i]))
+		{
+			mini->exitstatus = 1;
+			return ((void)ft_printerr("`%s': not a valid identifier", ft_substr(cmd[j], 0, ++i)), 1);
+		}
+		i++;
+	}
+	if (isdigit(cmd[j][0]))
+	{
+		mini->exitstatus = 1;
+		return ((void)ft_printerr("`%s': not a valid identifier", ft_substr(cmd[j], 0, i)), 1);
+	}
+	if (!ft_strchr(cmd[j], '='))
+		return (1);
+	return (0);
 }
 
 void	exportsolo(t_mini *mini)

@@ -1,61 +1,59 @@
 #include "include/minishell.h"
+#include <stdint.h>
+#include <stdio.h>
 
-char *var_heredoc(char *tmp)
+int	ft_checkt(char **cmd, t_mini *mini, size_t j)
 {
-	int	i;
-	int	j;
-	char *newtmp;
-	char *buff;
+	size_t	i;
 
 	i = 0;
-	while (tmp[i] != '$')
+	//if (cmd[j][0] == '=')
+	while (cmd[j][i] != '=' && cmd[j][i])
+	{
+		if (!ft_isalpha(cmd[j][i]))
+		{
+			mini->exitstatus = 1;
+			return ((void)printf("`%s': not a valid identifier", ft_substr(cmd[j], 0, ++i)), 1);
+		}
 		i++;
-	j = i + 1;
-	while (ft_isalnum(tmp[j]) && tmp[j])
-		j++;
-	newtmp = ft_substr(tmp, i + 1, j - i - 1);
-	buff = ft_substr(tmp, j, ft_strlen(tmp) - j);
-	tmp = ft_substr(tmp, 0, i);
-	if (!getenv(newtmp))
-	{
-		tmp = free_and_join(tmp, buff);
-		return (free(newtmp),tmp);
 	}
-	newtmp = ft_strdup(getenv(newtmp));
-	tmp = free_and_join(tmp, newtmp);
-	tmp = free_and_join(tmp, buff);
-	return (tmp);
-}
-
-int	heredoc(char *limiter)
-{
-	int		heredoc;
-	char	*line;
-	char	*tmp;
-
-	unlink(".heredoc");
-	heredoc = open(".heredoc", O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (!heredoc)
-		return (perror("open heredoc"), 1);
-	while (1)
+	if (isdigit(cmd[j][0]))
 	{
-		line = readline("> ");
-		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
-			break;
-		if (ft_strchr(line, '$'))
-			var_dquote(line);
-		tmp = ft_strjoin(line, "\n");
-		if (!tmp)
-			return (perror("Malloc"), 1);
-		write(heredoc, tmp, ft_strlen(tmp));
-		free(tmp);
+		mini->exitstatus = 1;
+		return ((void)printf("`%s': not a valid identifier", ft_substr(cmd[j], 0, i)), 1);
 	}
-	close(heredoc);
+	if (!ft_strchr(cmd[j], '='))
+		return (1);
 	return (0);
 }
 
+void	ft_xit(t_mini *mini, char **cmd)
+{
+	size_t	j;
+	size_t	i;
+
+	i = 0;
+	j = 1;
+	if (!cmd[1])
+		return ((void)printf("EWEW"));
+	while (cmd[j])
+	{
+		if (ft_checkt(cmd, mini, j))
+			return ;
+		while (cmd[j][i] != '=' && cmd[j][i])
+			i++;
+		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
+			printf("ca export");
+		i = 0;
+		j++;
+	}
+	//refreshtab(
+}
 
 int main(int argc, char **argv, char **envp)
 {
-	heredoc("eof");
+	t_mini	mini;
+
+	char *sa[] = {"export", "=salut", NULL};
+	ft_xit(&mini, sa);
 }

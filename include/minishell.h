@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 15:18:09 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:47:43 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_mini
 	char	*user;
 	char	*input;
 	t_list	*env;
-	int		exitstatus;
+	uint8_t	exitstatus;
 	char	**tabenv;
 	char	**tabcmd;
 	int		pipe[2];
@@ -112,8 +112,11 @@ void			recosignal(void);
 void			modifievaluelst(t_list **st, char *find, char *new);
 void			addvaluelst(t_mini *mini, char *find, char *new);
 void			export(t_mini *mini, char *find, char *new);
-int				ft_strnb(char *str, char c);
+int				ft_checkexport(char **cmd, t_mini *mini, size_t j);
 void			exportsolo(t_mini *mini);
+
+// cd.c
+int				execcd(t_mini *mini, char *path);
 
 // parse_line.c
 char			*squote_parse(char *input, int *index);
@@ -175,7 +178,7 @@ void			exec_builtins(t_exec *exec, t_mini *mini);
 void			ft_pwd(void);
 void			ft_env(t_mini *mini);
 void			ft_cd(char **cmd, t_mini *mini);
-void			ft_exit(void);
+void			ft_exit(t_mini *mini, char **cmd);
 void			ft_export(char **cmd, t_mini *mini);
 
 // builtins2.c

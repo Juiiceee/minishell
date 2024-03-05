@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/05 15:56:10 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:50:57 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_parse_exec(t_mini *mini)
 int	exec_node(t_exec *cmd, t_mini *mini)
 {
 	pid_t	pid;
+	int		status;
 
 	if (pipe(mini->pipe) == -1)
 		return (1);
@@ -91,8 +92,8 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 		free(mini->tabcmd);
 		exit (127);
 	}
-	waitpid(-1, &mini->exitstatus, 0);
-	mini->exitstatus = WEXITSTATUS(mini->exitstatus);
+	waitpid(-1, &status, 0);
+	mini->exitstatus = WEXITSTATUS(status);
 	close(mini->pipe[1]);
 	dup2(mini->pipe[0], 0);
 	return (0);
@@ -101,6 +102,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 int	last_node(t_exec *cmd, t_mini *mini)
 {
 	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid == -1)
@@ -118,8 +120,8 @@ int	last_node(t_exec *cmd, t_mini *mini)
 		free(mini->tabcmd);
 		exit (127);
 	}
-	waitpid(-1, &mini->exitstatus, 0);
-	mini->exitstatus = WEXITSTATUS(mini->exitstatus);
+	waitpid(-1, &status, 0);
+	mini->exitstatus = WEXITSTATUS(status);
 	return (0);
 }
 
