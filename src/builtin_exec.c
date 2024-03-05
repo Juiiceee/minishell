@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:30:52 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/05 16:48:11 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/05 16:51:54 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	exec_builtins(t_exec *exec, t_mini *mini)
 	else if (!ft_strncmp(exec->cmd[0], "env", 3))
 		ft_env(mini);
 	else if (!ft_strncmp(exec->cmd[0], "exit", 4))
-		ft_exit(mini, cmd);
+		ft_exit(mini, exec->cmd);
 }
