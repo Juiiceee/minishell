@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 17:02:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/06 12:13:34 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ int	heredoc(char *limiter)
 		write(heredoc, tmp, ft_strlen(tmp));
 		free(tmp);
 	}
-	close(heredoc);
-	return (0);
+	return (heredoc);
 }
