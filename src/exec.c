@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/05 16:50:57 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/06 12:59:59 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,30 @@ void	ft_parse_exec(t_mini *mini)
 
 int	exec_node(t_exec *cmd, t_mini *mini)
 {
-	pid_t	pid;
 	int		status;
 
 	if (pipe(mini->pipe) == -1)
 		return (1);
-	pid = fork();
-	if (pid == -1)
+	mini->pid = fork();
+	if (mini->pid == -1)
 		return (1);
-	if (pid == 0)
+	if (mini->pid == 0)
 	{
 		close(mini->pipe[0]);
 		if (!cmd->out)
 			dup2(mini->pipe[1], 1);
 		if (cmd->builtin == 1)
 			exec_builtins(cmd, mini);
-		else if (!parsingcommand(cmd, mini))
-			execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
-		ft_printerr("%s: command not found\n", cmd->cmd[0]);
-		ft_free(mini->tabenv);
-		ft_execlear(&mini->exe, *ft_free);
-		free(mini->tabcmd);
-		exit (127);
+		else
+		{
+			if (!parsingcommand(cmd, mini))
+				execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
+			ft_printerr("%s: command not found\n", cmd->cmd[0]);
+			ft_free(mini->tabenv);
+			ft_execlear(&mini->exe, *ft_free);
+			free(mini->tabcmd);
+			exit (127);
+		}
 	}
 	waitpid(-1, &status, 0);
 	mini->exitstatus = WEXITSTATUS(status);
@@ -101,17 +103,14 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 
 int	last_node(t_exec *cmd, t_mini *mini)
 {
-	pid_t	pid;
 	int		status;
 
-	pid = fork();
-	if (pid == -1)
+	mini->pid = fork();
+	if (mini->pid == -1)
 		return (1);
-	if (pid == 0)
+	if (mini->pid == 0)
 	{
-		if (cmd->builtin == 1)
-			exec_builtins(cmd, mini);
-		else if (!parsingcommand(cmd, mini))
+		if (!parsingcommand(cmd, mini))
 			execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 		ft_free(mini->tabenv);
 		ft_printerr("%s: command not found\n", cmd->cmd[0]);
@@ -123,6 +122,14 @@ int	last_node(t_exec *cmd, t_mini *mini)
 	waitpid(-1, &status, 0);
 	mini->exitstatus = WEXITSTATUS(status);
 	return (0);
+}
+
+void	ft_exec_one(t_exec *cmd, t_mini *mini)
+{
+	if (cmd->builtin == 1)
+		exec_builtins(cmd, mini);
+	else 
+		last_node(cmd, mini);
 }
 
 void	ft_exec(t_mini *mini)
@@ -141,8 +148,7 @@ void	ft_exec(t_mini *mini)
 	}
 	input(mini, tmp_exe);
 	output(mini, tmp_exe);
-	last_node(tmp_exe, mini);
+	ft_exec_one(tmp_exe, mini);
 	ft_execlear(&mini->exe, *ft_free);
 	free(mini->tabcmd);
-	// waitpid(-1, NULL, 0);
 }

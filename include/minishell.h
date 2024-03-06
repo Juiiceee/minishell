@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 16:47:43 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/06 12:57:21 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void			ft_unset(char **cmd, t_mini *mini);
 void			unset(t_mini *mini, char *find);
 
 // builtins2.c
-void			ft_echo(char **cmd);
+void			ft_echo(char **cmd, t_mini *mini);
 
 // lst_free.c
 void			ft_execlear(t_exec **lst, void (*del)(char **));

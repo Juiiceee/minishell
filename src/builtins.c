@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 16:48:37 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/06 12:57:37 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	ft_env(t_mini *mini)
 		str = str->next;
 	}
 	printf("%s\n", (char *)str->content);
-	exit(0);
+	if (mini->pid == 0)
+		exit(0);
 }
 
 void	ft_cd(char **cmd, t_mini *mini)
@@ -113,5 +114,6 @@ void ft_export(char **cmd, t_mini *mini)
 		j++;
 	}
 	refreshtab(mini);
-	exit(0);
+	if (mini->pid == 0)
+		exit(0);
 }

@@ -6,13 +6,13 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:30:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/05 14:48:31 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:23:40 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_echo(char **cmd)
+void	ft_echo(char **cmd, t_mini *mini)
 {
 	size_t	i;
 	size_t  n;
@@ -33,7 +33,8 @@ void	ft_echo(char **cmd)
 		printf("%s", cmd[i++]);
 	if (!n)
 		printf("\n");
-	exit(0);
+	if (mini->pid == 0)
+		exit(0);
 }
 
 void	ft_unset(char **cmd, t_mini *mini)
