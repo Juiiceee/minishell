@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/05 16:27:42 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:39:16 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ char *ft_select_token(char *input, int *i, t_mini *mini, int *j)
 	if (input[*i] == '$' || input[*i] == '|' || input[*i] == '>' || input[*i] == '<')
 		return(punct_parse(input + *i, i, mini, j));
 	else if (input[*i] == '"')
-		return(dquote_parse((input + *i + 1), i));
+		return(dquote_parse((input + *i), i));
 	else if (input[*i] == '\'')
-		return(squote_parse((input + *i + 1), i));
+		return(squote_parse((input + *i), i));
 	else if (ft_isprint(input[*i]))
 		return(str_parse(input + *i, i));
 	return (NULL);
@@ -117,7 +117,7 @@ t_token *ft_tokenizer(char *input, t_mini *mini)
 			old = ft_select_token(input, &i, mini, &j);
 			if (old)
 				mini->tabcmd[j] = old;
-			while (!isspace(input[i]) && input[i] != '\0' && old[0] != '|')
+			while (!isspace(input[i]) && input[i] != '\0' && mini->tabcmd[j][0] != '|')
 				mini->tabcmd[j] = free_and_join(mini->tabcmd[j], ft_select_token(input, &i, mini, &j));
 			while (mini->tabcmd[j])
 				j++;

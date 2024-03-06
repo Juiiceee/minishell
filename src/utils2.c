@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/06 15:47:47 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/03/06 15:54:06 by mda-cunh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/minishell.h"
+
+char	*free_old_and_join(char *old, char *new)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(old, new);
+	free(old);
+	return (tmp);
+}
+
+char	*free_new_and_join(char *old, char *new)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(old, new);
+	free(new);
+	return (tmp);
+}
+
+char	*cut_first_char(char *old)
+{
+	char	*tmp;
+
+	tmp = ft_substr(old, 1, ft_strlen(old) - 1);
+	free(old);
+	return (tmp);
+}

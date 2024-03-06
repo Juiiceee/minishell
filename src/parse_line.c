@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/06 13:10:22 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/06 15:39:23 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,38 +74,42 @@ char *var_dquote(char *tmp)
 
 char	*dquote_parse(char *input, int *index)
 {
-	int i = -1;
-	int j = -1;
+	int i;
+	int j;
 	char *tmp;
 
+	i = 0;
+	j = -1;
 	while (input[++i])
 		if (input[i] == '"')
 			break ;
-	tmp = malloc((sizeof (char)) * i + 1);
-	while (++j <= i)
-		tmp[j] = input[j];
-	tmp[j - 1] = '\0';
-	j = -1;
+	if (isspace(input[-1]))
+		tmp = ft_substr(input, 0, i);
+	else
+		tmp = ft_substr(input, 1, i - 1);
 	while (input[++j] != 0)
 		if (input[j] == '$' && ft_isalnum(input[j + 1]))
 			tmp = var_dquote(tmp);
-	*index = *index + i + 2;
+	*index = *index + i + 1;
 	return (tmp);
 }
 
 char	*squote_parse(char *input, int *index)
 {
-	int i = -1;
-	int j = -1;
+	int i;
 	char *tmp;
 	
+	i = 0;
 	while (input[++i])
 		if (input[i] == '\'')
 			break ;
-	tmp = malloc((sizeof (char)) * i + 1);
-	while (++j <= i)
-		tmp[j] = input[j];
-	tmp[j - 1] = '\0';
-	*index = *index + i + 2;
+	if (*index != 0)		
+		if (isspace(input[-1]))
+			tmp = ft_substr(input, 0, i);
+		else
+			tmp = ft_substr(input, 1, i - 1);
+	else 
+		tmp = ft_substr(input, 0, i);
+	*index = *index + i + 1;
 	return (tmp);
 }

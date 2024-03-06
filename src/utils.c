@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:15:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/02 15:33:45 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:46:24 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*free_and_join(char *old, char *new)
 
 	tmp = ft_strjoin(old, new);
 	free(old);
-	free(new);
+	if (new)
+		free(new);
 	return (tmp);
 }
 

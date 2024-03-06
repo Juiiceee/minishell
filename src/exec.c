@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/06 12:59:59 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:01:17 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,4 +151,5 @@ void	ft_exec(t_mini *mini)
 	ft_exec_one(tmp_exe, mini);
 	ft_execlear(&mini->exe, *ft_free);
 	free(mini->tabcmd);
+	waitpid(-1, NULL, 0);
 }

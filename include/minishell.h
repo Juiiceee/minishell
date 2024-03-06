@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/06 12:57:21 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:54:19 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,9 @@ int				heredoc(char *limiter);
 void			input(t_mini *mini, t_exec *exec);
 void			output(t_mini *mini, t_exec *exec);
 
-
+// utils2.c
+char			*free_old_and_join(char *old, char *new);
+char			*free_new_and_join(char *old, char *new);
+char			*cut_first_char(char *old);
 
 #endif
