@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:30:52 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/05 14:43:12 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:23:02 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exec_builtins(t_exec *exec, t_mini *mini)
 {
 	if (!ft_strncmp(exec->cmd[0], "echo", 4))
-		ft_echo(exec->cmd);
+		ft_echo(exec->cmd, mini);
 	else if (!ft_strncmp(exec->cmd[0], "cd", 2))
 		ft_cd(exec->cmd, mini);
 	else if (!ft_strncmp(exec->cmd[0], "pwd", 3))

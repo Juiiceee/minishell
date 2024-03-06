@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 15:57:45 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:30:00 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	ft_env(t_mini *mini)
 		str = str->next;
 	}
 	printf("%s\n", (char *)str->content);
-	exit(0);
+	if (mini->pid == 0)
+		exit(0);
 }
 
 void	ft_cd(char **cmd, t_mini *mini)
@@ -85,5 +86,6 @@ void ft_export(char **cmd, t_mini *mini)
 		j++;
 	}
 	refreshtab(mini);
-	exit(0);
+	if (mini->pid == 0)
+		exit(0);
 }
