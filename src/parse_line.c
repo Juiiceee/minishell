@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/05 16:39:14 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/06 13:10:22 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*dquote_parse(char *input, int *index)
 	tmp[j - 1] = '\0';
 	j = -1;
 	while (input[++j] != 0)
-		if (input[j] == '$')
+		if (input[j] == '$' && ft_isalnum(input[j + 1]))
 			tmp = var_dquote(tmp);
 	*index = *index + i + 2;
 	return (tmp);
