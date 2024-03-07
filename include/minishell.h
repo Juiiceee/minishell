@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/06 15:54:19 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:58:24 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int				recouser(t_mini *mini);
 void			running(t_mini *mini);
 void			createprename(t_mini *mini);
 int				insiderunning(t_mini *mini);
-int				updateexit(t_mini *mini, int nb);
 
 // signal.c
 void			recosignal(void);

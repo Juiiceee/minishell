@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   running.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 16:22:56 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:44:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	exitstatus;
+extern int	g_signalexit;
 
 void	createprename(t_mini *mini)
 {
@@ -31,6 +31,11 @@ int	insiderunning(t_mini *mini)
 	recocp(mini);
 	createprename(mini);
 	mini->input = readline(mini->userstr);
+	if (g_signalexit == 130)
+	{
+		mini->exitstatus = g_signalexit;
+		g_signalexit = 0;
+	}
 	free(mini->userstr);
 	free(mini->currentpath);
 	if (!mini->input)
@@ -59,10 +64,4 @@ void	running(t_mini *mini)
 			break;
 		}
 	}
-}
-
-int	updateexit(t_mini *mini, int nb)
-{
-	mini->exitstatus = nb;
-	return (nb);
 }

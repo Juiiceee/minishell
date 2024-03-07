@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   punct_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/05 16:18:37 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:16:15 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-extern int	exitstatus;
 
 char 	*pipe_sign(char *input, int *i)
 {
@@ -45,7 +43,6 @@ char 	*dollar_sign(char *input, int *i, t_mini *mini)
 {
 	int		j;
 	char	*tmp;
-	(void) mini;
 
 	j = 1;
 	*i += 1;

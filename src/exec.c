@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/06 16:01:17 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:50:10 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	last_node(t_exec *cmd, t_mini *mini)
 			execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 		ft_free(mini->tabenv);
 		ft_printerr("%s: command not found\n", cmd->cmd[0]);
-		ft_free(mini->tabenv);
+		//ft_free(mini->tabenv);
 		ft_execlear(&mini->exe, *ft_free);
 		free(mini->tabcmd);
 		exit (127);

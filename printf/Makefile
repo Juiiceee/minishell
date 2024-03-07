@@ -14,7 +14,7 @@ SRC = ft_printerr.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror -g3 -fPIC
 
 ARC = ar rcs
 
