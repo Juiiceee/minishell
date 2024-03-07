@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/04 14:06:38 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:51:40 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ t_exec	*exe_lstnew(t_token *tmp)
 		if (tmp->data_type == CMD)
 			if (is_a_builtin(tmp->global[0]))
 				newlst->builtin = 1;
-		if (tmp->data_type == CMD)
+		if (tmp->data_type == CMD && newlst->cmd)
+			newlst->cmd =ft_tabjoin(newlst->cmd, tmp->global);
+		else if (tmp->data_type == CMD && !newlst->cmd)
 			newlst->cmd = tmp->global;
 		if (tmp->data_type == IN_REDIRECT)
 			newlst->in = tmp->global;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/07 09:58:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/07 14:56:15 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_mini
 	char	**tabenv;
 	char	**tabcmd;
 	int		pipe[2];
-	int		clear_fd;
+	int		clear_fd[2];
 	pid_t	pid;
 	t_token	*lst;
 	t_exec	*exe;
@@ -198,12 +198,14 @@ void			ft_envclean(t_list **lst);
 int				heredoc(char *limiter);
 
 // redirect.c
-void			input(t_mini *mini, t_exec *exec);
-void			output(t_mini *mini, t_exec *exec);
+int			input(t_mini *mini, t_exec *exec);
+int			output(t_mini *mini, t_exec *exec);
 
 // utils2.c
-char			*free_old_and_join(char *old, char *new);
-char			*free_new_and_join(char *old, char *new);
-char			*cut_first_char(char *old);
+char		*free_old_and_join(char *old, char *new);
+char		*free_new_and_join(char *old, char *new);
+char		*cut_first_char(char *old);
+char		**ft_tabjoin(char **s1, char **s2);
+
 
 #endif

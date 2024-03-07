@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/07 09:50:10 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/07 16:17:42 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 				execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 			ft_printerr("%s: command not found\n", cmd->cmd[0]);
 			ft_free(mini->tabenv);
+			free(mini->user);
 			ft_execlear(&mini->exe, *ft_free);
+			ft_lstclear(&mini->env, *free);
 			free(mini->tabcmd);
 			exit (127);
 		}
@@ -110,12 +112,15 @@ int	last_node(t_exec *cmd, t_mini *mini)
 		return (1);
 	if (mini->pid == 0)
 	{
+		if (cmd->builtin == 1)
+			exec_builtins(cmd, mini);
 		if (!parsingcommand(cmd, mini))
 			execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
-		ft_free(mini->tabenv);
 		ft_printerr("%s: command not found\n", cmd->cmd[0]);
-		//ft_free(mini->tabenv);
+		ft_free(mini->tabenv);
+		free(mini->user);
 		ft_execlear(&mini->exe, *ft_free);
+		ft_lstclear(&mini->env, *free);
 		free(mini->tabcmd);
 		exit (127);
 	}
@@ -126,7 +131,11 @@ int	last_node(t_exec *cmd, t_mini *mini)
 
 void	ft_exec_one(t_exec *cmd, t_mini *mini)
 {
-	if (cmd->builtin == 1)
+	if (!input(mini, cmd))
+		return((void) ft_printerr(" No such file or directory\n"));
+	if (!output(mini, cmd))
+		return((void) ft_printerr(" No such file or directory\n"));
+	if (cmd->builtin == 1 && mini->exe->next == NULL)
 		exec_builtins(cmd, mini);
 	else 
 		last_node(cmd, mini);
@@ -135,7 +144,7 @@ void	ft_exec_one(t_exec *cmd, t_mini *mini)
 void	ft_exec(t_mini *mini)
 {
 	t_exec *tmp_exe;
-
+	
 	tmp_exe = mini->exe;
 	if (!tmp_exe)
 		return ;
@@ -146,8 +155,6 @@ void	ft_exec(t_mini *mini)
 		exec_node(tmp_exe, mini);
 		tmp_exe = tmp_exe->next;
 	}
-	input(mini, tmp_exe);
-	output(mini, tmp_exe);
 	ft_exec_one(tmp_exe, mini);
 	ft_execlear(&mini->exe, *ft_free);
 	free(mini->tabcmd);

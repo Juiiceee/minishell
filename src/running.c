@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   running.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/07 11:44:49 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/07 13:03:35 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	insiderunning(t_mini *mini)
 		add_history(mini->input);
 	ft_parse_exec(mini);
 	ft_exec(mini);
-	dup2(mini->clear_fd, 0);
+	dup2(mini->clear_fd[0], 0);
+	dup2(mini->clear_fd[1], 1);
 	// closepipe(mini);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:47:47 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/06 15:54:06 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:57:52 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,28 @@ char	*cut_first_char(char *old)
 	tmp = ft_substr(old, 1, ft_strlen(old) - 1);
 	free(old);
 	return (tmp);
+}
+
+char	**ft_tabjoin(char **s1, char **s2)
+{
+	char	**join;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	join = calloc((sizeof (char *)), (ft_tablen(s1) + ft_tablen(s2)) + 1);
+	if (!join)
+		return (NULL);
+	while (i < ft_tablen(s1))
+	{
+		join[i] = s1[i];
+		i++;
+	}
+	while (j < ft_tablen(s2))
+	{
+		join[i + j] = s2[j];
+		j++;
+	}
+	return (join);
 }
