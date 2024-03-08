@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/07 16:17:42 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:54:24 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ void	ft_parse_exec(t_mini *mini)
 
 int	exec_node(t_exec *cmd, t_mini *mini)
 {
-	int		status;
-
 	if (pipe(mini->pipe) == -1)
 		return (1);
-	mini->pid = fork();
-	if (mini->pid == -1)
+	mini->pid[mini->exe_n] = fork();
+	if (mini->pid[mini->exe_n] == -1)
 		return (1);
-	if (mini->pid == 0)
+	if (mini->pid[mini->exe_n] == 0)
 	{
+		if (!cmd->in)
+			dup2(mini->pipe[0], 0);
 		close(mini->pipe[0]);
-		if (!cmd->out)
+		if (!cmd->out && (mini->exe_n + 1) != mini->exe_size)
 			dup2(mini->pipe[1], 1);
 		if (cmd->builtin == 1)
 			exec_builtins(cmd, mini);
@@ -96,67 +96,48 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 			exit (127);
 		}
 	}
-	waitpid(-1, &status, 0);
-	mini->exitstatus = WEXITSTATUS(status);
 	close(mini->pipe[1]);
-	dup2(mini->pipe[0], 0);
+	mini->exe_n++;
 	return (0);
 }
 
-int	last_node(t_exec *cmd, t_mini *mini)
+void wait_child(t_mini *mini)
 {
 	int		status;
+	int 	i;
 
-	mini->pid = fork();
-	if (mini->pid == -1)
-		return (1);
-	if (mini->pid == 0)
+	i = 0;
+	while (i < mini->exe_size)
 	{
-		if (cmd->builtin == 1)
-			exec_builtins(cmd, mini);
-		if (!parsingcommand(cmd, mini))
-			execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
-		ft_printerr("%s: command not found\n", cmd->cmd[0]);
-		ft_free(mini->tabenv);
-		free(mini->user);
-		ft_execlear(&mini->exe, *ft_free);
-		ft_lstclear(&mini->env, *free);
-		free(mini->tabcmd);
-		exit (127);
+		waitpid(mini->pid[i], &status, 0);
+		mini->exitstatus = WEXITSTATUS(status);
+		i++;
 	}
-	waitpid(-1, &status, 0);
-	mini->exitstatus = WEXITSTATUS(status);
-	return (0);
-}
-
-void	ft_exec_one(t_exec *cmd, t_mini *mini)
-{
-	if (!input(mini, cmd))
-		return((void) ft_printerr(" No such file or directory\n"));
-	if (!output(mini, cmd))
-		return((void) ft_printerr(" No such file or directory\n"));
-	if (cmd->builtin == 1 && mini->exe->next == NULL)
-		exec_builtins(cmd, mini);
-	else 
-		last_node(cmd, mini);
 }
 
 void	ft_exec(t_mini *mini)
 {
 	t_exec *tmp_exe;
+	int i;
 	
+	i = 0;
 	tmp_exe = mini->exe;
 	if (!tmp_exe)
 		return ;
-	while (tmp_exe->next != NULL)
+	mini->exe_n = 0;
+	mini->exe_size = ft_exesize(tmp_exe);
+	mini->pid = ft_calloc((sizeof (pid_t)), (mini->exe_size));
+	while (mini->exe_n < mini->exe_size)
 	{
 		input(mini, tmp_exe);
 		output(mini, tmp_exe);
-		exec_node(tmp_exe, mini);
+		if (tmp_exe->builtin == 1 && mini->exe->next == NULL)
+			exec_builtins(tmp_exe, mini);
+		else 
+			exec_node(tmp_exe, mini);
 		tmp_exe = tmp_exe->next;
 	}
-	ft_exec_one(tmp_exe, mini);
+	wait_child(mini);
 	ft_execlear(&mini->exe, *ft_free);
 	free(mini->tabcmd);
-	waitpid(-1, NULL, 0);
 }
