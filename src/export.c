@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 14:52:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/08 16:39:15 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	export(t_mini *mini, char *find, char *new)
 	check = 1;
 	if (!st || !st->content)
 		return ;
+	if (!ft_strchr(find))
 	tmp = ft_strjoin(find, "=");
 	while (check && st->next != NULL)
 	{
@@ -96,8 +97,6 @@ int	ft_checkexport(char **cmd, t_mini *mini, size_t j)
 		mini->exitstatus = 1;
 		return ((void)ft_printerr("`%s': not a valid identifier", ft_substr(cmd[j], 0, i)), 1);
 	}
-	if (!ft_strchr(cmd[j], '='))
-		return (1);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/06 12:57:37 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:37:19 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	ft_env(t_mini *mini)
 		return ;
 	while (str->next != NULL)
 	{
-	 	printf("%s\n", (char *)str->content);
+		if (ft_strchr((char *)str->content, '='))
+	 		printf("%s\n", (char *)str->content);
 		str = str->next;
 	}
-	printf("%s\n", (char *)str->content);
+	if (ft_strchr((char *)str->content, '='))
+		printf("%s\n", (char *)str->content);
 	if (mini->pid == 0)
 		exit(0);
 }
@@ -108,6 +110,11 @@ void ft_export(char **cmd, t_mini *mini)
 			return ;
 		while (cmd[j][i] != '=' && cmd[j][i])
 			i++;
+		if (!ft_strchr(cmd[j], '=') && !pathenv(mini, ft_substr(cmd[j], 0, i)))
+		{
+			export(mini, ft_substr(cmd[j], 0, i), ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+			printf("oui");
+		}
 		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
 			export(mini, ft_substr(cmd[j], 0, i), ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
 		i = 0;
