@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/07 16:17:42 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:47:50 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 			exit (127);
 		}
 	}
-	waitpid(-1, &status, 0);
+	waitpid(mini->pid, &status, 0);
 	mini->exitstatus = WEXITSTATUS(status);
 	close(mini->pipe[1]);
 	dup2(mini->pipe[0], 0);
@@ -124,7 +124,7 @@ int	last_node(t_exec *cmd, t_mini *mini)
 		free(mini->tabcmd);
 		exit (127);
 	}
-	waitpid(-1, &status, 0);
+	waitpid(mini->pid, &status, 0);
 	mini->exitstatus = WEXITSTATUS(status);
 	return (0);
 }
