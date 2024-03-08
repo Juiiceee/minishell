@@ -2,7 +2,7 @@
 *.d
 minishell
 salut
-pipexbonus
+#pipexbonus
 test
 .heredoc
 minishell_tester
