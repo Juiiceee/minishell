@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/08 16:39:15 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/08 17:41:34 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	export(t_mini *mini, char *find, char *new)
 	check = 1;
 	if (!st || !st->content)
 		return ;
-	if (!ft_strchr(find))
 	tmp = ft_strjoin(find, "=");
 	while (check && st->next != NULL)
 	{
@@ -110,4 +109,16 @@ void	exportsolo(t_mini *mini)
 		printf("declare -x %s\n", (char *)st->content);
 		st = st->next;
 	}
+}
+
+void	exportvalueseul(t_mini *mini, char *find)
+{
+	t_list	*st;
+
+	st = mini->env;
+	if (!st || !st->content)
+		return ;
+	if (!pathenv(mini, find))
+		ft_lstadd_back(&mini->env, ft_lstnew(find));
+	return ;
 }

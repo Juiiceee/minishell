@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/08 16:37:19 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/08 17:41:22 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ void ft_export(char **cmd, t_mini *mini)
 			return ;
 		while (cmd[j][i] != '=' && cmd[j][i])
 			i++;
-		if (!ft_strchr(cmd[j], '=') && !pathenv(mini, ft_substr(cmd[j], 0, i)))
+		if (!ft_strchr(cmd[j], '='))
 		{
-			export(mini, ft_substr(cmd[j], 0, i), ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+			exportvalueseul(mini, cmd[j]);
 			printf("oui");
 		}
 		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)

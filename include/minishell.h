@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/08 11:47:22 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/08 17:41:28 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void			addvaluelst(t_mini *mini, char *find, char *new);
 void			export(t_mini *mini, char *find, char *new);
 int				ft_checkexport(char **cmd, t_mini *mini, size_t j);
 void			exportsolo(t_mini *mini);
+void			exportvalueseul(t_mini *mini, char *find);
 
 // cd.c
 int				execcd(t_mini *mini, char *path);
