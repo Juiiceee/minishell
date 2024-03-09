@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 16:16:57 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 16:48:24 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ int				execcd(t_mini *mini, char *path);
 
 // parse_line.c
 char			*squote_parse(char *input, int *index);
-char			*dquote_parse(char *input, int *index);
-char			*var_dquote(char *tmp);
+char			*dquote_parse(char *input, int *index, t_mini *mini);
+char			*var_dquote(char *tmp, t_mini *mini, int *index);
 char			*str_parse(char *input, int *index);
 char			*punct_parse(char *input, int *i, t_mini *mini, int *j);
 
@@ -201,7 +201,7 @@ void			ft_tokclean(t_token **lst);
 void			ft_envclean(t_list **lst);
 
 // here_doc.c
-int				heredoc(char *limiter);
+int				heredoc(char *limiter, t_mini *mini);
 
 // redirect.c
 int				input(t_mini *mini, t_exec *exec);

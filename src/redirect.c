@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:18:05 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:27:39 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 16:43:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	input(t_mini *mini, t_exec *exec)
 	{
 		if (ft_strlen(exec->in[0]) == 2)
 		{
-			fd = heredoc(exec->in[1]);
+			fd = heredoc(exec->in[1], mini);
 			if (fd < 0)
 				return (mini->exitstatus = 1, 0);
 			dup2(fd, 0);

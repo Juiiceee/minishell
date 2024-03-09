@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 14:22:10 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 16:49:21 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*var_heredoc(char *tmp)
 	return (tmp);
 }
 
-int	heredoc(char *limiter)
+int	heredoc(char *limiter, t_mini *mini)
 {
 	int		heredoc;
 	char	*line;
@@ -55,7 +55,7 @@ int	heredoc(char *limiter)
 		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
 			break ;
 		if (ft_strchr(line, '$'))
-			var_dquote(line);
+			var_dquote(line, mini, 0);
 		tmp = ft_strjoin(line, "\n");
 		if (!tmp)
 			return (perror("Malloc"), 1);
