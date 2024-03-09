@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/06 15:39:16 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:30:42 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	input_size(char *input, t_mini *mini)
 {
-	(void) mini;
-	int i;
-	int j;
+	int		i;
+	int		j;
 
+	(void) mini;
 	i = 0;
 	j = 0;
 	while (input[i])
@@ -26,13 +26,13 @@ int	input_size(char *input, t_mini *mini)
 			j += escape_redirect(input, &i);
 		else if (input[i] == '|')
 		{
-			while(input[i] == '|')
+			while (input[i] == '|')
 				i++;
 			j++;
 		}
 		else if (input[i] == '\'' || input[i] == '\"')
 			j += escape_quote(input, &i);
-		else 
+		else
 			j += escape_word(input, &i);
 		while (isspace(input[i]))
 			i++;
@@ -42,9 +42,9 @@ int	input_size(char *input, t_mini *mini)
 
 char	*split_env(char *old, char **tmp, int *j)
 {
-	char **spli;
-	int i;
-	int tmp_j;
+	char	**spli;
+	int		i;
+	int		tmp_j;
 
 	tmp_j = *j;
 	tmp_j += 1;
@@ -58,14 +58,14 @@ char	*split_env(char *old, char **tmp, int *j)
 		tmp_j = tmp_j + 1;
 		i++;
 	}
-	return(ft_strdup(spli[0]));
+	return (ft_strdup(spli[0]));
 }
 
-t_token *listing_token(char **tmp)
+t_token	*listing_token(char **tmp)
 {
-	t_token *lst;
-	t_token *new;
-	int i;
+	t_token	*lst;
+	t_token	*new;
+	int		i;
 
 	lst = NULL;
 	i = 0;
@@ -82,43 +82,46 @@ t_token *listing_token(char **tmp)
 			new = tokenizing_other(tmp, &i);
 		if (lst)
 			tok_lstadd_back(&lst, new);
-		else 
-			lst = new;	
+		else
+			lst = new;
 	}
-	return (lst);	
+	return (lst);
 }
 
-char *ft_select_token(char *input, int *i, t_mini *mini, int *j)
+char	*ft_select_token(char *input, int *i, t_mini *mini, int *j)
 {
-	if (input[*i] == '$' || input[*i] == '|' || input[*i] == '>' || input[*i] == '<')
-		return(punct_parse(input + *i, i, mini, j));
+	if (input[*i] == '$' || input[*i] == '|'
+		|| input[*i] == '>' || input[*i] == '<')
+		return (punct_parse(input + *i, i, mini, j));
 	else if (input[*i] == '"')
-		return(dquote_parse((input + *i), i));
+		return (dquote_parse((input + *i), i));
 	else if (input[*i] == '\'')
-		return(squote_parse((input + *i), i));
+		return (squote_parse((input + *i), i));
 	else if (ft_isprint(input[*i]))
-		return(str_parse(input + *i, i));
+		return (str_parse(input + *i, i));
 	return (NULL);
 }
 
-t_token *ft_tokenizer(char *input, t_mini *mini)
+t_token	*ft_tokenizer(char *input, t_mini *mini)
 {
-	int i;
-	int j;
-	char *old;
-	
+	int		i;
+	int		j;
+	char	*old;
+
 	j = 0;
 	i = 0;
 	mini->tabcmd = ft_calloc(sizeof (char *), (input_size(input, mini) + 1));
-	while(input[i] != '\0')
+	while (input[i] != '\0')
 	{
 		if (!isspace(mini->input[i]) && mini->input[i] != '\0')
 		{
 			old = ft_select_token(input, &i, mini, &j);
 			if (old)
 				mini->tabcmd[j] = old;
-			while (!isspace(input[i]) && input[i] != '\0' && mini->tabcmd[j][0] != '|')
-				mini->tabcmd[j] = free_and_join(mini->tabcmd[j], ft_select_token(input, &i, mini, &j));
+			while (!isspace(input[i]) && input[i] != '\0'
+				&& mini->tabcmd[j][0] != '|')
+				mini->tabcmd[j] = free_and_join(mini->tabcmd[j],
+						ft_select_token(input, &i, mini, &j));
 			while (mini->tabcmd[j])
 				j++;
 		}

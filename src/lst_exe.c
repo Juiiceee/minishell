@@ -6,22 +6,26 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/08 14:34:14 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:14:35 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void init_new_null(t_exec *new)
+void	init_new_null(t_exec *new)
 {
 	new->builtin = 0;
 	new->cmd = NULL;
 	new->in = NULL;
 	new->out = NULL;
+	new->fdin = 0;
+	new->fdout = 0;
+	new->is_fdout = 0;
+	new->is_fdin = 0;
 	new->next = NULL;
 }
 
-int is_a_builtin(char *cmd)
+int	is_a_builtin(char *cmd)
 {
 	if (!ft_strncmp(cmd, "echo", 4))
 		return (1);
@@ -60,9 +64,9 @@ t_exec	*exe_lstnew(t_token *tmp)
 		else if (tmp->data_type == CMD && !newlst->cmd)
 			newlst->cmd = tmp->global;
 		if (tmp->data_type == IN_REDIRECT)
-			newlst->in = tmp->global;
+			parse_redirect_in(tmp, newlst);
 		if (tmp->data_type == OU_REDIRECT)
-			newlst->out = tmp->global;
+			parse_redirect_out(tmp, newlst);
 		if (!tmp->next)
 			break ;
 		tmp = tmp->next;

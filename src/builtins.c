@@ -6,35 +6,48 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/06 12:57:37 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:51:43 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_pwd(void)
+void	ft_pwd(t_mini *mini)
 {
-	char *pwd;
+	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
 	free(pwd);
+	mini->exitstatus = 0;
 }
 
 void	ft_env(t_mini *mini)
 {
-	t_list *str;
+	t_list	*str;
 
 	str = mini->env;
 	if (!mini->env)
+	{
+		mini->exitstatus = 0;
 		return ;
+	}
 	while (str->next != NULL)
 	{
-	 	printf("%s\n", (char *)str->content);
+		if (ft_strchr((char *)str->content, '='))
+		{
+			write(1, (char *)str->content, ft_strlen((char *)str->content));
+			write(1, "\n", 1);
+		}
 		str = str->next;
 	}
-	printf("%s\n", (char *)str->content);
-	if (mini->pid == 0)
+	if (ft_strchr((char *)str->content, '='))
+	{
+		write(1, (char *)str->content, ft_strlen((char *)str->content));
+		write(1, "\n", 1);
+	}
+	mini->exitstatus = 0;
+	if (mini->pid[mini->exe_n] == 0)
 		exit(0);
 }
 
@@ -51,9 +64,8 @@ void	ft_cd(char **cmd, t_mini *mini)
 	{
 		pwd = getcwd(NULL, 0);
 		export(mini, "PWD", pwd);
-		free(pwd);
-		chdir(pathenv(mini, "HOME"));
-		export(mini, "PWD", pathenv(mini, "HOME"));
+		return ((void)(free(pwd), chdir(pathenv(mini, "HOME")),
+			export(mini, "PWD", pathenv(mini, "HOME")), mini->exitstatus = 0));
 	}
 	else if (cmd[1][0] == '-' && ft_strlen(cmd[1]) == 1)
 	{
@@ -66,6 +78,7 @@ void	ft_cd(char **cmd, t_mini *mini)
 			return ;
 	}
 }
+
 void	ft_exit(t_mini *mini, char **cmd)
 {
 	int	i;
@@ -93,7 +106,7 @@ void	ft_exit(t_mini *mini, char **cmd)
 	exit(ft_atoi(cmd[1]));
 }
 
-void ft_export(char **cmd, t_mini *mini)
+void	ft_export(char **cmd, t_mini *mini)
 {
 	size_t	j;
 	size_t	i;
@@ -108,12 +121,16 @@ void ft_export(char **cmd, t_mini *mini)
 			return ;
 		while (cmd[j][i] != '=' && cmd[j][i])
 			i++;
-		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
-			export(mini, ft_substr(cmd[j], 0, i), ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+		if (!ft_strchr(cmd[j], '='))
+			exportvalueseul(mini, cmd[j]);
+		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=')
+			&& ft_strlen(cmd[j]) != i)
+			export(mini, ft_substr(cmd[j], 0, i),
+				ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
 		i = 0;
 		j++;
 	}
 	refreshtab(mini);
-	if (mini->pid == 0)
+	if (mini->pid[mini->exe_n] == 0)
 		exit(0);
 }

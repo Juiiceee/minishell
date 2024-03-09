@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:30:52 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/06 12:57:32 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:46:03 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	exec_builtins(t_exec *exec, t_mini *mini)
 	else if (!ft_strncmp(exec->cmd[0], "cd", 2))
 		ft_cd(exec->cmd, mini);
 	else if (!ft_strncmp(exec->cmd[0], "pwd", 3))
-		ft_pwd();
+		ft_pwd(mini);
 	else if (!ft_strncmp(exec->cmd[0], "export", 6))
 		ft_export(exec->cmd, mini);
 	else if (!ft_strncmp(exec->cmd[0], "unset", 5))

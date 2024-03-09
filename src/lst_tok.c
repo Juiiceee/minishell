@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/28 10:23:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:22:59 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ t_token	*tok_lstlast(t_token *lst)
 	return (lst);
 }
 
-int is_splitted(char *tmp)
+int	is_splitted(char *tmp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (tmp[0] == '>' || tmp[0] == '<')
@@ -61,9 +61,9 @@ int is_splitted(char *tmp)
 		while (tmp[i] == '>' || tmp[i] == '<')
 			i++;
 		if (i == (int)ft_strlen(tmp))
-			return(2);
+			return (2);
 		else
-			return(1);
+			return (1);
 	}
 	return (1);
 }

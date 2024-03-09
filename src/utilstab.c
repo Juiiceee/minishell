@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:49 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/01 10:56:17 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:33:08 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	tablength(char **tab)
 
 void	lsttotab(t_mini *mini)
 {
-	int	i;
+	int		i;
 	t_list	*st;
 	t_list	*lst;
 

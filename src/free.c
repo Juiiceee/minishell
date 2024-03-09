@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:30:29 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/01 15:17:45 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:21:36 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	freelst(t_list *lst)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	while (lst)
 	{
@@ -35,16 +35,17 @@ void	freetab(char **tab)
 	free(tab);
 }
 
-void free_list_element(t_list **lst, t_list *element)
+void	free_list_element(t_list **lst, t_list *element)
 {
 	t_list	*prev;
+
 	if (!*lst || !element)
-		return;
+		return ;
 	if (*lst == element)
 	{
 		*lst = element->next;
 		free(element);
-		return;
+		return ;
 	}
 	prev = *lst;
 	while (prev->next && prev->next != element)

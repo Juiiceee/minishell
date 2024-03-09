@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/06 15:39:23 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:24:50 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 char	*punct_parse(char *input, int *i, t_mini *mini, int *j)
 {
-	char *tmp;
+	char	*tmp;
+
 	if (input[0] == '$')
 	{
 		tmp = dollar_sign(input, i, mini);
@@ -23,19 +24,22 @@ char	*punct_parse(char *input, int *i, t_mini *mini, int *j)
 	}
 	if (input[0] == '>' || input[0] == '<')
 		tmp = redirect_sign(input, i);
-	if  (input[0] == '|')
+	if (input[0] == '|')
 		tmp = pipe_sign(input, i);
 	return (tmp);
 }
 
 char	*str_parse(char *input, int *index)
 {
-	int i = -1;
-	int j = -1;
-	char *tmp;
+	int		i;
+	int		j;
+	char	*tmp;
 
+	i = -1;
+	j = -1;
 	while (input[++i])
-		if (!ft_isprint(input[i]) || input[i] == '\'' || input[i] == '"' || input[i] == '$')
+		if (!ft_isprint(input[i]) || input[i] == '\'' || input[i] == '"'
+			|| input[i] == '$')
 			break ;
 	tmp = malloc((sizeof (char)) * i + 1);
 	while (++j <= i)
@@ -45,12 +49,12 @@ char	*str_parse(char *input, int *index)
 	return (tmp);
 }
 
-char *var_dquote(char *tmp)
+char	*var_dquote(char *tmp)
 {
-	int	i;
-	int	j;
-	char *newtmp;
-	char *buff;
+	int		i;
+	int		j;
+	char	*newtmp;
+	char	*buff;
 
 	i = 0;
 	while (tmp[i] != '$')
@@ -64,7 +68,7 @@ char *var_dquote(char *tmp)
 	if (!getenv(newtmp))
 	{
 		tmp = free_and_join(tmp, buff);
-		return (free(newtmp),tmp);
+		return (free(newtmp), tmp);
 	}
 	newtmp = ft_strdup(getenv(newtmp));
 	tmp = free_and_join(tmp, newtmp);
@@ -74,9 +78,9 @@ char *var_dquote(char *tmp)
 
 char	*dquote_parse(char *input, int *index)
 {
-	int i;
-	int j;
-	char *tmp;
+	int		i;
+	int		j;
+	char	*tmp;
 
 	i = 0;
 	j = -1;
@@ -96,19 +100,21 @@ char	*dquote_parse(char *input, int *index)
 
 char	*squote_parse(char *input, int *index)
 {
-	int i;
-	char *tmp;
-	
+	int		i;
+	char	*tmp;
+
 	i = 0;
 	while (input[++i])
 		if (input[i] == '\'')
 			break ;
-	if (*index != 0)		
+	if (*index != 0)
+	{
 		if (isspace(input[-1]))
 			tmp = ft_substr(input, 0, i);
 		else
 			tmp = ft_substr(input, 1, i - 1);
-	else 
+	}
+	else
 		tmp = ft_substr(input, 0, i);
 	*index = *index + i + 1;
 	return (tmp);

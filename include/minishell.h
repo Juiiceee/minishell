@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 01:06:42 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:13:09 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ typedef struct s_exec
 {
 	char			**cmd;
 	char			**in;
+	int				fdin;
+	int				is_fdin;
 	char			**out;
+	int				fdout;
+	int				is_fdout;
 	int				builtin;
 	struct s_exec	*next;
 }	t_exec;
@@ -116,6 +120,7 @@ void			addvaluelst(t_mini *mini, char *find, char *new);
 void			export(t_mini *mini, char *find, char *new);
 int				ft_checkexport(char **cmd, t_mini *mini, size_t j);
 void			exportsolo(t_mini *mini);
+void			exportvalueseul(t_mini *mini, char *find);
 
 // cd.c
 int				execcd(t_mini *mini, char *path);
@@ -125,7 +130,7 @@ char			*squote_parse(char *input, int *index);
 char			*dquote_parse(char *input, int *index);
 char			*var_dquote(char *tmp);
 char			*str_parse(char *input, int *index);
-char			*punct_parse(char *input,int *i, t_mini *mini, int *j);
+char			*punct_parse(char *input, int *i, t_mini *mini, int *j);
 
 // utils.c
 char			*free_and_join(char *old, char *new);
@@ -139,6 +144,8 @@ t_token			*listing_token(char **tmp);
 int				input_size(char *input, t_mini *mini);
 char			*split_env(char *old, char **tmp, int *j);
 
+//utilsexport.c
+void			exportvalueseul(t_mini *mini, char *find);
 
 // tokenizing.c
 t_token			*tokenizing_redirect(char **tmp, int *i);
@@ -164,6 +171,7 @@ t_exec			*exe_lstlast(t_exec *lst);
 // exec.c
 void			ft_parse_exec(t_mini *mini);
 void			ft_exec(t_mini *mini);
+int				parsingcommand(t_exec *cmd, t_mini *mini);
 int				exec_node(t_exec *cmd, t_mini *mini);
 
 // escape.c
@@ -175,7 +183,7 @@ int				escape_redirect(char *input, int *i);
 void			exec_builtins(t_exec *exec, t_mini *mini);
 
 // builtins.c
-void			ft_pwd(void);
+void			ft_pwd(t_mini *mini);
 void			ft_env(t_mini *mini);
 void			ft_cd(char **cmd, t_mini *mini);
 void			ft_exit(t_mini *mini, char **cmd);
@@ -183,12 +191,10 @@ void			ft_export(char **cmd, t_mini *mini);
 
 // builtins2.c
 void			ft_unset(char **cmd, t_mini *mini);
+void			ft_echo(char **cmd, t_mini *mini);
 
 //unset.c
 void			unset(t_mini *mini, char *find);
-
-// builtins2.c
-void			ft_echo(char **cmd, t_mini *mini);
 
 // lst_free.c
 void			ft_execlear(t_exec **lst, void (*del)(char **));
@@ -201,6 +207,8 @@ int				heredoc(char *limiter);
 // redirect.c
 int				input(t_mini *mini, t_exec *exec);
 int				output(t_mini *mini, t_exec *exec);
+void 			parse_redirect_out(t_token *tmp, t_exec *newlst);
+void 			parse_redirect_in(t_token *tmp, t_exec *newlst);
 
 // utils2.c
 char			*free_old_and_join(char *old, char *new);
@@ -214,5 +222,11 @@ int				ft_exesize(t_exec *lst);
 // pipe_utils.c
 void			init_pipe(t_mini *mini);
 void			closepipe(t_mini *mini);
+
+// utilsexec.c
+
+int				utilsparsingcom(char **envpath, int *i, t_exec *cmd);
+void			utilsexec_node(t_exec *cmd, t_mini *mini);
+int 			utilsft_exec(t_mini *mini, t_exec *tmp_exe);
 
 #endif

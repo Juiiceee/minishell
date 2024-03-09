@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 14:52:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:19:37 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	modifievaluelst(t_list **st, char *find, char *new)
 	t_list	*lst;
 
 	lst = *st;
-	//free(lst->content);
 	if (ft_strlen(new) == 0)
 		lst->content = ft_strjoin(find, "=");
 	else
@@ -52,8 +51,11 @@ void	export(t_mini *mini, char *find, char *new)
 
 	st = mini->env;
 	check = 1;
-	if (!st || !st->content)
+	if (!st)
+	{
+		addvaluelst(mini, find, new);
 		return ;
+	}
 	tmp = ft_strjoin(find, "=");
 	while (check && st->next != NULL)
 	{
@@ -79,25 +81,22 @@ int	ft_checkexport(char **cmd, t_mini *mini, size_t j)
 	{
 		while (cmd[j][i])
 			i++;
-		mini->exitstatus = 1;
-			return ((void)ft_printerr("`%s': not a valid identifier", ft_substr(cmd[j], 0, i)), 1);
+		return (mini->exitstatus = 1,
+			(void)ft_printerr("`%s': not a valid identifier",
+				ft_substr(cmd[j], 0, i)), 1);
 	}
 	while (cmd[j][i] != '=' && cmd[j][i])
 	{
 		if (!ft_isalpha(cmd[j][i]))
-		{
-			mini->exitstatus = 1;
-			return ((void)ft_printerr("`%s': not a valid identifier", ft_substr(cmd[j], 0, ++i)), 1);
-		}
+			return (mini->exitstatus = 1,
+				(void)ft_printerr("`%s': not a valid identifier",
+					ft_substr(cmd[j], 0, ++i)), 1);
 		i++;
 	}
 	if (isdigit(cmd[j][0]))
-	{
-		mini->exitstatus = 1;
-		return ((void)ft_printerr("`%s': not a valid identifier", ft_substr(cmd[j], 0, i)), 1);
-	}
-	if (!ft_strchr(cmd[j], '='))
-		return (1);
+		return (mini->exitstatus = 1,
+			(void)ft_printerr("`%s': not a valid identifier",
+				ft_substr(cmd[j], 0, i)), 1);
 	return (0);
 }
 
