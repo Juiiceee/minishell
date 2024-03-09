@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/08 16:54:24 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 01:50:02 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ void	ft_parse_exec(t_mini *mini)
 
 int	exec_node(t_exec *cmd, t_mini *mini)
 {
-	if (pipe(mini->pipe) == -1)
-		return (1);
 	mini->pid[mini->exe_n] = fork();
 	if (mini->pid[mini->exe_n] == -1)
 		return (1);
 	if (mini->pid[mini->exe_n] == 0)
 	{
-		if (!cmd->in)
-			dup2(mini->pipe[0], 0);
-		close(mini->pipe[0]);
-		if (!cmd->out && (mini->exe_n + 1) != mini->exe_size)
-			dup2(mini->pipe[1], 1);
+		if (!cmd->in && mini->exe_n != 0)
+			dup2(mini->pipe[2 * mini->exe_n - 2], 0);
+		if (!cmd->out && cmd->next)
+		{
+			dup2(mini->pipe[2 * mini->exe_n + 1], 1);
+			closepipe(mini);
+		}
 		if (cmd->builtin == 1)
 			exec_builtins(cmd, mini);
 		else
@@ -96,8 +96,6 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 			exit (127);
 		}
 	}
-	close(mini->pipe[1]);
-	mini->exe_n++;
 	return (0);
 }
 
@@ -118,15 +116,14 @@ void wait_child(t_mini *mini)
 void	ft_exec(t_mini *mini)
 {
 	t_exec *tmp_exe;
-	int i;
 	
-	i = 0;
 	tmp_exe = mini->exe;
 	if (!tmp_exe)
 		return ;
 	mini->exe_n = 0;
 	mini->exe_size = ft_exesize(tmp_exe);
 	mini->pid = ft_calloc((sizeof (pid_t)), (mini->exe_size));
+	init_pipe(mini);
 	while (mini->exe_n < mini->exe_size)
 	{
 		input(mini, tmp_exe);
@@ -136,6 +133,7 @@ void	ft_exec(t_mini *mini)
 		else 
 			exec_node(tmp_exe, mini);
 		tmp_exe = tmp_exe->next;
+		mini->exe_n++;
 	}
 	wait_child(mini);
 	ft_execlear(&mini->exe, *ft_free);

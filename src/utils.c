@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:15:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/06 15:46:24 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 01:06:50 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,6 @@ char **ft_subtab(char **tab, int start, int len)
 	}
 	sub[i] = 0;
 	return (sub);
-}
-
-void	closepipe(t_mini *mini)
-{
-	close(mini->pipe[0]);
-	close(mini->pipe[1]);
 }
 
 /*char **duptab(char **dup, int lenght)
