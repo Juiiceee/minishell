@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsexec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 14:11:31 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 17:27:51 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ void	utilsexec_node(t_exec *cmd, t_mini *mini)
 	exit (127);
 }
 
-void	utilsft_exec(t_mini *mini, t_exec *tmp_exe)
+int		utilsft_exec(t_mini *mini, t_exec *tmp_exe)
 {
-	output(mini, tmp_exe);
-	if (tmp_exe->builtin == 1 && mini->exe->next == NULL)
+	if (!input(mini, tmp_exe))
+		return (0);
+	if (!output(mini, tmp_exe))
+		return (0);
+	if (mini->exe->builtin == 1 && mini->exe->next == NULL)
 		exec_builtins(tmp_exe, mini);
 	else
 		exec_node(tmp_exe, mini);
 	mini->exe_n++;
+	return (1);
 }

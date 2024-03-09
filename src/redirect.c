@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:18:05 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:27:39 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 17:22:01 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,90 @@ int	input(t_mini *mini, t_exec *exec)
 {
 	int	fd;
 
-	if (exec->in)
+	if (exec->is_fdin == 1)
 	{
-		if (ft_strlen(exec->in[0]) == 2)
-		{
-			fd = heredoc(exec->in[1]);
-			if (fd < 0)
-				return (mini->exitstatus = 1, 0);
-			dup2(fd, 0);
-			return (close(fd), 1);
-		}
-		else if (ft_strlen(exec->in[0]) == 1)
-		{
-			fd = open(exec->in[1], O_RDONLY);
-			if (fd < 0)
-				return (mini->exitstatus = 1, 0);
-			dup2(fd, 0);
-			return (close(fd), 1);
-		}	
+		dup2(exec->fdin, 0);
+		return (close(exec->fdin), 1);
+	}
+	else if (exec->is_fdin == 2)
+		return (0);
+	else if (exec->is_fdin == 3)
+	{
+		fd = heredoc(exec->in[1]);
+		if (fd < 0)
+			return (mini->exitstatus = 1, 0);
+		dup2(fd, 0);
+		return (close(fd), 1);
 	}
 	return (1);
 }
 
 int	output(t_mini *mini, t_exec *exec)
 {
-	int	fd;
-
-	if (exec->out)
+	(void) mini;
+	
+	if (exec->is_fdout == 1)
 	{
-		if (!ft_strncmp(exec->out[0], ">", 1))
+		dup2(exec->fdout, 1);
+		return (close(exec->fdout), 1);
+	}
+	else if (exec->is_fdout == 2)
+		return (0);
+	return (1);
+}
+
+void parse_redirect_in(t_token *tmp, t_exec *newlst)
+{
+	int fd;
+	
+	newlst->in = tmp->global;
+	if (ft_strlen(tmp->global[0]) == 2)
+		newlst->is_fdin = 3;
+	else if (ft_strlen(tmp->global[0]) == 1)
+	{
+		fd = open(tmp->global[1], O_RDONLY);
+		if (fd < 0)
 		{
-			fd = open(exec->out[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (fd < 0)
-				return (mini->exitstatus = 1, 0);
-			dup2(fd, 1);
-			return (close(fd), 1);
+			if (newlst->fdin)
+				close(newlst->fdin);
+			newlst->is_fdin = 2;
+			return ;
 		}
-		else if (!ft_strncmp(exec->out[0], ">>", 2))
+		else 
 		{
-			fd = open(exec->out[1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-			if (fd < 0)
-				return (mini->exitstatus = 1, 0);
-			dup2(fd, 1);
-			return (close(fd), 1);
+			if (newlst->is_fdin != 2)
+				newlst->is_fdin = 1;
+			if (newlst->fdin)
+				close(newlst->fdin);
+			newlst->fdin = fd;
 		}
 	}
-	return (1);
+}
+
+void parse_redirect_out(t_token *tmp, t_exec *newlst)
+{
+	int fd;
+
+	newlst->out = tmp->global;
+	if (ft_strlen(tmp->global[0]) == 1)
+		fd = open(tmp->global[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (ft_strlen(tmp->global[0]) == 2)
+		fd = open(tmp->global[1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		return ;
+	if (fd < 0)
+	{
+		newlst->is_fdout = 2;
+		if (newlst->fdout)
+			close(newlst->fdout);
+		return ;
+	}
+	else 
+	{
+		if (newlst->is_fdout != 2)
+			newlst->is_fdout = 1;
+		if (newlst->fdout)
+			close(newlst->fdout);
+		newlst->fdout = fd;
+	}
 }

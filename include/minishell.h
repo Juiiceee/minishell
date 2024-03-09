@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 14:39:02 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 17:13:09 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ typedef struct s_exec
 {
 	char			**cmd;
 	char			**in;
+	int				fdin;
+	int				is_fdin;
 	char			**out;
+	int				fdout;
+	int				is_fdout;
 	int				builtin;
 	struct s_exec	*next;
 }	t_exec;
@@ -203,6 +207,8 @@ int				heredoc(char *limiter);
 // redirect.c
 int				input(t_mini *mini, t_exec *exec);
 int				output(t_mini *mini, t_exec *exec);
+void 			parse_redirect_out(t_token *tmp, t_exec *newlst);
+void 			parse_redirect_in(t_token *tmp, t_exec *newlst);
 
 // utils2.c
 char			*free_old_and_join(char *old, char *new);
@@ -221,6 +227,6 @@ void			closepipe(t_mini *mini);
 
 int				utilsparsingcom(char **envpath, int *i, t_exec *cmd);
 void			utilsexec_node(t_exec *cmd, t_mini *mini);
-void			utilsft_exec(t_mini *mini, t_exec *tmp_exe);
+int 			utilsft_exec(t_mini *mini, t_exec *tmp_exe);
 
 #endif

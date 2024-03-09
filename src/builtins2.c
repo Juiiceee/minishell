@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:30:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 13:52:57 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 15:51:48 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_echo(char **cmd, t_mini *mini)
 	if (!n)
 		printf("\n");
 	mini->exitstatus = 0;
-	if (mini->pid == 0)
+	if (mini->pid[mini->exe_n] == 0)
 		exit(0);
 }
 

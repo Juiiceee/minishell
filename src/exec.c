@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:10:52 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 17:24:01 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 		return (1);
 	if (mini->pid[mini->exe_n] == 0)
 	{
-		if (!cmd->in && mini->exe_n != 0)
+		if (cmd->is_fdin != 1 && mini->exe_n != 0)
 			dup2(mini->pipe[2 * mini->exe_n - 2], 0);
-		if (!cmd->out && cmd->next)
-			dup2(mini->pipe[2 * mini->exe_n + 1], 1);
+		if (cmd->is_fdout != 1 && cmd->next != NULL)
+			dup2(mini->pipe[2 * mini->exe_n + 1], 1); 
 		closepipe(mini);
 		if (cmd->builtin == 1)
 			exec_builtins(cmd, mini);
@@ -105,14 +105,14 @@ void	ft_exec(t_mini *mini)
 	init_pipe(mini);
 	while (mini->exe_n < mini->exe_size && tmp_exe)
 	{
-		if (!input(mini, tmp_exe))
+		if (!utilsft_exec(mini, tmp_exe))
 		{
+			mini->exitstatus = 1;
 			tmp_exe = tmp_exe->next;
 			close(mini->pipe[2 * mini->exe_n + 1]);
 			mini->exe_n++;
 			continue ;
 		}
-		utilsft_exec(mini, tmp_exe);
 		tmp_exe = tmp_exe->next;
 	}
 	closepipe(mini);
