@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 14:20:32 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:39:02 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ char			*squote_parse(char *input, int *index);
 char			*dquote_parse(char *input, int *index);
 char			*var_dquote(char *tmp);
 char			*str_parse(char *input, int *index);
-char			*punct_parse(char *input,int *i, t_mini *mini, int *j);
+char			*punct_parse(char *input, int *i, t_mini *mini, int *j);
 
 // utils.c
 char			*free_and_join(char *old, char *new);
