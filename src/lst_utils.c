@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 15:33:07 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/08 15:36:14 by mda-cunh         ###   ########.fr       */
+/*   Created: 2024/03/08 12:24:22 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/03/08 12:25:31 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	init(t_mini *mini, char **env)
+int	ft_exesize(t_exec *lst)
 {
-	if (recoenv(mini, env))
-		return (1);
-	if (recouser(mini))
-		return (1);
-	lsttotab(mini);
-	mini->exitstatus = 0;
-	mini->clear_fd[0] = dup(0);
-	mini->clear_fd[1] = dup(1);
-	mini->tabcmd = NULL;
-	return (0);
+	int	count;
+
+	count = 0;
+	while (lst)
+	{
+		count++;
+		lst = lst->next;
+	}
+	return (count);
 }

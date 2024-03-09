@@ -1,7 +1,7 @@
 NAME			:= minishell
 SRC_DIR			:= src
 OBJ_DIR			:= obj
-SRCS			:= builtin_exec.c builtins2.c builtins.c cd.c env.c escape.c exec.c export.c free.c heredoc.c init.c lst_exe.c lst_free.c lst_tok.c main.c parse_line.c prompt.c punct_handle.c running.c signal.c tokenizer.c tokenizing.c unset.c utils.c utilstab.c redirect.c utils2.c
+SRCS			:= builtin_exec.c builtins2.c builtins.c cd.c env.c escape.c exec.c export.c free.c heredoc.c init.c lst_exe.c lst_free.c lst_tok.c main.c parse_line.c prompt.c punct_handle.c running.c signal.c tokenizer.c tokenizing.c unset.c utils.c utilstab.c redirect.c utils2.c lst_utils.c pipe_utils.c
 #commande shell pour les src: ls src/. | tr "\n" " " > oui | cat; rm oui
 SRCS			:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

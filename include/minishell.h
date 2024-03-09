@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/08 17:41:28 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 12:36:28 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,12 @@ typedef struct s_mini
 	uint8_t	exitstatus;
 	char	**tabenv;
 	char	**tabcmd;
-	int		pipe[2];
+	int		exe_n;
+	int		exe_size;
+	pid_t	*pid;
+	int		*pipe;
+	int		pipe_n;
 	int		clear_fd[2];
-	pid_t	pid;
 	t_token	*lst;
 	t_exec	*exe;
 }	t_mini;
@@ -129,7 +132,6 @@ char			*punct_parse(char *input,int *i, t_mini *mini, int *j);
 char			*free_and_join(char *old, char *new);
 char			**ft_subtab(char **tab, int start, int len);
 int				ft_tablen(char **tab);
-void			closepipe(t_mini *mini);
 
 // tokenizer.c
 t_token			*ft_tokenizer(char *input, t_mini *mini);
@@ -163,7 +165,6 @@ t_exec			*exe_lstlast(t_exec *lst);
 // exec.c
 void			ft_parse_exec(t_mini *mini);
 void			ft_exec(t_mini *mini);
-int				last_node(t_exec *cmd, t_mini *mini);
 int				exec_node(t_exec *cmd, t_mini *mini);
 
 // escape.c
@@ -199,14 +200,20 @@ void			ft_envclean(t_list **lst);
 int				heredoc(char *limiter);
 
 // redirect.c
-int			input(t_mini *mini, t_exec *exec);
-int			output(t_mini *mini, t_exec *exec);
+int				input(t_mini *mini, t_exec *exec);
+int				output(t_mini *mini, t_exec *exec);
 
 // utils2.c
-char		*free_old_and_join(char *old, char *new);
-char		*free_new_and_join(char *old, char *new);
-char		*cut_first_char(char *old);
-char		**ft_tabjoin(char **s1, char **s2);
+char			*free_old_and_join(char *old, char *new);
+char			*free_new_and_join(char *old, char *new);
+char			*cut_first_char(char *old);
+char			**ft_tabjoin(char **s1, char **s2);
 
+// lst_utlis.c
+int				ft_exesize(t_exec *lst);
+
+// pipe_utils.c
+void			init_pipe(t_mini *mini);
+void			closepipe(t_mini *mini);
 
 #endif
