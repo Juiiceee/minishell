@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 12:36:45 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 13:32:36 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_parse_exec(t_mini *mini)
 			ft_free(tmp->global);
 			tmp = tmp->next;
 		}
-		else 
+		else
 			break ;
 	}
 	ft_tokclean(&mini->lst);
