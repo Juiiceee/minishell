@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:29:47 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 18:14:20 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 18:16:36 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	execcd(t_mini *mini, char *path)
 {
 	char	*pwd;
-//
+
 	pwd = getcwd(NULL, 0);
 	if (chdir(path) == -1)
 	{
