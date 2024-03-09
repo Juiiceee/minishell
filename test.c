@@ -2,5 +2,6 @@
 
 int main(int argc, char **argv, char **envp)
 {
-	ft_printerr("salut ca va ?");
+	if (!envp[0])
+		printf("oui");
 }

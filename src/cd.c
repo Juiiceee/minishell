@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:29:47 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/05 16:32:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 12:44:30 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int	execcd(t_mini *mini, char *path)
 	pwd = getcwd(NULL, 0);
 	export(mini, "PWD", pwd);
 	free(pwd);
+	mini->exitstatus = 0;
 	return (0);
 }

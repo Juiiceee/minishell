@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/08 17:41:34 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 13:15:12 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ void	export(t_mini *mini, char *find, char *new)
 
 	st = mini->env;
 	check = 1;
-	if (!st || !st->content)
+	if (!st)
+	{
+		addvaluelst(mini, find, new);
 		return ;
+	}
 	tmp = ft_strjoin(find, "=");
 	while (check && st->next != NULL)
 	{
