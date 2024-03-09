@@ -45,8 +45,8 @@ int	insiderunning(t_mini *mini)
 		add_history(mini->input);
 	ft_parse_exec(mini);
 	ft_exec(mini);
-	// dup2(mini->clear_fd[0], 0);
-	// dup2(mini->clear_fd[1], 1);
+	dup2(mini->clear_fd[0], 0);
+	dup2(mini->clear_fd[1], 1);
 	// closepipe(mini);
 	return (0);
 }

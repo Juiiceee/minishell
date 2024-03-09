@@ -77,10 +77,8 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 		if (!cmd->in && mini->exe_n != 0)
 			dup2(mini->pipe[2 * mini->exe_n - 2], 0);
 		if (!cmd->out && cmd->next)
-		{
 			dup2(mini->pipe[2 * mini->exe_n + 1], 1);
-			closepipe(mini);
-		}
+		closepipe(mini);
 		if (cmd->builtin == 1)
 			exec_builtins(cmd, mini);
 		else
@@ -96,6 +94,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 			exit (127);
 		}
 	}
+	close(mini->pipe[2 * mini->exe_n + 1]);
 	return (0);
 }
 
@@ -107,8 +106,11 @@ void wait_child(t_mini *mini)
 	i = 0;
 	while (i < mini->exe_size)
 	{
-		waitpid(mini->pid[i], &status, 0);
-		mini->exitstatus = WEXITSTATUS(status);
+		if (mini->pid[i])
+		{
+			waitpid(mini->pid[i], &status, 0);
+			mini->exitstatus = WEXITSTATUS(status);
+		}
 		i++;
 	}
 }
@@ -124,9 +126,15 @@ void	ft_exec(t_mini *mini)
 	mini->exe_size = ft_exesize(tmp_exe);
 	mini->pid = ft_calloc((sizeof (pid_t)), (mini->exe_size));
 	init_pipe(mini);
-	while (mini->exe_n < mini->exe_size)
+	while (mini->exe_n < mini->exe_size && tmp_exe)
 	{
-		input(mini, tmp_exe);
+		if(!input(mini, tmp_exe))
+		{
+			tmp_exe = tmp_exe->next;
+			close(mini->pipe[2 * mini->exe_n + 1]);
+			mini->exe_n++;
+			continue ;
+		}
 		output(mini, tmp_exe);
 		if (tmp_exe->builtin == 1 && mini->exe->next == NULL)
 			exec_builtins(tmp_exe, mini);
@@ -135,6 +143,7 @@ void	ft_exec(t_mini *mini)
 		tmp_exe = tmp_exe->next;
 		mini->exe_n++;
 	}
+	closepipe(mini);
 	wait_child(mini);
 	ft_execlear(&mini->exe, *ft_free);
 	free(mini->tabcmd);
