@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:24:50 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 17:20:03 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*str_parse(char *input, int *index)
 	return (tmp);
 }
 
-char	*var_dquote(char *tmp)
+char	*var_dquote(char *tmp, t_mini *mini, int *index)
 {
 	int		i;
 	int		j;
@@ -57,9 +57,19 @@ char	*var_dquote(char *tmp)
 	char	*buff;
 
 	i = 0;
+	(void)*index;
 	while (tmp[i] != '$')
 		i++;
 	j = i + 1;
+	if (tmp[j] == '?')
+	{
+		buff = ft_substr(tmp, j + 1, ft_strlen(tmp) - (j + 1));
+		tmp = ft_substr(tmp, 0, i);
+		newtmp = ft_itoa(mini->exitstatus);
+		tmp = free_and_join(tmp, newtmp);
+		tmp = free_and_join(tmp, buff);
+		return (tmp);
+	}
 	while (ft_isalnum(tmp[j]) && tmp[j])
 		j++;
 	newtmp = ft_substr(tmp, i + 1, j - i - 1);
@@ -76,7 +86,7 @@ char	*var_dquote(char *tmp)
 	return (tmp);
 }
 
-char	*dquote_parse(char *input, int *index)
+char	*dquote_parse(char *input, int *index, t_mini *mini)
 {
 	int		i;
 	int		j;
@@ -92,8 +102,8 @@ char	*dquote_parse(char *input, int *index)
 	else
 		tmp = ft_substr(input, 1, i - 1);
 	while (input[++j] != 0)
-		if (input[j] == '$' && ft_isalnum(input[j + 1]))
-			tmp = var_dquote(tmp);
+		if (input[j] == '$' && (ft_isalnum(input[j + 1]) || input[j + 1] == '?'))
+			tmp = var_dquote(tmp, mini, index);
 	*index = *index + i + 1;
 	return (tmp);
 }

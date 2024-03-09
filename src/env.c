@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/04 16:04:00 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:59:26 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	recoenv(t_mini *mini, char **argv)
 		if (!tmp)
 			return (1);
 		ft_lstadd_back(&mini->env, ft_lstnew(tmp));
+		//free(tmp);
 	}
 	return (0);
 }

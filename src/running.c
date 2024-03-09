@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 17:14:02 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:43:56 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	insiderunning(t_mini *mini)
 	if (!mini->input)
 		return (1);
 	mini->lst = ft_tokenizer(mini->input, mini);
+	lstat(mini->lst->global[0], &mini->dossier);
+	if (S_ISDIR(mini->dossier.st_mode))
+		return (ft_printerr("%s: Is a directory\n"), 0);
 	if (ft_strlen(mini->input) != 0)
 		add_history(mini->input);
 	ft_parse_exec(mini);

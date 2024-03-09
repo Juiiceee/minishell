@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:30:42 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 16:39:14 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*ft_select_token(char *input, int *i, t_mini *mini, int *j)
 		|| input[*i] == '>' || input[*i] == '<')
 		return (punct_parse(input + *i, i, mini, j));
 	else if (input[*i] == '"')
-		return (dquote_parse((input + *i), i));
+		return (dquote_parse((input + *i), i, mini));
 	else if (input[*i] == '\'')
 		return (squote_parse((input + *i), i));
 	else if (ft_isprint(input[*i]))
