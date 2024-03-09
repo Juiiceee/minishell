@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:47:47 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/07 13:57:52 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:33:03 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ char	*cut_first_char(char *old)
 char	**ft_tabjoin(char **s1, char **s2)
 {
 	char	**join;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;

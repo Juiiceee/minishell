@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:15:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 01:06:50 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:32:55 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_tablen(char **tab)
 	return (i);
 }
 
-char **ft_subtab(char **tab, int start, int len)
+char	**ft_subtab(char **tab, int start, int len)
 {
 	int		i;
 	char	**sub;
@@ -56,13 +56,6 @@ char **ft_subtab(char **tab, int start, int len)
 	sub[i] = 0;
 	return (sub);
 }
-
-/*char **duptab(char **dup, int lenght)
-{
-	char **dst;
-
-	
-}*/
 
 int	isvar(char **env, char *var)
 {

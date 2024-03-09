@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst_exe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/08 14:34:14 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:22:43 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void init_new_null(t_exec *new)
+void	init_new_null(t_exec *new)
 {
 	new->builtin = 0;
 	new->cmd = NULL;
@@ -21,7 +21,7 @@ void init_new_null(t_exec *new)
 	new->next = NULL;
 }
 
-int is_a_builtin(char *cmd)
+int	is_a_builtin(char *cmd)
 {
 	if (!ft_strncmp(cmd, "echo", 4))
 		return (1);

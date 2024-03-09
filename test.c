@@ -1,7 +1,13 @@
 #include "include/minishell.h"
 
+void	oui(int	*i)
+{
+	(*i)++;
+}
+
 int main(int argc, char **argv, char **envp)
 {
-	if (!envp[0])
-		printf("oui");
+	int i = 0;
+	oui(&i);
+	printf("%d", i);
 }

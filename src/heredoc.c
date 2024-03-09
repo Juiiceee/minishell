@@ -6,18 +6,18 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/06 13:01:11 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:22:10 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char *var_heredoc(char *tmp)
+char	*var_heredoc(char *tmp)
 {
-	int	i;
-	int	j;
-	char *newtmp;
-	char *buff;
+	int		i;
+	int		j;
+	char	*newtmp;
+	char	*buff;
 
 	i = 0;
 	while (tmp[i] != '$')
@@ -31,7 +31,7 @@ char *var_heredoc(char *tmp)
 	if (!getenv(newtmp))
 	{
 		tmp = free_and_join(tmp, buff);
-		return (free(newtmp),tmp);
+		return (free(newtmp), tmp);
 	}
 	newtmp = ft_strdup(getenv(newtmp));
 	tmp = free_and_join(tmp, newtmp);
@@ -53,7 +53,7 @@ int	heredoc(char *limiter)
 	{
 		line = readline("> ");
 		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
-			break;
+			break ;
 		if (ft_strchr(line, '$'))
 			var_dquote(line);
 		tmp = ft_strjoin(line, "\n");

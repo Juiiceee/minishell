@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 12:55:31 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 13:51:55 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_pwd(t_mini *mini)
 {
-	char *pwd;
+	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
@@ -24,7 +24,7 @@ void	ft_pwd(t_mini *mini)
 
 void	ft_env(t_mini *mini)
 {
-	t_list *str;
+	t_list	*str;
 
 	str = mini->env;
 	if (!mini->env)
@@ -35,11 +35,17 @@ void	ft_env(t_mini *mini)
 	while (str->next != NULL)
 	{
 		if (ft_strchr((char *)str->content, '='))
-	 		printf("%s\n", (char *)str->content);
+		{
+			write(1, (char *)str->content, ft_strlen((char *)str->content));
+			write(1, "\n", 1);
+		}
 		str = str->next;
 	}
 	if (ft_strchr((char *)str->content, '='))
-		printf("%s\n", (char *)str->content);
+	{
+		write(1, (char *)str->content, ft_strlen((char *)str->content));
+		write(1, "\n", 1);
+	}
 	mini->exitstatus = 0;
 	if (mini->pid == 0)
 		exit(0);
@@ -59,7 +65,7 @@ void	ft_cd(char **cmd, t_mini *mini)
 		pwd = getcwd(NULL, 0);
 		export(mini, "PWD", pwd);
 		return ((void)(free(pwd), chdir(pathenv(mini, "HOME")),
-		export(mini, "PWD", pathenv(mini, "HOME")), mini->exitstatus = 0));
+			export(mini, "PWD", pathenv(mini, "HOME")), mini->exitstatus = 0));
 	}
 	else if (cmd[1][0] == '-' && ft_strlen(cmd[1]) == 1)
 	{
@@ -72,6 +78,7 @@ void	ft_cd(char **cmd, t_mini *mini)
 			return ;
 	}
 }
+
 void	ft_exit(t_mini *mini, char **cmd)
 {
 	int	i;
@@ -99,7 +106,7 @@ void	ft_exit(t_mini *mini, char **cmd)
 	exit(ft_atoi(cmd[1]));
 }
 
-void ft_export(char **cmd, t_mini *mini)
+void	ft_export(char **cmd, t_mini *mini)
 {
 	size_t	j;
 	size_t	i;
@@ -115,12 +122,11 @@ void ft_export(char **cmd, t_mini *mini)
 		while (cmd[j][i] != '=' && cmd[j][i])
 			i++;
 		if (!ft_strchr(cmd[j], '='))
-		{
 			exportvalueseul(mini, cmd[j]);
-			printf("oui");
-		}
-		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=') && ft_strlen(cmd[j]) != i)
-			export(mini, ft_substr(cmd[j], 0, i), ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=')
+			&& ft_strlen(cmd[j]) != i)
+			export(mini, ft_substr(cmd[j], 0, i),
+				ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
 		i = 0;
 		j++;
 	}

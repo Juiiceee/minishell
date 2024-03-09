@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:32:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/03 12:48:49 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:25:08 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*pathenv(t_mini *mini, char *find)
 {
-	int	check;
-	t_list *st;
+	int		check;
+	t_list	*st;
 
 	st = mini->env;
 	check = 1;

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 12:45:42 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:20:32 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ t_token			*listing_token(char **tmp);
 int				input_size(char *input, t_mini *mini);
 char			*split_env(char *old, char **tmp, int *j);
 
+//utilsexport.c
+void			exportvalueseul(t_mini *mini, char *find);
 
 // tokenizing.c
 t_token			*tokenizing_redirect(char **tmp, int *i);
@@ -165,6 +167,7 @@ t_exec			*exe_lstlast(t_exec *lst);
 // exec.c
 void			ft_parse_exec(t_mini *mini);
 void			ft_exec(t_mini *mini);
+int				parsingcommand(t_exec *cmd, t_mini *mini);
 int				exec_node(t_exec *cmd, t_mini *mini);
 
 // escape.c
@@ -213,5 +216,11 @@ int				ft_exesize(t_exec *lst);
 // pipe_utils.c
 void			init_pipe(t_mini *mini);
 void			closepipe(t_mini *mini);
+
+// utilsexec.c
+
+int				utilsparsingcom(char **envpath, int *i, t_exec *cmd);
+void			utilsexec_node(t_exec *cmd, t_mini *mini);
+void			utilsft_exec(t_mini *mini, t_exec *tmp_exe);
 
 #endif

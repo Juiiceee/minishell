@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:33:07 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 13:27:21 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 14:22:37 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void	envmin(t_mini *mini)
 {
 	char	*tmp;
 
-	if (!pathenv(mini,"PWD"))
+	if (!pathenv(mini, "PWD"))
 		export(mini, "PWD", getcwd(NULL, 0));
-	if (!pathenv(mini,"SHLVL"))
+	if (!pathenv(mini, "SHLVL"))
 		export(mini, "SHLVL", "1");
 	else
 	{
-		tmp = increasenb(pathenv(mini,"SHLVL"));
+		tmp = increasenb(pathenv(mini, "SHLVL"));
 		export(mini, "SHLVL", tmp);
 		free(tmp);
 	}
-	if (!pathenv(mini,"_"))
+	if (!pathenv(mini, "_"))
 		export(mini, "_", "/usr/bin/env");
 }
 
@@ -54,4 +54,3 @@ int	init(t_mini *mini, char **env)
 	mini->tabcmd = NULL;
 	return (0);
 }
-

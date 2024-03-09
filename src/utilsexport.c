@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   utilsexport.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 14:39:20 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 14:32:35 by lbehr            ###   ########.fr       */
+/*   Created: 2024/03/09 14:19:46 by lbehr             #+#    #+#             */
+/*   Updated: 2024/03/09 14:20:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	unset(t_mini *mini, char *find)
+void	exportvalueseul(t_mini *mini, char *find)
 {
-	int		check;
 	t_list	*st;
-	char	*tmp;
 
 	st = mini->env;
-	check = 1;
 	if (!st || !st->content)
 		return ;
-	tmp = ft_strjoin(find, "=");
-	while (check && st->next)
-	{
-		check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
-		if (check == 0)
-			break ;
-		st = st->next;
-	}
-	check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
-	if (check == 0)
-		free_list_element(&mini->env, st);
+	if (!pathenv(mini, find))
+		ft_lstadd_back(&mini->env, ft_lstnew(find));
 	return ;
 }
