@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 13:51:55 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 15:25:04 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	ft_exit(t_mini *mini, char **cmd)
 		return ((void)ft_printerr("cd: too many arguments\n"));
 	}
 	printf("exit\n");
+	ft_envclean(&mini->env);
 	if (!cmd[1])
 		exit(mini->exitstatus);
 	if (cmd[1][0] == '+' || cmd[1][0] == '-')
@@ -125,8 +126,7 @@ void	ft_export(char **cmd, t_mini *mini)
 			exportvalueseul(mini, cmd[j]);
 		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=')
 			&& ft_strlen(cmd[j]) != i)
-			export(mini, ft_substr(cmd[j], 0, i),
-				ft_substr(cmd[j], i + 1, ft_strlen(cmd[j]) - i - 1));
+			freesub(mini, cmd, j, i);
 		i = 0;
 		j++;
 	}

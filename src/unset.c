@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:39:20 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 14:32:35 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 15:08:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	unset(t_mini *mini, char *find)
 	check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
 	if (check == 0)
 		free_list_element(&mini->env, st);
-	return ;
+	return (free(tmp), free(find));
 }

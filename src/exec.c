@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:10:52 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 15:07:21 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ void	ft_exec(t_mini *mini)
 		utilsft_exec(mini, tmp_exe);
 		tmp_exe = tmp_exe->next;
 	}
-	closepipe(mini);
-	wait_child(mini);
-	ft_execlear(&mini->exe, *ft_free);
-	free(mini->tabcmd);
+	return (closepipe(mini), wait_child(mini), ft_execlear(&mini->exe,
+			*ft_free), free(mini->pid), free(mini->tabcmd));
 }

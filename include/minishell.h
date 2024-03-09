@@ -6,13 +6,14 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 14:39:02 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/09 16:16:57 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <sys/stat.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <readline/readline.h>
@@ -63,22 +64,23 @@ typedef struct s_exec
 
 typedef struct s_mini
 {
-	char	*currentpath;
-	char	*userstr;
-	char	*user;
-	char	*input;
-	t_list	*env;
-	uint8_t	exitstatus;
-	char	**tabenv;
-	char	**tabcmd;
-	int		exe_n;
-	int		exe_size;
-	pid_t	*pid;
-	int		*pipe;
-	int		pipe_n;
-	int		clear_fd[2];
-	t_token	*lst;
-	t_exec	*exe;
+	char		*currentpath;
+	struct stat	dossier;
+	char		*userstr;
+	char		*user;
+	char		*input;
+	t_list		*env;
+	uint8_t		exitstatus;
+	char		**tabenv;
+	char		**tabcmd;
+	int			exe_n;
+	int			exe_size;
+	pid_t		*pid;
+	int			*pipe;
+	int			pipe_n;
+	int			clear_fd[2];
+	t_token		*lst;
+	t_exec		*exe;
 }	t_mini;
 
 // utilstab.c
@@ -142,6 +144,7 @@ char			*split_env(char *old, char **tmp, int *j);
 
 //utilsexport.c
 void			exportvalueseul(t_mini *mini, char *find);
+void			freesub(t_mini *mini, char **cmd, size_t j, size_t	i);
 
 // tokenizing.c
 t_token			*tokenizing_redirect(char **tmp, int *i);
