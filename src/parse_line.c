@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 17:20:03 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/11 18:06:33 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,26 @@ char	*dquote_parse(char *input, int *index, t_mini *mini)
 	char	*tmp;
 
 	i = 0;
-	j = -1;
-	while (input[++i])
-		if (input[i] == '"')
+	j = 0;
+	printf("%s\n", input);
+	while (input[i])
+		if (input[i++] == '"')
 			break ;
-	if (isspace(input[-1]))
-		tmp = ft_substr(input, 0, i);
+	if (*index != 0)
+	{
+		if (isspace(input[-1]))
+			tmp = ft_substr(input, 0, i);
+		else
+			tmp = ft_substr(input, 1, i - 1);
+	}
 	else
-		tmp = ft_substr(input, 1, i - 1);
+		tmp = ft_substr(input, 0, i);
 	while (input[++j] != 0)
 		if (input[j] == '$' && (ft_isalnum(input[j + 1]) || input[j + 1] == '?'))
 			tmp = var_dquote(tmp, mini, index);
-	*index = *index + i + 1;
+	*index = *index + i;
+	if (input[*index] != '\0')
+		*index = *index + 1;
 	return (tmp);
 }
 

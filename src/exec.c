@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 17:43:05 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:29:08 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ int	parsingcommand(t_exec *cmd, t_mini *mini)
 	if (ft_strchr(cmd->cmd[0], '/') != NULL)
 		return (0);
 	envpath = ft_split(pathenv(mini, "PATH"), ':');
-	if (!envpath)
-		return (1);
-	while (envpath[i])
+	while (envpath && envpath[i])
 	{
 		if (!utilsparsingcom(envpath, &i, cmd))
 			return (0);
 	}
-	freetab(envpath);
+	if (envpath)
+		freetab(envpath);
+	if (!access(cmd->cmd[0], X_OK))
+		return (0);
 	return (1);
 }
 
@@ -116,5 +117,5 @@ void	ft_exec(t_mini *mini)
 		tmp_exe = tmp_exe->next;
 	}
 	return (closepipe(mini), wait_child(mini), ft_execlear(&mini->exe,
-			*ft_free), free(mini->pid), free(mini->tabcmd));
+			*ft_free), free(mini->input), free(mini->pid), free(mini->tabcmd));
 }
