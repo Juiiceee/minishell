@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   escape.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:35:23 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:35:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 00:37:04 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int	escape_word(char *input, int *i)
 		return (escape_dolar(input, i));
 	while (input[j])
 	{
-		if ((input[j] == '|' && ft_strlen(input) == 1)
-			|| (input[j] == '<' || input[j] == '>') || (isspace(input[j])))
+		if (input[j] == '|' || input[j] == '<' 
+		|| input[j] == '>' || (isspace(input[j])))
 			break ;
 		if (input[j] == '\'' || input[j] == '\"')
 			escape_quote(input, &j);

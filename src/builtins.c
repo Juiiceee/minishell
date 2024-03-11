@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/11 12:25:30 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 00:25:13 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	ft_export(char **cmd, t_mini *mini)
 			return ;
 		while (cmd[j][i] != '=' && cmd[j][i])
 			i++;
-		if (!ft_strchr(cmd[j], '='))
+		if (!ft_strchr(cmd[j], '=') || cmd[j][i + 1] == '\0')
 			exportvalueseul(mini, cmd[j]);
 		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=')
 			&& ft_strlen(cmd[j]) != i)

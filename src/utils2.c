@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:47:47 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/11 18:21:58 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/11 23:45:06 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ char	*cut_first_char(char *old)
 {
 	char	*tmp;
 
-		printf("%c\n", old[ft_strlen(old)]);
-		printf("%c\n", old[0]);
-	if (old[ft_strlen(old)] != old[0])
-	{
-		free(old);
-		return (NULL);	
-	}
 	tmp = ft_substr(old, 1, ft_strlen(old) - 1);
 	free(old);
 	return (tmp);

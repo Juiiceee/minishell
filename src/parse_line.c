@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/11 18:06:33 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 00:33:01 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*str_parse(char *input, int *index)
 	j = -1;
 	while (input[++i])
 		if (!ft_isprint(input[i]) || input[i] == '\'' || input[i] == '"'
-			|| input[i] == '$')
+			|| input[i] == '$' || input[i] == '>' || input[i] == '<'
+			|| input[i] == '|')
 			break ;
 	tmp = malloc((sizeof (char)) * i + 1);
 	while (++j <= i)
@@ -93,11 +94,12 @@ char	*dquote_parse(char *input, int *index, t_mini *mini)
 	char	*tmp;
 
 	i = 0;
-	j = 0;
-	printf("%s\n", input);
-	while (input[i])
-		if (input[i++] == '"')
+	j = -1;
+	while (input[++i])
+		if (input[i] == '"')
 			break ;
+	if (input[i] == '\0')
+		return(*index = *index + i, ft_printerr("Dquote is badly closed, followed string as been voided : %s\n", input), NULL);
 	if (*index != 0)
 	{
 		if (isspace(input[-1]))
@@ -110,9 +112,7 @@ char	*dquote_parse(char *input, int *index, t_mini *mini)
 	while (input[++j] != 0)
 		if (input[j] == '$' && (ft_isalnum(input[j + 1]) || input[j + 1] == '?'))
 			tmp = var_dquote(tmp, mini, index);
-	*index = *index + i;
-	if (input[*index] != '\0')
-		*index = *index + 1;
+	*index = *index + i + 1;
 	return (tmp);
 }
 
@@ -125,6 +125,8 @@ char	*squote_parse(char *input, int *index)
 	while (input[++i])
 		if (input[i] == '\'')
 			break ;
+	if (input[i] == '\0')
+		return(*index = *index + i, ft_printerr("Squote is badly closed, followed string as been voided : %s\n", input), NULL);
 	if (*index != 0)
 	{
 		if (isspace(input[-1]))
