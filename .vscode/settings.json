@@ -3,6 +3,7 @@
 		"readline.h": "c",
 		"minishell.h": "c",
 		"stddef.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"unistd.h": "c"
 	}
 }
