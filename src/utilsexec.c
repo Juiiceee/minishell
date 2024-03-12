@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 12:53:54 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:50:02 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int		utilsft_exec(t_mini *mini, t_exec *tmp_exe)
 		exec_builtins(tmp_exe, mini);
 	else
 		exec_node(tmp_exe, mini);
+	if (tmp_exe->is_fdout == 1)
+		dup2(mini->clear_fd[1], 1);
 	mini->exe_n++;
 	return (1);
 }
