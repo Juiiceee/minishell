@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 23:59:47 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/13 00:15:37 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ void			ft_tokclean(t_token **lst);
 void			ft_envclean(t_list **lst);
 
 // here_doc.c
-int				heredoc(char *limiter, t_mini *mini);
+int				heredoc(char *limiter);
 
 // redirect.c
 int				input(t_mini *mini, t_exec *exec);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:18:05 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 13:00:30 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/13 00:16:01 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	input(t_mini *mini, t_exec *exec)
 		return (0);
 	else if (exec->is_fdin == 3)
 	{
-		fd = heredoc(exec->in[1], mini);
+		fd = heredoc(exec->in[1]);
 		if (fd < 0)
 			return (mini->exitstatus = 1, 0);
 		dup2(fd, 0);

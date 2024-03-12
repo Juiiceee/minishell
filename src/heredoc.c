@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/13 00:15:21 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,29 @@ char	*var_heredoc(char *tmp)
 	return (tmp);
 }
 
-int	heredoc(char *limiter, t_mini *mini)
+int	heredoc(char *limiter)
 {
-	int		heredoc;
+	int		heredoc[2];
 	char	*line;
 	char	*tmp;
 
-	unlink(".heredoc");
-	heredoc = open(".heredoc", O_WRONLY | O_CREAT | O_APPEND);
-	if (!heredoc)
-		return (perror("open heredoc"), 1);
+	if (pipe(heredoc) == -1)
+		return(-1);
 	while (1)
 	{
 		line = readline("> ");
 		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
 			break ;
 		if (ft_strchr(line, '$'))
-			var_dquote(line, mini, 0);
+			var_heredoc(line);
 		tmp = ft_strjoin(line, "\n");
 		if (!tmp)
 			return (perror("Malloc"), 1);
-		write(heredoc, tmp, ft_strlen(tmp));
+		write(heredoc[1], tmp, ft_strlen(tmp));
 		free(tmp);
+		free(line);
 	}
-	return (heredoc);
+	free(line);
+	close(heredoc[1]);
+	return (heredoc[0]);
 }
