@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 14:46:45 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_export(char **cmd, t_mini *mini)
 			i++;
 		if (!ft_strchr(cmd[j], '=') || cmd[j][i + 1] == '\0')
 			exportvalueseul(mini, cmd[j]);
-		if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=')
+		else if (cmd[j][0] != '=' && ft_strchr(cmd[j], '=')
 			&& ft_strlen(cmd[j]) != i)
 			freesub(mini, cmd, j, i);
 		i = 0;

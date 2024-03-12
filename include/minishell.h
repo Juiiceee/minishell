@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 12:24:42 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 14:35:53 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,8 @@ int				heredoc(char *limiter, t_mini *mini);
 // redirect.c
 int				input(t_mini *mini, t_exec *exec);
 int				output(t_mini *mini, t_exec *exec);
-void 			parse_redirect_out(t_token *tmp, t_exec *newlst);
-void 			parse_redirect_in(t_token *tmp, t_exec *newlst);
+void			parse_redirect_out(t_token *tmp, t_exec *newlst);
+void			parse_redirect_in(t_token *tmp, t_exec *newlst);
 
 // utils2.c
 char			*free_old_and_join(char *old, char *new);
