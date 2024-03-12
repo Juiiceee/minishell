@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:18:05 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 00:48:43 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:46:38 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void parse_redirect_in(t_token *tmp, t_exec *newlst)
 	newlst->in = tmp->global;
 	if (ft_strlen(tmp->global[0]) == 2)
 		newlst->is_fdin = 3;
-	else if (ft_strlen(tmp->global[0]) == 1)
+	else if (ft_strlen(tmp->global[0]) == 1 && newlst->is_fdin != 2
+			&& newlst->is_fdout != 2)
 	{
 		fd = open(tmp->global[1], O_RDONLY);
 		if (fd < 0)
@@ -67,8 +68,7 @@ void parse_redirect_in(t_token *tmp, t_exec *newlst)
 		}
 		else 
 		{
-			if (newlst->is_fdin != 2)
-				newlst->is_fdin = 1;
+			newlst->is_fdin = 1;
 			if (newlst->fdin)
 				close(newlst->fdin);
 			newlst->fdin = fd;
@@ -81,9 +81,11 @@ void parse_redirect_out(t_token *tmp, t_exec *newlst)
 	int fd;
 
 	newlst->out = tmp->global;
-	if (ft_strlen(tmp->global[0]) == 1)
+	if (ft_strlen(tmp->global[0]) == 1 && newlst->is_fdout != 2 
+		&& newlst->is_fdin != 2)
 		fd = open(tmp->global[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (ft_strlen(tmp->global[0]) == 2)
+	else if (ft_strlen(tmp->global[0]) == 2 && newlst->is_fdout != 2 
+		&& newlst->is_fdin != 2)
 		fd = open(tmp->global[1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
 		return ;
@@ -96,8 +98,7 @@ void parse_redirect_out(t_token *tmp, t_exec *newlst)
 	}
 	else 
 	{
-		if (newlst->is_fdout != 2)
-			newlst->is_fdout = 1;
+		newlst->is_fdout = 1;
 		if (newlst->fdout)
 			close(newlst->fdout);
 		newlst->fdout = fd;

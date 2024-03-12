@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/11 17:32:05 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:53:54 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	utilsexec_node(t_exec *cmd, t_mini *mini)
 	free(mini->user);
 	free(mini->pid);
 	free(mini->input);
+	rl_clear_history();
 	ft_execlear(&mini->exe, *ft_free);
 	ft_lstclear(&mini->env, *free);
 	free(mini->tabcmd);
