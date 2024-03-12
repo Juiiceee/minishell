@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 11:51:59 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 16:28:30 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,18 @@ int	ft_checkexport(char **cmd, t_mini *mini, size_t j)
 			(void)ft_printerr("`%s': not a valid identifier",
 				ft_substr(cmd[j], 0, i)), 1);
 	}
+	if (isdigit(cmd[j][0]))
+		return (mini->exitstatus = 1,
+			(void)ft_printerr("`%s': not a valid identifier",
+				ft_substr(cmd[j], 0, i)), 1);
 	while (cmd[j][i] != '=' && cmd[j][i])
 	{
-		if (!ft_isalpha(cmd[j][i]))
+		if (ft_alphaunderscore(cmd[j][i]))
 			return (mini->exitstatus = 1,
 				(void)ft_printerr("`%s': not a valid identifier",
 					ft_substr(cmd[j], 0, ++i)), 1);
 		i++;
 	}
-	if (isdigit(cmd[j][0]))
-		return (mini->exitstatus = 1,
-			(void)ft_printerr("`%s': not a valid identifier",
-				ft_substr(cmd[j], 0, i)), 1);
 	return (0);
 }
 

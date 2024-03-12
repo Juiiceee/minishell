@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 14:35:53 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 16:29:16 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_mini
 int				tablength(char **tab);
 void			lsttotab(t_mini *mini);
 void			refreshtab(t_mini *mini);
+int				ft_lstsizestrchr(t_list *lst, char c);
 
 // free.c
 void			freetab(char **tab);
@@ -148,6 +149,7 @@ char			*split_env(char *old, char **tmp, int *j);
 //utilsexport.c
 void			exportvalueseul(t_mini *mini, char *find);
 void			freesub(t_mini *mini, char **cmd, size_t j, size_t	i);
+int				ft_alphaunderscore(char c);
 
 // tokenizing.c
 t_token			*tokenizing_redirect(char **tmp, int *i);
