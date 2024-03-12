@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   running.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 17:04:12 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 23:49:53 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	createprename(t_mini *mini)
 
 int	checkisdir(t_mini *mini)
 {
+	if (!mini->lst)
+		return (0);
 	mini->dossier.st_mode = 0;
 	if (!mini->lst->next)
 	{
@@ -65,7 +67,8 @@ int	insiderunning(t_mini *mini)
 	if (checkisdir(mini))
 		return (0);
 	ft_parse_exec(mini);
-	ft_exec(mini);
+	if (mini->exe)
+		ft_exec(mini);
 	dup2(mini->clear_fd[0], 0);
 	dup2(mini->clear_fd[1], 1);
 	return (0);
@@ -78,6 +81,7 @@ void	running(t_mini *mini)
 		if (insiderunning(mini))
 		{
 			ft_envclean(&mini->env);
+			rl_clear_history();
 			printf("exit\n");
 			break ;
 		}

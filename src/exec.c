@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 16:40:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/13 00:01:17 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ int	parsingcommand(t_exec *cmd, t_mini *mini)
 {
 	char	**envpath;
 	int		i;
+	int 	status;
 
 	i = 0;
+	status = 0;
 	if (ft_strchr(cmd->cmd[0], '/') != NULL)
-		return (0);
+		if (what_is_error(cmd, mini, &status))
+			return (free_child(mini), exit(status), 0);
 	envpath = ft_split(pathenv(mini, "PATH"), ':');
 	while (envpath && envpath[i])
 	{
@@ -28,8 +31,8 @@ int	parsingcommand(t_exec *cmd, t_mini *mini)
 	}
 	if (envpath)
 		freetab(envpath);
-	if (!access(cmd->cmd[0], X_OK))
-		return (0);
+	if (what_is_error(cmd, mini, &status))
+		return (free_child(mini), exit(status), 0);
 	return (1);
 }
 
@@ -39,6 +42,8 @@ void	ft_parse_exec(t_mini *mini)
 
 	tmp = mini->lst;
 	mini->exe = NULL;
+	if (tmp->data_type == PIPE || tmp->data_type == DONT_EXIST)
+		return (ft_tokclear_str(&mini->lst));
 	while (tmp)
 	{
 		exe_lstadd_back(&mini->exe, exe_lstnew(tmp));
@@ -52,7 +57,6 @@ void	ft_parse_exec(t_mini *mini)
 		else
 			break ;
 	}
-	ft_tokclean(&mini->lst);
 }
 
 int	exec_node(t_exec *cmd, t_mini *mini)
@@ -121,5 +125,6 @@ void	ft_exec(t_mini *mini)
 		tmp_exe = tmp_exe->next;
 	}
 	return (closepipe(mini), wait_child(mini), ft_execlear(&mini->exe,
-			*ft_free), free(mini->input), free(mini->pid), free(mini->tabcmd));
+			*ft_free), free(mini->input), free(mini->pid),
+				ft_tokclean(&mini->lst));
 }

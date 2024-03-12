@@ -6,39 +6,35 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 19:36:17 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 23:43:04 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	what_is_error(t_exec *cmd, t_mini *mini)
+int	what_is_error(t_exec *cmd, t_mini *mini, int *status)
 {
 	if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && access(cmd->cmd[0], F_OK))
 	{
-		ft_printerr("%s: no such file or directory\n", cmd->cmd[0]);
-		return(127);
+		ft_printerr("%s: No such file or directory\n", cmd->cmd[0]);
+		return(*status = 127, 1);
 	}
 	else if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && checkisdir(mini))
 	{
 		ft_printerr("%s: Is a directory\n", cmd->cmd[0]);
-		return(126);
+		return(*status = 126, 1);
 	}
-	else if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && access(cmd->cmd[0], X_OK))
+	else if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && (access(cmd->cmd[0], X_OK) < 0))
 	{
-		ft_printerr("%s: permission denied\n", cmd->cmd[0]);
-		return(126);
+		ft_printerr("%s: Permission denied\n", cmd->cmd[0]);
+		return(*status = 126, 1);
 	}
-	// else
-	// {
-	// 	ft_printerr("%s: command not found\n", cmd->cmd[0]);
-	// 	return(127);
-	// }
 	return (0);
 }
 
 void free_child(t_mini *mini)
 {
+	ft_tokclean(&mini->lst);
 	ft_free(mini->tabenv);
 	free(mini->user);
 	free(mini->pid);
@@ -46,7 +42,6 @@ void free_child(t_mini *mini)
 	rl_clear_history();
 	ft_execlear(&mini->exe, *ft_free);
 	ft_lstclear(&mini->env, *free);
-	free(mini->tabcmd); 
 }
 
 int	utilsparsingcom(char **envpath, int *i, t_exec *cmd)
@@ -72,15 +67,11 @@ int	utilsparsingcom(char **envpath, int *i, t_exec *cmd)
 
 void	utilsexec_node(t_exec *cmd, t_mini *mini)
 {
-	int	status;
-
-	status = 0;
-	status = what_is_error(cmd, mini);
 	if (!parsingcommand(cmd, mini))
 		execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 	ft_printerr("%s: command not found\n", cmd->cmd[0]);
 	free_child(mini);
-	exit (status);
+	exit (127);
 }
 
 int	utilsft_exec(t_mini *mini, t_exec *tmp_exe)

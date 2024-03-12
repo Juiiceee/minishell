@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   punct_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 21:46:40 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*dollar_sign(char *input, int *i, t_mini *mini)
 	tmp = ft_substr(input, 1, j - 1);
 	*i += ft_strlen(tmp);
 	if (!pathenv(mini, tmp))
-		return (free(tmp), ft_strdup(""));
+		return (free(tmp), NULL);
 	else
 		tmp = free_and_join(ft_strdup("$"), ft_strdup(pathenv(mini, tmp)));
 	return (tmp);

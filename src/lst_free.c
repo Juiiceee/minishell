@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:06:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 15:00:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/13 00:00:29 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ void	ft_execlear(t_exec **lst, void (*del)(char **))
 			(*del)(actual->in);
 		if (actual->out)
 			(*del)(actual->out);
+		free(actual);
+		actual = sav;
+	}
+	*lst = NULL;
+}
+
+void	ft_tokclear_str(t_token **lst)
+{
+	t_token	*actual;
+	t_token	*sav;
+
+	if (!lst)
+		return ;
+	actual = *lst;
+	while (actual)
+	{
+		sav = actual->next;
+		ft_free(actual->global);
 		free(actual);
 		actual = sav;
 	}

@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 19:36:56 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 23:59:47 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ void			ft_echo(char **cmd, t_mini *mini);
 void			unset(t_mini *mini, char *find);
 
 // lst_free.c
+void			ft_tokclear_str(t_token **lst);
 void			ft_execlear(t_exec **lst, void (*del)(char **));
 void			ft_tokclean(t_token **lst);
 void			ft_envclean(t_list **lst);
@@ -229,7 +230,8 @@ void			init_pipe(t_mini *mini);
 void			closepipe(t_mini *mini);
 
 // utilsexec.c
-
+int				what_is_error(t_exec *cmd, t_mini *mini, int *status);
+void			free_child(t_mini *mini);
 int				utilsparsingcom(char **envpath, int *i, t_exec *cmd);
 void			utilsexec_node(t_exec *cmd, t_mini *mini);
 int 			utilsft_exec(t_mini *mini, t_exec *tmp_exe);
