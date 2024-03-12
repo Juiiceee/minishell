@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 13:00:45 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ void	utilsexec_node(t_exec *cmd, t_mini *mini)
 	free(mini->user);
 	free(mini->pid);
 	free(mini->input);
+	rl_clear_history();
 	ft_execlear(&mini->exe, *ft_free);
 	ft_lstclear(&mini->env, *free);
 	free(mini->tabcmd);
 	exit (127);
 }
 
-int		utilsft_exec(t_mini *mini, t_exec *tmp_exe)
+int	utilsft_exec(t_mini *mini, t_exec *tmp_exe)
 {
 	if (!input(mini, tmp_exe))
 		return (0);
