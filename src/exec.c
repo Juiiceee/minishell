@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 14:17:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 		return (1);
 	if (mini->pid[mini->exe_n] == 0)
 	{
-		if (cmd->is_fdin != 1 && mini->exe_n != 0)
+		if (cmd->is_fdin == 0 && mini->exe_n != 0)
 			dup2(mini->pipe[2 * mini->exe_n - 2], 0);
-		if (cmd->is_fdout != 1 && cmd->next != NULL)
+		if (cmd->is_fdout == 0 && cmd->next != NULL)
 			dup2(mini->pipe[2 * mini->exe_n + 1], 1); 
 		closepipe(mini);
 		if (cmd->builtin == 1)
@@ -80,8 +80,10 @@ void	wait_child(t_mini *mini)
 {
 	int	status;
 	int	i;
+	int	mini_status_temp;
 
 	i = 0;
+	mini_status_temp = mini->exitstatus;
 	while (i < mini->exe_size)
 	{
 		if (mini->pid[i])
@@ -89,6 +91,8 @@ void	wait_child(t_mini *mini)
 			waitpid(mini->pid[i], &status, 0);
 			mini->exitstatus = WEXITSTATUS(status);
 		}
+		else
+			mini->exitstatus = mini_status_temp;
 		i++;
 	}
 }
