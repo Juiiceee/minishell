@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 16:29:16 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 19:36:56 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ char			*pathenv(t_mini *mini, char *find);
 int				recouser(t_mini *mini);
 
 // running.c
+int				checkisdir(t_mini *mini);
 void			running(t_mini *mini);
 void			createprename(t_mini *mini);
 int				insiderunning(t_mini *mini);

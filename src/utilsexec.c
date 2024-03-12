@@ -3,14 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   utilsexec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 16:56:56 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 19:36:17 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
+
+int	what_is_error(t_exec *cmd, t_mini *mini)
+{
+	if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && access(cmd->cmd[0], F_OK))
+	{
+		ft_printerr("%s: no such file or directory\n", cmd->cmd[0]);
+		return(127);
+	}
+	else if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && checkisdir(mini))
+	{
+		ft_printerr("%s: Is a directory\n", cmd->cmd[0]);
+		return(126);
+	}
+	else if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && access(cmd->cmd[0], X_OK))
+	{
+		ft_printerr("%s: permission denied\n", cmd->cmd[0]);
+		return(126);
+	}
+	// else
+	// {
+	// 	ft_printerr("%s: command not found\n", cmd->cmd[0]);
+	// 	return(127);
+	// }
+	return (0);
+}
+
+void free_child(t_mini *mini)
+{
+	ft_free(mini->tabenv);
+	free(mini->user);
+	free(mini->pid);
+	free(mini->input);
+	rl_clear_history();
+	ft_execlear(&mini->exe, *ft_free);
+	ft_lstclear(&mini->env, *free);
+	free(mini->tabcmd); 
+}
 
 int	utilsparsingcom(char **envpath, int *i, t_exec *cmd)
 {
@@ -37,24 +74,12 @@ void	utilsexec_node(t_exec *cmd, t_mini *mini)
 {
 	int	status;
 
-	status = 127;
+	status = 0;
+	status = what_is_error(cmd, mini);
 	if (!parsingcommand(cmd, mini))
-	{
-		if (execve(cmd->cmd[0], cmd->cmd, mini->tabenv) == -1)
-			status = 126;
-	}
-	if (status == 126)
-		perror("execve");
-	else
-		ft_printerr("%s: command not found\n", cmd->cmd[0]);
-	ft_free(mini->tabenv);
-	free(mini->user);
-	free(mini->pid);
-	free(mini->input);
-	rl_clear_history();
-	ft_execlear(&mini->exe, *ft_free);
-	ft_lstclear(&mini->env, *free);
-	free(mini->tabcmd);
+		execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
+	ft_printerr("%s: command not found\n", cmd->cmd[0]);
+	free_child(mini);
 	exit (status);
 }
 
