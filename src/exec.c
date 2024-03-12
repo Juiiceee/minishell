@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 14:17:38 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 16:40:24 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	exec_node(t_exec *cmd, t_mini *mini)
 		if (cmd->is_fdin == 0 && mini->exe_n != 0)
 			dup2(mini->pipe[2 * mini->exe_n - 2], 0);
 		if (cmd->is_fdout == 0 && cmd->next != NULL)
-			dup2(mini->pipe[2 * mini->exe_n + 1], 1); 
+			dup2(mini->pipe[2 * mini->exe_n + 1], 1);
 		closepipe(mini);
 		if (cmd->builtin == 1)
 			exec_builtins(cmd, mini);

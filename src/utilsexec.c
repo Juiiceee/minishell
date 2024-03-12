@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 15:39:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 16:56:56 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,18 @@ int	utilsparsingcom(char **envpath, int *i, t_exec *cmd)
 
 void	utilsexec_node(t_exec *cmd, t_mini *mini)
 {
+	int	status;
+
+	status = 127;
 	if (!parsingcommand(cmd, mini))
 	{
 		if (execve(cmd->cmd[0], cmd->cmd, mini->tabenv) == -1)
-		{
-			perror("execve");
-			exit(126);
-		}
+			status = 126;
 	}
-	ft_printerr("%s: command not found\n", cmd->cmd[0]);
+	if (status == 126)
+		perror("execve");
+	else
+		ft_printerr("%s: command not found\n", cmd->cmd[0]);
 	ft_free(mini->tabenv);
 	free(mini->user);
 	free(mini->pid);
@@ -52,7 +55,7 @@ void	utilsexec_node(t_exec *cmd, t_mini *mini)
 	ft_execlear(&mini->exe, *ft_free);
 	ft_lstclear(&mini->env, *free);
 	free(mini->tabcmd);
-	exit (127);
+	exit (status);
 }
 
 int	utilsft_exec(t_mini *mini, t_exec *tmp_exe)

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:19:46 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 16:28:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 17:04:09 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	freesub(t_mini *mini, char **cmd, size_t j, size_t	i)
 
 int	ft_alphaunderscore(char c)
 {
-	if (ft_isalpha(c) || c == '_')
+	if (ft_isalpha(c) || c == '_' || ft_isdigit(c))
 		return (0);
 	return (1);
 }

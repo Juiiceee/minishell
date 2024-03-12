@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 14:57:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 17:04:12 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	checkisdir(t_mini *mini)
 		{
 			lstat(mini->lst->global[0], &mini->dossier);
 			if (S_ISDIR(mini->dossier.st_mode))
-				return (ft_printerr("%s: Is a directory\n", mini->lst->global[0]),
-					mini->exitstatus = 126, 1);
+				return (ft_printerr("%s: Is a directory\n",
+						mini->lst->global[0]), mini->exitstatus = 126, 1);
 		}
 	}
 	return (0);

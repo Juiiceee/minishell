@@ -5,17 +5,30 @@
 #include <unistd.h>
 #include <unistd.h>
 
-int	ft_isalpha(int c)
+int	checkisdir(t_mini *mini)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1024);
+	mini->dossier.st_mode = 0;
+	if (!mini->lst->next)
+	{
+		if (!ft_strncmp(mini->lst->global[0], "./", 2)
+			|| !ft_strncmp(mini->lst->global[0], "/", 1))
+		{
+			lstat(mini->lst->global[0], &mini->dossier);
+			if (S_ISDIR(mini->dossier.st_mode))
+				return (printf("%s: Is a directory\n", mini->lst->global[0]),
+					mini->exitstatus = 126, 1);
+		}
+	}
 	return (0);
 }
 
-/*int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	char *sa[] = {"./sa.sh", NULL};
-	int i = execve(sa[0], sa, envp);
-	perror("execve");
-	return (i);
-}*/
+	t_mini	mini;
+	char sa[] = "valgrind";
+
+	lstat(sa, &mini.dossier);
+	if (S_ISDIR(mini.dossier.st_mode))
+		return (printf("%s: Is a directory\n", sa),
+			mini.exitstatus = 126, 1);
+}
