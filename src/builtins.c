@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 14:46:45 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 15:05:03 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	ft_env(t_mini *mini)
 
 	str = mini->env;
 	if (!mini->env)
-	{
-		mini->exitstatus = 0;
-		return ;
-	}
+		return (mini->exitstatus = 0, (void)0);
 	while (str->next != NULL)
 	{
 		if (ft_strchr((char *)str->content, '='))

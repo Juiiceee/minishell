@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:19:46 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 15:02:37 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	exportvalueseul(t_mini *mini, char *find)
 	if (!st || !st->content)
 		return ;
 	if (!pathenv(mini, find))
-		ft_lstadd_back(&mini->env, ft_lstnew(find));
+		ft_lstadd_back(&mini->env, ft_lstnew(ft_strdup(find)));
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:06:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 15:00:05 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	ft_envclean(t_list **lst)
 		free(actual);
 		actual = sav;
 	}
-	free(actual->content);
+	if (actual->content)
+		free(actual->content);
 	free(actual);
 	*lst = NULL;
 }
