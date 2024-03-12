@@ -6,11 +6,11 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:25:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 char	*pipe_sign(char *input, int *i)
 {

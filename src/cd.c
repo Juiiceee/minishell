@@ -6,11 +6,11 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:29:47 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 13:53:37 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 int	execcd(t_mini *mini, char *path)
 {

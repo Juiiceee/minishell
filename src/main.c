@@ -6,11 +6,11 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/07 09:58:42 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 int	main(int argc, char **argv, char **env)
 {

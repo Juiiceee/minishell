@@ -5,8 +5,10 @@ SRCS			:= builtin_exec.c builtins2.c builtins.c cd.c env.c escape.c exec.c expor
 #commande shell pour les src: ls src/. | tr "\n" " " > oui | cat; rm oui
 SRCS			:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+DEPS			:= $(OBJS:.o=.d)
 CC				:= cc
 CFLAGS			:= -Wall -Wextra -Werror -g3
+CPPFLAGS		:= -MMD -MP -I include
 #CFLAGS			:= -g3 -Iinclude
 RM				:= rm -rf
 DIR_DUP			= mkdir -p $(@D)
@@ -22,7 +24,9 @@ $(NAME) :	$(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
-	$(CC) -c $< $(CFLAGS) -o $@
+	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
+
+-include $(DEPS)
 
 clean	:
 	$(RM) $(OBJ_DIR)
@@ -39,5 +43,3 @@ re		:	fclean all
 	make -C $(PRINTF) re --no-print-directory
 
 .PHONY: all clean fclean re
-
--include $(DEP)

@@ -6,11 +6,11 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/09 16:49:21 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 char	*var_heredoc(char *tmp)
 {

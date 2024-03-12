@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lst_exe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 17:14:35 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 void	init_new_null(t_exec *new)
 {

@@ -6,11 +6,11 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/09 14:22:59 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 t_token	*tok_lstnew(char **content, t_type data)
 {

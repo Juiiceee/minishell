@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utilsexec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/11 17:32:05 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 int	utilsparsingcom(char **envpath, int *i, t_exec *cmd)
 {
