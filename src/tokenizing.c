@@ -3,19 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:00:02 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 14:20:25 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/13 14:56:24 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char **redirect_split(char **tmp, int *i, int j)
+{
+	char **buff;
+	
+	buff = malloc((sizeof (char *)) * 3);
+	if (!buff)
+		return (NULL);
+	buff[0] = ft_substr(tmp[*i], 0, j);
+	buff[1] = ft_substr(tmp[*i], j, ft_strlen(tmp[*i]) - j);
+	buff[2] = 0;
+	return(buff);
+}
+
 t_token	*tokenizing_redirect(char **tmp, int *i)
 {
 	int		j;
-	char	**buff;
 
 	j = 0;
 	while (tmp[*i][j] == '>' || tmp[*i][j] == '<')
@@ -31,14 +43,10 @@ t_token	*tokenizing_redirect(char **tmp, int *i)
 	}
 	else if (j != (int)ft_strlen(tmp[*i]))
 	{
-		buff = malloc((sizeof (char *)) * 3);
-		buff[0] = ft_substr(tmp[*i], 0, j);
-		buff[1] = ft_substr(tmp[*i], j, ft_strlen(tmp[*i]) - j);
-		buff[2] = 0;
 		if (tmp[*i][0] == '<')
-			return (tok_lstnew(buff, IN_REDIRECT));
+			return (tok_lstnew(redirect_split(tmp, i, j), IN_REDIRECT));
 		else if (tmp[*i][0] == '>')
-			return (tok_lstnew(buff, OU_REDIRECT));
+			return (tok_lstnew(redirect_split(tmp, i, j), OU_REDIRECT));
 	}
 	return (NULL);
 }

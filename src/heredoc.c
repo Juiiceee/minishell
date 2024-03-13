@@ -6,13 +6,37 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/13 00:15:21 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:19:03 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*var_heredoc(char *tmp)
+char	*varparse(char *tmp, int j, int i, t_mini *mini)
+{
+	char	*newtmp;
+	char	*buff;
+	char	*swap;
+
+	while (ft_isalnum(tmp[j]) && tmp[j])
+		j++;
+	newtmp = ft_substr(tmp, i + 1, j - i - 1);
+	buff = ft_substr(tmp, j, ft_strlen(tmp) - j);
+	tmp = sub_and_free(tmp, 0, i);
+	if (!pathenv(mini, newtmp))
+	{
+		tmp = free_and_join(tmp, buff);
+		return (free(newtmp), tmp);
+	}
+	swap = newtmp;
+	newtmp = ft_strdup(pathenv(mini, newtmp));
+	free(swap);
+	tmp = free_and_join(tmp, newtmp);
+	tmp = free_and_join(tmp, buff);
+	return (tmp);
+}
+
+char	*var_heredoc(char *tmp, t_mini *mini)
 {
 	int		i;
 	int		j;
@@ -23,37 +47,44 @@ char	*var_heredoc(char *tmp)
 	while (tmp[i] != '$')
 		i++;
 	j = i + 1;
-	while (ft_isalnum(tmp[j]) && tmp[j])
-		j++;
-	newtmp = ft_substr(tmp, i + 1, j - i - 1);
-	buff = ft_substr(tmp, j, ft_strlen(tmp) - j);
-	tmp = ft_substr(tmp, 0, i);
-	if (!getenv(newtmp))
+	if (tmp[j] == '?')
 	{
+		buff = ft_substr(tmp, j + 1, ft_strlen(tmp) - (j + 1));
+		tmp = ft_substr(tmp, 0, i);
+		newtmp = ft_itoa(mini->exitstatus);
+		tmp = free_and_join(tmp, newtmp);
 		tmp = free_and_join(tmp, buff);
-		return (free(newtmp), tmp);
+		return (tmp);
 	}
-	newtmp = ft_strdup(getenv(newtmp));
-	tmp = free_and_join(tmp, newtmp);
-	tmp = free_and_join(tmp, buff);
-	return (tmp);
+	return (varparse(tmp, j, i, mini));
 }
 
-int	heredoc(char *limiter)
+char	*wait_line(char *line, t_mini *mini)
+{
+	int i;
+
+	i = -1;
+	while (line[++i] != 0)
+		if (line[i] == '$' && (ft_isalnum(line[i + 1]) || line[i + 1] == '?'))
+			line = var_heredoc(line, mini);
+	return(line);
+}
+
+int	heredoc(char *limiter, t_mini *mini)
 {
 	int		heredoc[2];
 	char	*line;
 	char	*tmp;
 
 	if (pipe(heredoc) == -1)
-		return(-1);
+		return (-1);
 	while (1)
 	{
 		line = readline("> ");
 		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
 			break ;
 		if (ft_strchr(line, '$'))
-			var_heredoc(line);
+			line = wait_line(line, mini);
 		tmp = ft_strjoin(line, "\n");
 		if (!tmp)
 			return (perror("Malloc"), 1);
@@ -65,3 +96,4 @@ int	heredoc(char *limiter)
 	close(heredoc[1]);
 	return (heredoc[0]);
 }
+

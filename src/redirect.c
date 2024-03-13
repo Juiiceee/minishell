@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:18:05 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 00:16:01 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:37:12 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	input(t_mini *mini, t_exec *exec)
 		return (0);
 	else if (exec->is_fdin == 3)
 	{
-		fd = heredoc(exec->in[1]);
+		fd = heredoc(exec->in[1], mini);
 		if (fd < 0)
 			return (mini->exitstatus = 1, 0);
 		dup2(fd, 0);
@@ -64,7 +64,7 @@ void parse_redirect_in(t_token *tmp, t_exec *newlst)
 			if (newlst->fdin)
 				close(newlst->fdin);
 			newlst->is_fdin = 2;
-			return ;
+			return ((void) printf("infile error :%s\n", tmp->global[1]));
 		}
 		else 
 		{
@@ -94,7 +94,7 @@ void parse_redirect_out(t_token *tmp, t_exec *newlst)
 		newlst->is_fdout = 2;
 		if (newlst->fdout)
 			close(newlst->fdout);
-		return ;
+		return ((void) printf("outfile error :%s\n", tmp->global[1]));
 	}
 	else 
 	{

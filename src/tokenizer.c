@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 11:36:50 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:54:37 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_token	*ft_tokenizer(char *input, t_mini *mini)
 			while (!isspace(input[i]) && input[i] != '\0' && input[i] != '<'
 				&& mini->tabcmd[j][0] != '|' && input[i] != '>' && input[i] != '|')
 				mini->tabcmd[j] = free_and_join(mini->tabcmd[j],
-						ft_select_token(input, &i, mini, &j));
+					ft_select_token(input, &i, mini, &j));
 			while (mini->tabcmd[j])
 				j++;
 		}
