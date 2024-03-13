@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 09:40:00 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/13 11:05:10 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int	parsingcommand(t_exec *cmd, t_mini *mini)
 	i = 0;
 	status = 0;
 	if (ft_strchr(cmd->cmd[0], '/') != NULL)
+	{
 		if (what_is_error(cmd, mini, &status))
 			return (free_child(mini), exit(status), 0);
+		else
+			return(0);
+	}
 	envpath = ft_split(pathenv(mini, "PATH"), ':');
 	while (envpath && envpath[i])
 	{
