@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/13 00:15:37 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:26:19 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ void			parse_redirect_out(t_token *tmp, t_exec *newlst);
 void			parse_redirect_in(t_token *tmp, t_exec *newlst);
 
 // utils2.c
+char			*sub_and_free(char *old, int from, int to);
 char			*free_old_and_join(char *old, char *new);
 char			*free_new_and_join(char *old, char *new);
 char			*cut_first_char(char *old);

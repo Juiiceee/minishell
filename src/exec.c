@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 11:05:10 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:15:17 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	ft_parse_exec(t_mini *mini)
 
 	tmp = mini->lst;
 	mini->exe = NULL;
-	if (!tmp)
-		return ;
 	if (tmp->data_type == PIPE || tmp->data_type == DONT_EXIST)
 		return (ft_tokclear_str(&mini->lst));
 	while (tmp)

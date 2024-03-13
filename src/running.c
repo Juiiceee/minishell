@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 23:49:53 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:15:47 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	createprename(t_mini *mini)
 int	checkisdir(t_mini *mini)
 {
 	if (!mini->lst)
-		return (0);
+		return (1);
 	mini->dossier.st_mode = 0;
 	if (!mini->lst->next)
 	{
@@ -61,14 +61,12 @@ int	insiderunning(t_mini *mini)
 		return (1);
 	if (ft_strlen(mini->input) == 0)
 		return (free(mini->input), 0);
+	add_history(mini->input);
 	mini->lst = ft_tokenizer(mini->input, mini);
-	if (ft_strlen(mini->input) != 0)
-		add_history(mini->input);
 	if (checkisdir(mini))
-		return (0);
+		return (free(mini->input), 0);
 	ft_parse_exec(mini);
-	if (mini->exe)
-		ft_exec(mini);
+	ft_exec(mini);
 	dup2(mini->clear_fd[0], 0);
 	dup2(mini->clear_fd[1], 1);
 	return (0);

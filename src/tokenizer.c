@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 23:42:42 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:36:50 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*split_env(char *old, char **tmp, int *j)
 	char	**spli;
 	int		i;
 	int		tmp_j;
+	char	*buff;
 
 	tmp_j = *j;
 	tmp_j += 1;
@@ -58,7 +59,10 @@ char	*split_env(char *old, char **tmp, int *j)
 		tmp_j = tmp_j + 1;
 		i++;
 	}
-	return (ft_strdup(spli[0]));
+	buff = (ft_strdup(spli[0]));
+	free(old);
+	ft_free(spli);
+	return (buff);
 }
 
 t_token	*listing_token(char **tmp)

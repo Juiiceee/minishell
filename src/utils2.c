@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:47:47 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/03/13 11:26:07 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ char	*cut_first_char(char *old)
 	char	*tmp;
 
 	tmp = ft_substr(old, 1, ft_strlen(old) - 1);
+	free(old);
+	return (tmp);
+}
+
+char	*sub_and_free(char *old, int from, int to)
+{
+	char	*tmp;
+
+	tmp = ft_substr(old, from, to);
 	free(old);
 	return (tmp);
 }
