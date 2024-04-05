@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/13 14:13:38 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:07:52 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int				ft_lstsizestrchr(t_list *lst, char c);
 // free.c
 void			freetab(char **tab);
 void			freelst(t_list *lst);
+void			recosigint(int sig);
 void			free_list_element(t_list **lst, t_list *element);
 
 // env.c
@@ -139,6 +140,7 @@ char			*punct_parse(char *input, int *i, t_mini *mini, int *j);
 char			*free_and_join(char *old, char *new);
 char			**ft_subtab(char **tab, int start, int len);
 int				ft_tablen(char **tab);
+int				ft_strcmp(char *s1, char *s2);
 
 // tokenizer.c
 t_token			*ft_tokenizer(char *input, t_mini *mini);

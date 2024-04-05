@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:32:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/02 14:44:32 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ char	*pathenv(t_mini *mini, char *find)
 		return (NULL);
 	while (check && st->next != NULL)
 	{
-		check = ft_strncmp(find, (char *)st->content, ft_strlen(find));
+		check = ft_strcmp(find, (char *)st->content);
 		if (check == 0)
 			break ;
 		st = st->next;
 	}
-	check = ft_strncmp(find, (char *)st->content, ft_strlen(find));
+	check = ft_strcmp(find, (char *)st->content);
 	if (check == 0)
 		return ((char *)st->content + (ft_strlen(find) + 1));
 	return (NULL);

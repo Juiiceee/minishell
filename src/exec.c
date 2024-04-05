@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 15:24:35 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:47:09 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,6 @@ void	ft_parse_exec(t_mini *mini)
 	while (tmp)
 	{
 		exe_lstadd_back(&mini->exe, exe_lstnew(tmp));
-		while (tmp->data_type != PIPE && tmp->next != NULL)
-		{
-			if (tmp->data_type == DONT_EXIST)
-				return (mini->exe = NULL, (void) NULL);
-			tmp = tmp->next;
-		}
 		if (tmp->data_type == PIPE)
 		{
 			ft_free(tmp->global);
@@ -97,6 +91,8 @@ void	wait_child(t_mini *mini)
 
 	i = 0;
 	mini_status_temp = mini->exitstatus;
+	status = 0;
+	signal(SIGINT, SIG_IGN);
 	while (i < mini->exe_size)
 	{
 		if (mini->pid[i])
@@ -107,6 +103,16 @@ void	wait_child(t_mini *mini)
 		else
 			mini->exitstatus = mini_status_temp;
 		i++;
+	}
+	signal(SIGINT, recosigint);
+	if (WIFEXITED(status))
+		mini->exitstatus = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		mini->exitstatus = WTERMSIG(status);
+		if (mini->exitstatus != 0x83)
+			mini->exitstatus += 0b10000000;
+		printf("\n");
 	}
 }
 

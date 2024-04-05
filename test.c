@@ -1,34 +1,19 @@
-#include "include/minishell.h"
+#include <stdio.h>
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <unistd.h>
-
-int	checkisdir(t_mini *mini)
+int	ft_strcmp(char *s1, char *s2)
 {
-	mini->dossier.st_mode = 0;
-	if (!mini->lst->next)
+	int	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
 	{
-		if (!ft_strncmp(mini->lst->global[0], "./", 2)
-			|| !ft_strncmp(mini->lst->global[0], "/", 1))
-		{
-			lstat(mini->lst->global[0], &mini->dossier);
-			if (S_ISDIR(mini->dossier.st_mode))
-				return (printf("%s: Is a directory\n", mini->lst->global[0]),
-					mini->exitstatus = 126, 1);
-		}
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
 	return (0);
 }
 
-int main(int argc, char **argv, char **envp)
-{
-	t_mini	mini;
-	char sa[] = "valgrind";
-
-	lstat(sa, &mini.dossier);
-	if (S_ISDIR(mini.dossier.st_mode))
-		return (printf("%s: Is a directory\n", sa),
-			mini.exitstatus = 126, 1);
+int main(int ac, char **av) {
+	printf("%d\n", ft_strcmp(av[1], av[2]));
 }

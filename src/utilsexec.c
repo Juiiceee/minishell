@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 23:43:04 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:58:25 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	utilsparsingcom(char **envpath, int *i, t_exec *cmd)
 
 void	utilsexec_node(t_exec *cmd, t_mini *mini)
 {
+	signal(SIGQUIT, SIG_DFL);
 	if (!parsingcommand(cmd, mini))
 		execve(cmd->cmd[0], cmd->cmd, mini->tabenv);
 	ft_printerr("%s: command not found\n", cmd->cmd[0]);

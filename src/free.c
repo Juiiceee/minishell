@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:30:29 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/02 14:17:19 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	free_list_element(t_list **lst, t_list *element)
 	if (*lst == element)
 	{
 		*lst = element->next;
+		free(element->content);
 		free(element);
 		return ;
 	}
@@ -53,6 +54,7 @@ void	free_list_element(t_list **lst, t_list *element)
 	if (prev->next == element)
 	{
 		prev->next = element->next;
+		free(element->content);
 		free(element);
 	}
 }

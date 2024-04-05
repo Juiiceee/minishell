@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 11:57:38 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:59:35 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@ char *special_dolar_sign(char *input, t_mini *mini, int *i)
 	if (isspace(input[1]) || !input[1])
 		return (ft_strdup("$"));
 	if (input[1] == '?')
-		return (*i = *i + 1, free_and_join(ft_strdup("$"),
+		return (*i = *i + 2, free_and_join(ft_strdup("$"),
 		ft_itoa(mini->exitstatus)));
-	if (input[1] == '$')
-		return (*i = *i + 1, free_and_join(ft_strdup("$"),
-		ft_strdup(pathenv(mini, "SYSTEMD_EXEC_PID"))));
 	return (NULL);
 }
 
@@ -58,14 +55,13 @@ char	*dollar_sign(char *input, int *i, t_mini *mini)
 	char 	*swap;
 
 	j = 1;
-	*i += 1;
-	if (isspace(input[1]) || !input[1] || input[1] == '?' || input[1] == '$')
+	if (isspace(input[1]) || !input[1] || input[1] == '?')
 		return(special_dolar_sign(input, mini, i));
-	while ((isalpha(input[j]) && input[j]))
+	while ((ft_isprint(input[j]) && input[j]))
 		j++;
 	tmp = ft_substr(input, 1, j - 1);
-	*i += ft_strlen(tmp);
-	if (!pathenv(mini, tmp))
+	*i += j;
+	if (!tmp[0] || !pathenv(mini, tmp))
 		return (free(tmp), NULL);
 	else
 	{

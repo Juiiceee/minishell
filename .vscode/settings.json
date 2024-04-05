@@ -4,6 +4,9 @@
 		"minishell.h": "c",
 		"stddef.h": "c",
 		"stdio.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"signal.h": "c",
+		"pthreadtypes.h": "c",
+		"sigthread.h": "c"
 	}
 }
