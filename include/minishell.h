@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/20 16:07:52 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:16:40 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,5 +238,9 @@ void			free_child(t_mini *mini);
 int				utilsparsingcom(char **envpath, int *i, t_exec *cmd);
 void			utilsexec_node(t_exec *cmd, t_mini *mini);
 int 			utilsft_exec(t_mini *mini, t_exec *tmp_exe);
+
+// validation.c
+int 			input_validation(t_mini *mini);
+void			free_inpt_error(t_mini *mini);
 
 #endif

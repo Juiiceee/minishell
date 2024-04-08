@@ -6,11 +6,13 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/13 14:19:03 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:30:07 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_signalexit;
 
 char	*varparse(char *tmp, int j, int i, t_mini *mini)
 {
@@ -81,7 +83,7 @@ int	heredoc(char *limiter, t_mini *mini)
 	while (1)
 	{
 		line = readline("> ");
-		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
+		if (!ft_strncmp(line, limiter, ft_strlen(limiter)) || g_signalexit == 130)
 			break ;
 		if (ft_strchr(line, '$'))
 			line = wait_line(line, mini);

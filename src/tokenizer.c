@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/05 13:37:19 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:05:19 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_token	*listing_token(char **tmp)
 			new = tokenizing_pipe(tmp, &i);
 		else
 			new = tokenizing_other(tmp, &i);
+		new->next = NULL;
 		if (lst)
 			tok_lstadd_back(&lst, new);
 		else
