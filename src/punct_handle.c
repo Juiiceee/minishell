@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/02 14:59:35 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:34:54 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*redirect_sign(char *input, int *i)
 char *special_dolar_sign(char *input, t_mini *mini, int *i)
 {
 	if (isspace(input[1]) || !input[1])
-		return (ft_strdup("$"));
+		return (*i = *i + 1, ft_strdup("$"));
 	if (input[1] == '?')
 		return (*i = *i + 2, free_and_join(ft_strdup("$"),
 		ft_itoa(mini->exitstatus)));
