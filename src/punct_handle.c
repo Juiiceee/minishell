@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:50:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/08 16:34:54 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:51:06 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*redirect_sign(char *input, int *i)
 
 char *special_dolar_sign(char *input, t_mini *mini, int *i)
 {
-	if (isspace(input[1]) || !input[1])
+	if (!ft_isalnum(input[1]) || !input[1])
 		return (*i = *i + 1, ft_strdup("$"));
 	if (input[1] == '?')
 		return (*i = *i + 2, free_and_join(ft_strdup("$"),
@@ -55,9 +55,9 @@ char	*dollar_sign(char *input, int *i, t_mini *mini)
 	char 	*swap;
 
 	j = 1;
-	if (isspace(input[1]) || !input[1] || input[1] == '?')
+	if (!ft_isalnum(input[1]) || !input[1])
 		return(special_dolar_sign(input, mini, i));
-	while ((ft_isprint(input[j]) && input[j]))
+	while ((ft_isalnum(input[j]) || input[j] == '_') && input[j])
 		j++;
 	tmp = ft_substr(input, 1, j - 1);
 	*i += j;
