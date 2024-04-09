@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:42:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/09 15:15:15 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:50:28 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void free_inpt_error(t_mini *mini)
 {
-		free(mini->input);
-		ft_tokclean(&mini->lst);
+	free(mini->input);
+	ft_tokclear_str(&mini->lst);
 }
 
 int input_validation(t_mini *mini)
