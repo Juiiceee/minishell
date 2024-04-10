@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 15:38:39 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 00:19:29 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	addvaluelst(t_mini *mini, char *find, char *new)
 void	export(t_mini *mini, char *find, char *new)
 {
 	int		check;
-	char	*tmp;
 	t_list	*st;
 
 	st = mini->env;
@@ -59,20 +58,18 @@ void	export(t_mini *mini, char *find, char *new)
 		addvaluelst(mini, find, new);
 		return ;
 	}
-	tmp = ft_strjoin(find, "=");
 	while (check && st->next != NULL)
 	{
-		check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
+		check = ft_strcmp(find, (char *)st->content);
 		if (check == 0)
 			break ;
 		st = st->next;
 	}
-	check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
+	check = ft_strcmp(find, (char *)st->content);
 	if (check == 0)
 		modifievaluelst(&st, find, new);
 	else
 		addvaluelst(mini, find, new);
-	return (free(tmp));
 }
 
 int	ft_checkexport(char **cmd, t_mini *mini, size_t j)

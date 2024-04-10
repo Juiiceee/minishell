@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   escape.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:35:23 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/10 14:25:51 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 00:32:29 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	escape_redirect(char *input, int *i)
 	return (1);
 }
 
-int	escape_dolar(char *input, int *i)
+int	escape_dolar(char *input, int *i, t_mini *mini)
 {
 	int		j;
 	char	*tmp;
@@ -32,7 +32,7 @@ int	escape_dolar(char *input, int *i)
 		j++;
 	tmp = ft_substr(input, *i + 1, j - *i - 1);
 	*i = j;
-	var = getenv(tmp);
+	var = pathenv(mini, tmp);
 	if (!var)
 		return (free(tmp), 1);
 	free (tmp);
@@ -61,13 +61,13 @@ int	escape_quote(char *input, int *i)
 	return (1);
 }
 
-int	escape_word(char *input, int *i)
+int	escape_word(char *input, int *i, t_mini *mini)
 {
 	int	j;
 
 	j = *i;
 	if (input[j] == '$')
-		return (escape_dolar(input, i));
+		return (escape_dolar(input, i, mini));
 	while (input[j])
 	{
 		if (input[j] == '|' || input[j] == '<'

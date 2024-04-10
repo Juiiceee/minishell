@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_exe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 00:10:12 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ void	init_new_null(t_exec *new)
 
 int	is_a_builtin(char *cmd)
 {
-	if (!ft_strncmp(cmd, "echo", 4))
+	if (!ft_strcmp(cmd, "echo"))
 		return (1);
-	if (!ft_strncmp(cmd, "cd", 2))
+	if (!ft_strcmp(cmd, "cd"))
 		return (1);
-	if (!ft_strncmp(cmd, "pwd", 3))
+	if (!ft_strcmp(cmd, "pwd"))
 		return (1);
-	if (!ft_strncmp(cmd, "export", 6))
+	if (!ft_strcmp(cmd, "export"))
 		return (1);
-	if (!ft_strncmp(cmd, "unset", 5))
+	if (!ft_strcmp(cmd, "unset"))
 		return (1);
-	if (!ft_strncmp(cmd, "env", 3))
+	if (!ft_strcmp(cmd, "env"))
 		return (1);
-	if (!ft_strncmp(cmd, "exit", 4))
+	if (!ft_strcmp(cmd, "exit"))
 		return (1);
-	if (!ft_strncmp(cmd, "meow", 4))
+	if (!ft_strcmp(cmd, "meow"))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:30:29 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/02 14:17:19 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 23:57:06 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,17 @@ void	free_list_element(t_list **lst, t_list *element)
 		free(element->content);
 		free(element);
 	}
+}
+
+void child_clean_exit(t_mini *mini, int ext_code)
+{
+	free_child(mini);
+	exit(ext_code);
+}
+
+void clean_for_exit(t_mini *mini, int ext_code)
+{
+	closepipe(mini);
+	free_child(mini);
+	exit(ext_code);
 }
