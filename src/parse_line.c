@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/10 11:52:16 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 15:57:22 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*dquote_parse(char *input, int *index, t_mini *mini)
 		if (input[i] == '"')
 			break ;
 	if (input[i] == '\0')
-		return (*index = *index + i, ft_printerr("Dquote is badly closed, followed string as been voided : %s\n", input), NULL);
+		return (*index = *index + i, printexe(4, input), NULL);
 	if (*index != 0)
 	{
 		if (isspace(input[-1]))
@@ -128,7 +128,7 @@ char	*squote_parse(char *input, int *index)
 	if (input[i] == '\0')
 	{
 		*index = *index + i;
-		ft_printerr("Squote is badly closed, followed string as been voided : %s\n", input);
+		printexe(5, input);
 		return (NULL);
 	}
 	if (*index != 0)

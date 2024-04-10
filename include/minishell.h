@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 15:35:13 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 16:31:23 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void			exportvalueseul(t_mini *mini, char *find);
 void			freesub(t_mini *mini, char **cmd, size_t j, size_t	i);
 int				ft_alphaunderscore(char c);
 void			printexe(int i, char *str);
+void			printflu(int i, char *str);
 
 // tokenizing.c
 t_token			*tokenizing_redirect(char **tmp, int *i);

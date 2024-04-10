@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:19:46 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 15:44:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 16:34:27 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,35 @@ void	printexe(int i, char *str)
 			ft_putstr_fd("': not a valid identifier", 2), free(str));
 	else if (i == 2)
 		return (ft_putstr_fd("exit: ", 2), ft_putstr_fd(str, 2),
-			ft_putstr_fd(": numeric argument required\n", 2), free(str));
+			ft_putstr_fd(": numeric argument required\n", 2));
+	else if (i == 3)
+		return (ft_putstr_fd("cd: ", 2), ft_putstr_fd(str, 2),
+			ft_putstr_fd(": No such file or directory\n", 2));
+	else if (i == 4)
+		return (ft_putstr_fd("Dquote is badly closed: ", 2),
+			ft_putstr_fd(str, 2), ft_putstr_fd("\n", 2));
+	else if (i == 5)
+		return (ft_putstr_fd("Squote is badly closed: ", 2),
+			ft_putstr_fd(str, 2), ft_putstr_fd("\n", 2));
+	else if (i == 6)
+		return (ft_putstr_fd("infile error :", 2),
+			ft_putstr_fd(str, 2), ft_putstr_fd("\n", 2));
+	else if (i == 7)
+		return (ft_putstr_fd("outfile error :", 2),
+			ft_putstr_fd(str, 2), ft_putstr_fd("\n", 2));
+	else if (i == 8)
+		return (ft_putstr_fd(str, 2), ft_putstr_fd(": Is a directory\n", 2));
+}
+
+void	printflu(int i, char *str)
+{
+	if (i == 9)
+		return (ft_putstr_fd(str, 2),
+			ft_putstr_fd(": No such file or directory\n", 2));
+	else if (i == 10)
+		return (ft_putstr_fd(str, 2),
+			ft_putstr_fd(": Permission denied\n", 2));
+	else if (i == 11)
+		return (ft_putstr_fd(str, 2),
+			ft_putstr_fd(": command not found\n", 2));
 }

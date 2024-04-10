@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:29:47 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 11:46:41 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 15:50:46 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	execcd(t_mini *mini, char *path)
 	{
 		mini->exitstatus = 1;
 		free(pwd);
-		return ((void)ft_printerr("cd: %s: No such file or directory\n",
-				path), 1);
+		return (printexe(3, path), 1);
 	}
 	export(mini, "OLDPWD", pwd);
 	free(pwd);

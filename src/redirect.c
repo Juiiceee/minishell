@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:18:05 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/10 11:53:17 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 16:02:02 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	parse_redirect_in(t_token *tmp, t_exec *newlst)
 			if (newlst->fdin)
 				close(newlst->fdin);
 			newlst->is_fdin = 2;
-			return ((void) printf("infile error :%s\n", tmp->global[1]));
+			return (printexe(6, tmp->global[1]));
 		}
 		else
 		{
@@ -93,7 +93,7 @@ void	parse_redirect_out(t_token *tmp, t_exec *newlst)
 		newlst->is_fdout = 2;
 		if (newlst->fdout)
 			close(newlst->fdout);
-		return ((void) printf("outfile error :%s\n", tmp->global[1]));
+		return (printexe(7, tmp->global[1]));
 	}
 	else
 	{

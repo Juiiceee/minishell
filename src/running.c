@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   running.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/09 14:28:51 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:13:02 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	checkisdir(t_mini *mini)
 		{
 			lstat(mini->lst->global[0], &mini->dossier);
 			if (S_ISDIR(mini->dossier.st_mode))
-				return (ft_printerr("%s: Is a directory\n",
-						mini->lst->global[0]), mini->exitstatus = 126, 1);
+				return (printexe(8, mini->lst->global[0]),
+					mini->exitstatus = 126, 1);
 		}
 	}
 	return (0);
