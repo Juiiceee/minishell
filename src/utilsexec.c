@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsexec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/20 14:58:25 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:51:21 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 int	what_is_error(t_exec *cmd, t_mini *mini, int *status)
 {
-	if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && access(cmd->cmd[0], F_OK))
+	if ((cmd->cmd[0][0] == '/'
+		|| cmd->cmd[0][0] == '.') && access(cmd->cmd[0], F_OK))
 	{
 		ft_printerr("%s: No such file or directory\n", cmd->cmd[0]);
-		return(*status = 127, 1);
+		return (*status = 127, 1);
 	}
-	else if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && checkisdir(mini))
+	else if ((cmd->cmd[0][0] == '/'
+		|| cmd->cmd[0][0] == '.') && checkisdir(mini))
 	{
 		ft_printerr("%s: Is a directory\n", cmd->cmd[0]);
-		return(*status = 126, 1);
+		return (*status = 126, 1);
 	}
-	else if ((cmd->cmd[0][0] == '/' || cmd->cmd[0][0] == '.') && (access(cmd->cmd[0], X_OK) < 0))
+	else if ((cmd->cmd[0][0] == '/'
+		|| cmd->cmd[0][0] == '.') && (access(cmd->cmd[0], X_OK) < 0))
 	{
 		ft_printerr("%s: Permission denied\n", cmd->cmd[0]);
-		return(*status = 126, 1);
+		return (*status = 126, 1);
 	}
 	return (0);
 }
 
-void free_child(t_mini *mini)
+void	free_child(t_mini *mini)
 {
 	ft_tokclean(&mini->lst);
 	ft_free(mini->tabenv);

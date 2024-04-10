@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/08 17:34:06 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:52:48 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	parsingcommand(t_exec *cmd, t_mini *mini)
 {
 	char	**envpath;
 	int		i;
-	int 	status;
+	int		status;
 
 	i = 0;
 	status = 0;
@@ -25,7 +25,7 @@ int	parsingcommand(t_exec *cmd, t_mini *mini)
 		if (what_is_error(cmd, mini, &status))
 			return (free_child(mini), exit(status), 0);
 		else
-			return(0);
+			return (0);
 	}
 	envpath = ft_split(pathenv(mini, "PATH"), ':');
 	while (envpath && envpath[i])
@@ -63,11 +63,10 @@ void	ft_parse_exec(t_mini *mini)
 			else if (!tmp->next)
 				break ;
 		}
-		else 
+		else
 			break ;
 	}
 }
-
 
 int	exec_node(t_exec *cmd, t_mini *mini)
 {
@@ -148,5 +147,5 @@ void	ft_exec(t_mini *mini)
 	}
 	return (closepipe(mini), wait_child(mini), ft_execlear(&mini->exe,
 			*ft_free), free(mini->input), free(mini->pid),
-				ft_tokclean(&mini->lst));
+		ft_tokclean(&mini->lst));
 }

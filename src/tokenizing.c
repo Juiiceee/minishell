@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:00:02 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/09 13:55:50 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:50:39 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char **redirect_split(char **tmp, int *i, int j)
+char	**redirect_split(char **tmp, int *i, int j)
 {
-	char **buff;
-	
+	char	**buff;
+
 	buff = malloc((sizeof (char *)) * 3);
 	if (!buff)
 		return (NULL);
 	buff[0] = ft_substr(tmp[*i], 0, j);
 	buff[1] = ft_substr(tmp[*i], j, ft_strlen(tmp[*i]) - j);
 	buff[2] = 0;
-	return(buff);
+	return (buff);
 }
 
 t_token	*tokenizing_redirect(char **tmp, int *i)

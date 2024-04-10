@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:33 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/02 14:12:08 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:53:44 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	recoenv(t_mini *mini, char **argv)
 		if (!tmp)
 			return (1);
 		ft_lstadd_back(&mini->env, ft_lstnew(tmp));
-		//free(tmp);
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/08 12:30:07 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:44:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ char	*var_heredoc(char *tmp, t_mini *mini)
 
 char	*wait_line(char *line, t_mini *mini)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i] != 0)
 		if (line[i] == '$' && (ft_isalnum(line[i + 1]) || line[i + 1] == '?'))
 			line = var_heredoc(line, mini);
-	return(line);
+	return (line);
 }
 
 int	heredoc(char *limiter, t_mini *mini)
@@ -83,7 +83,8 @@ int	heredoc(char *limiter, t_mini *mini)
 	while (1)
 	{
 		line = readline("> ");
-		if (!ft_strncmp(line, limiter, ft_strlen(limiter)) || g_signalexit == 130)
+		if (!ft_strncmp(line, limiter, ft_strlen(limiter))
+			|| g_signalexit == 130)
 			break ;
 		if (ft_strchr(line, '$'))
 			line = wait_line(line, mini);
@@ -98,4 +99,3 @@ int	heredoc(char *limiter, t_mini *mini)
 	close(heredoc[1]);
 	return (heredoc[0]);
 }
-

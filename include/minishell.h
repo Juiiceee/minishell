@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/08 16:16:40 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:54:18 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,10 +237,10 @@ int				what_is_error(t_exec *cmd, t_mini *mini, int *status);
 void			free_child(t_mini *mini);
 int				utilsparsingcom(char **envpath, int *i, t_exec *cmd);
 void			utilsexec_node(t_exec *cmd, t_mini *mini);
-int 			utilsft_exec(t_mini *mini, t_exec *tmp_exe);
+int				utilsft_exec(t_mini *mini, t_exec *tmp_exe);
 
 // validation.c
-int 			input_validation(t_mini *mini);
+int				input_validation(t_mini *mini);
 void			free_inpt_error(t_mini *mini);
 
 #endif

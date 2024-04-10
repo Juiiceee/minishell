@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:18:05 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 14:37:12 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:53:17 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	input(t_mini *mini, t_exec *exec)
 int	output(t_mini *mini, t_exec *exec)
 {
 	(void) mini;
-	
 	if (exec->is_fdout == 1)
 	{
 		dup2(exec->fdout, 1);
@@ -48,15 +47,15 @@ int	output(t_mini *mini, t_exec *exec)
 	return (1);
 }
 
-void parse_redirect_in(t_token *tmp, t_exec *newlst)
+void	parse_redirect_in(t_token *tmp, t_exec *newlst)
 {
-	int fd;
-	
+	int	fd;
+
 	newlst->in = tmp->global;
 	if (ft_strlen(tmp->global[0]) == 2)
 		newlst->is_fdin = 3;
 	else if (ft_strlen(tmp->global[0]) == 1 && newlst->is_fdin != 2
-			&& newlst->is_fdout != 2)
+		&& newlst->is_fdout != 2)
 	{
 		fd = open(tmp->global[1], O_RDONLY);
 		if (fd < 0)
@@ -66,7 +65,7 @@ void parse_redirect_in(t_token *tmp, t_exec *newlst)
 			newlst->is_fdin = 2;
 			return ((void) printf("infile error :%s\n", tmp->global[1]));
 		}
-		else 
+		else
 		{
 			newlst->is_fdin = 1;
 			if (newlst->fdin)
@@ -76,15 +75,15 @@ void parse_redirect_in(t_token *tmp, t_exec *newlst)
 	}
 }
 
-void parse_redirect_out(t_token *tmp, t_exec *newlst)
+void	parse_redirect_out(t_token *tmp, t_exec *newlst)
 {
-	int fd;
+	int	fd;
 
 	newlst->out = tmp->global;
-	if (ft_strlen(tmp->global[0]) == 1 && newlst->is_fdout != 2 
+	if (ft_strlen(tmp->global[0]) == 1 && newlst->is_fdout != 2
 		&& newlst->is_fdin != 2)
 		fd = open(tmp->global[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (ft_strlen(tmp->global[0]) == 2 && newlst->is_fdout != 2 
+	else if (ft_strlen(tmp->global[0]) == 2 && newlst->is_fdout != 2
 		&& newlst->is_fdin != 2)
 		fd = open(tmp->global[1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
@@ -96,7 +95,7 @@ void parse_redirect_out(t_token *tmp, t_exec *newlst)
 			close(newlst->fdout);
 		return ((void) printf("outfile error :%s\n", tmp->global[1]));
 	}
-	else 
+	else
 	{
 		newlst->is_fdout = 1;
 		if (newlst->fdout)

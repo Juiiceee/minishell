@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/05 13:25:12 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:52:16 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*dquote_parse(char *input, int *index, t_mini *mini)
 		if (input[i] == '"')
 			break ;
 	if (input[i] == '\0')
-		return(*index = *index + i, ft_printerr("Dquote is badly closed, followed string as been voided : %s\n", input), NULL);
+		return (*index = *index + i, ft_printerr("Dquote is badly closed, followed string as been voided : %s\n", input), NULL);
 	if (*index != 0)
 	{
 		if (isspace(input[-1]))
@@ -110,10 +110,10 @@ char	*dquote_parse(char *input, int *index, t_mini *mini)
 	else
 		tmp = ft_substr(input, 0, i);
 	while (input[++j] != 0 && tmp[j] != 0)
-		if (input[j] == '$' && (ft_isalnum(input[j + 1]) || input[j + 1] == '?'))
+		if (input[j] == '$'
+			&& (ft_isalnum(input[j + 1]) || input[j + 1] == '?'))
 			tmp = var_dquote(tmp, mini, index);
-	*index = *index + i + 1;
-	return (tmp);
+	return (*index = *index + i + 1, tmp);
 }
 
 char	*squote_parse(char *input, int *index)
@@ -126,7 +126,11 @@ char	*squote_parse(char *input, int *index)
 		if (input[i] == '\'')
 			break ;
 	if (input[i] == '\0')
-		return(*index = *index + i, ft_printerr("Squote is badly closed, followed string as been voided : %s\n", input), NULL);
+	{
+		*index = *index + i;
+		ft_printerr("Squote is badly closed, followed string as been voided : %s\n", input);
+		return (NULL);
+	}
 	if (*index != 0)
 	{
 		if (isspace(input[-1]))
