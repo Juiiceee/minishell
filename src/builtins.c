@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 15:05:03 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 15:45:36 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_cd(char **cmd, t_mini *mini)
 	if (tablength(cmd) > 2)
 	{
 		mini->exitstatus = 1;
-		return ((void)ft_printerr("cd: too many arguments\n"));
+		return ((void)write(2, "cd: too many arguments\n", 24));
 	}
 	else if (tablength(cmd) == 1)
 	{
@@ -84,7 +84,7 @@ void	ft_exit(t_mini *mini, char **cmd)
 	if (tablength(cmd) > 2)
 	{
 		mini->exitstatus = 1;
-		return ((void)ft_printerr("cd: too many arguments\n"));
+		return ((void)write(2, "exit: too many arguments\n", 26));
 	}
 	printf("exit\n");
 	ft_envclean(&mini->env);
@@ -96,7 +96,7 @@ void	ft_exit(t_mini *mini, char **cmd)
 	{
 		if (!ft_isdigit(cmd[1][i]))
 		{
-			ft_printerr("exit: %s: numeric argument required\n", cmd[1]);
+			printexe(2, cmd[1]);
 			exit(2);
 		}
 		i++;

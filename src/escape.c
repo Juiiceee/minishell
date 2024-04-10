@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:35:23 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/10 11:42:51 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 14:25:51 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,7 @@ int	escape_quote(char *input, int *i)
 			break ;
 		}
 	}
-	while (ft_isalnum(input[j]))
-		j++;
-	if (input[j] == '\'' || input[j] == '\"')
-	{
-		*i = j;
-		escape_quote(input, i);
-	}
-	else
-		*i = j;
+	*i = j;
 	return (1);
 }
 
