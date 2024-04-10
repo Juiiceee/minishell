@@ -6,11 +6,11 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:42:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/10 11:53:30 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 16:42:51 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 void	free_inpt_error(t_mini *mini)
 {
