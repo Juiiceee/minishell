@@ -13,14 +13,12 @@ CPPFLAGS		:= -MMD -MP -I include
 RM				:= rm -rf
 DIR_DUP			= mkdir -p $(@D)
 LIBFT			:= libft
-PRINTF			:= printf
 
 all		:	$(NAME)
 
 $(NAME) :	$(OBJS)
-	@make -C $(PRINTF) --no-print-directory
 	@make -C $(LIBFT) --no-print-directory
-	$(CC) $(OBJS) $(PRINTF)/libftprinterr.a $(LIBFT)/libft.a -lreadline -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT)/libft.a -lreadline -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
@@ -31,15 +29,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 clean	:
 	$(RM) $(OBJ_DIR)
 	make -C $(LIBFT) clean --no-print-directory
-	make -C $(PRINTF) clean --no-print-directory
 
 fclean	:	clean
 	$(RM) $(NAME)
 	make -C $(LIBFT) fclean --no-print-directory
-	make -C $(PRINTF) fclean --no-print-directory
 
 re		:	fclean all
 	make -C $(LIBFT) re --no-print-directory
-	make -C $(PRINTF) re --no-print-directory
 
 .PHONY: all clean fclean re

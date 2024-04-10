@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 16:31:23 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/10 16:36:46 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <signal.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
-# include "../printf/ft_printerr.h"
 
 typedef enum e_type
 {
