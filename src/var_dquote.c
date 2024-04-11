@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_dquote.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:07:22 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 14:24:58 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:02:31 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*exit_code_dquote(t_mini *mini, char *tmp, int i, int j)
 {
 	char	*newtmp;
 	char	*buff;
+
 	buff = ft_substr(tmp, j + 1, ft_strlen(tmp) - (j + 1));
 	tmp = sub_and_free(tmp, 0, i);
 	newtmp = ft_itoa(mini->exitstatus);
