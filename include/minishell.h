@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/11 13:09:15 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 14:34:45 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ int				execcd(t_mini *mini, char *path);
 // parse_line.c
 char			*squote_parse(char *input, int *index);
 char			*dquote_parse(char *input, int *index, t_mini *mini);
-char			*var_dquote(char *tmp, t_mini *mini, int *index);
 char			*str_parse(char *input, int *index);
 char			*punct_parse(char *input, int *i, t_mini *mini, int *j);
 
@@ -252,5 +251,8 @@ void			child_exit_signal(t_mini *mini, int status);
 
 // utilsexit.c
 void			utilsexit(t_mini *mini, char **cmd);
+
+// var_dquote.c
+char			*var_dquote(char *tmp, t_mini *mini, int *index);
 
 #endif
