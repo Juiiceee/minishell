@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 11:56:13 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 13:08:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	*dquote_parse(char *input, int *index, t_mini *mini)
 		return (*index = *index + i, printexe(4, input), NULL);
 	if (*index != 0)
 	{
-		if (isspace(input[-1]))
+		if (ft_isspace(input[-1]))
 			tmp = ft_substr(input, 0, i);
 		else
 			tmp = ft_substr(input, 1, i - 1);
@@ -133,7 +133,7 @@ char	*squote_parse(char *input, int *index)
 	}
 	if (*index != 0)
 	{
-		if (isspace(input[-1]))
+		if (ft_isspace(input[-1]))
 			tmp = ft_substr(input, 0, i);
 		else
 			tmp = ft_substr(input, 1, i - 1);

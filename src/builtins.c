@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/11 00:05:02 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:03:10 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	ft_cd(char **cmd, t_mini *mini)
 {
 	char	*pwd;
 
+	if (mini->exe_size != 1)
+		child_clean_exit(mini, 0);
 	if (tablength(cmd) > 2)
-	{
-		mini->exitstatus = 1;
-		return ((void)write(2, "cd: too many arguments\n", 24));
-	}
+		return (mini->exitstatus = 1,
+			(void)write(2, "cd: too many arguments\n", 24));
 	else if (tablength(cmd) == 1)
 	{
 		pwd = getcwd(NULL, 0);
@@ -80,31 +80,25 @@ void	ft_cd(char **cmd, t_mini *mini)
 
 void	ft_exit(t_mini *mini, char **cmd)
 {
-	int	i;
-
-	i = 1;
-	if (mini->exe_size != 1)
-		child_clean_exit(mini, 0);
 	if (tablength(cmd) > 2)
 	{
-		mini->exitstatus = 1;
-		return ((void)write(2, "exit: too many arguments\n", 26));
+		if (mini->exe_size != 1)
+		{
+			write(2, "exit: too many arguments\n", 26);
+			child_clean_exit(mini, 1);
+		}
+		return (mini->exitstatus = 1,
+			(void)write(2, "exit: too many arguments\n", 26));
 	}
 	printf("exit\n");
 	ft_envclean(&mini->env);
 	if (!cmd[1])
+	{
+		if (mini->exe_size != 1)
+			child_clean_exit(mini, mini->exitstatus);
 		clean_for_exit(mini, mini->exitstatus);
-	if (cmd[1][0] == '+' || cmd[1][0] == '-')
-		while (cmd[1][i])
-		{
-			if (!ft_isdigit(cmd[1][i]))
-			{
-				printexe(2, cmd[1]);
-				exit(2);
-			}
-			i++;
-		}
-	clean_for_exit(mini, ft_atoi(cmd[1]));
+	}
+	utilsexit(mini, cmd);
 }
 
 void	ft_export(char **cmd, t_mini *mini)

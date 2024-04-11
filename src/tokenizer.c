@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 00:30:51 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:08:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	input_size(char *input, t_mini *mini)
 			j += escape_quote(input, &i);
 		else
 			j += escape_word(input, &i, mini);
-		while (isspace(input[i]))
+		while (ft_isspace(input[i]))
 			i++;
 	}
 	return (j);
@@ -117,22 +117,21 @@ t_token	*ft_tokenizer(char *input, t_mini *mini)
 	j = 0;
 	i = 0;
 	inpt_size = input_size(input, mini);
-	printf("%d\n", inpt_size);
 	mini->tabcmd = ft_calloc(sizeof (char *), (inpt_size + 1));
 	while (input[i] != '\0')
 	{
-		if (!isspace(mini->input[i]) && mini->input[i] != '\0')
+		if (!ft_isspace(mini->input[i]) && mini->input[i] != '\0')
 		{
 			mini->tabcmd[j] = ft_select_token(input, &i, mini, &j);
-			while (!isspace(input[i]) && input[i] != '\0' && input[i] != '<'
-				&& input[i] != '>' && input[i] != '|' && mini->tabcmd[j] 
+			while (!ft_isspace(input[i]) && input[i] != '\0' && input[i] != '<'
+				&& input[i] != '>' && input[i] != '|' && mini->tabcmd[j]
 				&& mini->tabcmd[j][0] != '|')
 				mini->tabcmd[j] = free_and_join(mini->tabcmd[j],
 						ft_select_token(input, &i, mini, &j));
-			while (mini->tabcmd[j]  && j < inpt_size)
+			while (mini->tabcmd[j] && j < inpt_size)
 				j++;
 		}
-		if (mini->input[i] != '\0' && isspace(mini->input[i]))
+		if (mini->input[i] != '\0' && ft_isspace(mini->input[i]))
 			i++;
 	}
 	return (listing_token(mini->tabcmd));

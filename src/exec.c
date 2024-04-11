@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/10 11:52:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 12:33:51 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,8 @@ void	wait_child(t_mini *mini)
 			mini->exitstatus = mini_status_temp;
 		i++;
 	}
-	signal(SIGINT, recosigint);
-	if (WIFEXITED(status))
-		mini->exitstatus = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-	{
-		mini->exitstatus = WTERMSIG(status);
-		if (mini->exitstatus != 0x83)
-			mini->exitstatus += 0b10000000;
-		printf("\n");
-	}
+	if (mini->exe_size != 1 || mini->exe->builtin != 1)
+		child_exit_signal(mini, status);
 }
 
 void	ft_exec(t_mini *mini)

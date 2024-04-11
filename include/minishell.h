@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/11 11:56:03 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 13:09:15 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int				tablength(char **tab);
 void			lsttotab(t_mini *mini);
 void			refreshtab(t_mini *mini);
 int				ft_lstsizestrchr(t_list *lst, char c);
+int				ft_isspace(int c);
 
 // free.c
 void			freetab(char **tab);
@@ -245,5 +246,11 @@ int				utilsft_exec(t_mini *mini, t_exec *tmp_exe);
 // validation.c
 int				input_validation(t_mini *mini);
 void			free_inpt_error(t_mini *mini);
+
+// exit_status.c
+void			child_exit_signal(t_mini *mini, int status);
+
+// utilsexit.c
+void			utilsexit(t_mini *mini, char **cmd);
 
 #endif

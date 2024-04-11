@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:49 by lbehr             #+#    #+#             */
-/*   Updated: 2024/03/12 15:16:03 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 13:08:12 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,10 @@ int	ft_lstsizestrchr(t_list *lst, char c)
 		lst = lst->next;
 	}
 	return (count);
+}
+
+int	ft_isspace(int c)
+{
+	return (c == ' ' || c == '\f' || c == '\n'
+		|| c == '\r' || c == '\t' || c == '\v');
 }

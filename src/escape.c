@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   escape.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:35:23 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 00:32:29 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:08:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	escape_word(char *input, int *i, t_mini *mini)
 	{
 		if (input[j] == '|' || input[j] == '<'
 			|| input[j] == '>'
-			|| (isspace(input[j])))
+			|| (ft_isspace(input[j])))
 			break ;
 		if (input[j] == '\'' || input[j] == '\"')
 			escape_quote(input, &j);
