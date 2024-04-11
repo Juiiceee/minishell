@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 16:36:46 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 11:56:03 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ int				ft_lstsizestrchr(t_list *lst, char c);
 // free.c
 void			freetab(char **tab);
 void			freelst(t_list *lst);
-void			recosigint(int sig);
 void			free_list_element(t_list **lst, t_list *element);
+void			child_clean_exit(t_mini *mini, int ext_code);
+void			clean_for_exit(t_mini *mini, int ext_code);
 
 // env.c
 int				recoenv(t_mini *mini, char **argv);
@@ -117,6 +118,7 @@ int				insiderunning(t_mini *mini);
 
 // signal.c
 void			recosignal(void);
+void			recosigint(int sig);
 
 // export.c
 void			modifievaluelst(t_list **st, char *find, char *new);
@@ -183,7 +185,7 @@ int				parsingcommand(t_exec *cmd, t_mini *mini);
 int				exec_node(t_exec *cmd, t_mini *mini);
 
 // escape.c
-int				escape_word(char *input, int *i);
+int				escape_word(char *input, int *i, t_mini *mini);
 int				escape_quote(char *input, int *i);
 int				escape_redirect(char *input, int *i);
 

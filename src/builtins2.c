@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:30:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/12 10:51:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 00:05:25 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_echo(char **cmd, t_mini *mini)
 		printf("\n");
 	mini->exitstatus = 0;
 	if (mini->exe_size != 1)
-		exit(0);
+		child_clean_exit(mini, 0);
 }
 
 void	ft_unset(char **cmd, t_mini *mini)
@@ -57,4 +57,6 @@ void	ft_unset(char **cmd, t_mini *mini)
 	}
 	mini->exitstatus = 0;
 	refreshtab(mini);
+	if (mini->exe_size != 1)
+		child_clean_exit(mini, 0);
 }

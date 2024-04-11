@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/10 15:57:22 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 11:56:13 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ char	*var_dquote(char *tmp, t_mini *mini, int *index)
 	newtmp = ft_substr(tmp, i + 1, j - i - 1);
 	buff = ft_substr(tmp, j, ft_strlen(tmp) - j);
 	tmp = ft_substr(tmp, 0, i);
-	if (!getenv(newtmp))
+	if (!pathenv(mini, newtmp))
 	{
 		tmp = free_and_join(tmp, buff);
 		return (free(newtmp), tmp);
 	}
-	newtmp = ft_strdup(getenv(newtmp));
+	newtmp = ft_strdup(pathenv(mini, newtmp));
 	tmp = free_and_join(tmp, newtmp);
 	tmp = free_and_join(tmp, buff);
 	return (tmp);

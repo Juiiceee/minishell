@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/10 15:01:45 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 00:30:51 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	input_size(char *input, t_mini *mini)
 		else if (input[i] == '\'' || input[i] == '\"')
 			j += escape_quote(input, &i);
 		else
-			j += escape_word(input, &i);
+			j += escape_word(input, &i, mini);
 		while (isspace(input[i]))
 			i++;
 	}
@@ -112,23 +112,24 @@ t_token	*ft_tokenizer(char *input, t_mini *mini)
 {
 	int		i;
 	int		j;
-	char	*old;
+	int		inpt_size;
 
 	j = 0;
 	i = 0;
-	mini->tabcmd = ft_calloc(sizeof (char *), (input_size(input, mini) + 1));
+	inpt_size = input_size(input, mini);
+	printf("%d\n", inpt_size);
+	mini->tabcmd = ft_calloc(sizeof (char *), (inpt_size + 1));
 	while (input[i] != '\0')
 	{
 		if (!isspace(mini->input[i]) && mini->input[i] != '\0')
 		{
-			old = ft_select_token(input, &i, mini, &j);
-			if (old)
-				mini->tabcmd[j] = old;
+			mini->tabcmd[j] = ft_select_token(input, &i, mini, &j);
 			while (!isspace(input[i]) && input[i] != '\0' && input[i] != '<'
-				&& input[i] != '>' && input[i] != '|' && mini->tabcmd[j][0] != '|')
+				&& input[i] != '>' && input[i] != '|' && mini->tabcmd[j] 
+				&& mini->tabcmd[j][0] != '|')
 				mini->tabcmd[j] = free_and_join(mini->tabcmd[j],
 						ft_select_token(input, &i, mini, &j));
-			while (mini->tabcmd[j])
+			while (mini->tabcmd[j]  && j < inpt_size)
 				j++;
 		}
 		if (mini->input[i] != '\0' && isspace(mini->input[i]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:17:24 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 15:45:36 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 00:05:02 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_pwd(t_mini *mini)
 	printf("%s\n", pwd);
 	free(pwd);
 	mini->exitstatus = 0;
+	if (mini->exe_size != 1)
+		child_clean_exit(mini, 0);
 }
 
 void	ft_env(t_mini *mini)
@@ -45,7 +47,7 @@ void	ft_env(t_mini *mini)
 	}
 	mini->exitstatus = 0;
 	if (mini->exe_size != 1)
-		exit(0);
+		child_clean_exit(mini, 0);
 }
 
 void	ft_cd(char **cmd, t_mini *mini)
@@ -80,7 +82,9 @@ void	ft_exit(t_mini *mini, char **cmd)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
+	if (mini->exe_size != 1)
+		child_clean_exit(mini, 0);
 	if (tablength(cmd) > 2)
 	{
 		mini->exitstatus = 1;
@@ -89,19 +93,18 @@ void	ft_exit(t_mini *mini, char **cmd)
 	printf("exit\n");
 	ft_envclean(&mini->env);
 	if (!cmd[1])
-		exit(mini->exitstatus);
+		clean_for_exit(mini, mini->exitstatus);
 	if (cmd[1][0] == '+' || cmd[1][0] == '-')
-		i++;
-	while (cmd[1][i])
-	{
-		if (!ft_isdigit(cmd[1][i]))
+		while (cmd[1][i])
 		{
-			printexe(2, cmd[1]);
-			exit(2);
+			if (!ft_isdigit(cmd[1][i]))
+			{
+				printexe(2, cmd[1]);
+				exit(2);
+			}
+			i++;
 		}
-		i++;
-	}
-	exit(ft_atoi(cmd[1]));
+	clean_for_exit(mini, ft_atoi(cmd[1]));
 }
 
 void	ft_export(char **cmd, t_mini *mini)
@@ -129,5 +132,5 @@ void	ft_export(char **cmd, t_mini *mini)
 	}
 	refreshtab(mini);
 	if (mini->exe_size != 1)
-		exit(0);
+		child_clean_exit(mini, 0);
 }

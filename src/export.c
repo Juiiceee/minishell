@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/11 11:47:32 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 11:56:08 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	addvaluelst(t_mini *mini, char *find, char *new)
 void	export(t_mini *mini, char *find, char *new)
 {
 	int		check;
-	char	*tmp;
 	t_list	*st;
 
 	st = mini->env;
@@ -59,20 +58,18 @@ void	export(t_mini *mini, char *find, char *new)
 		addvaluelst(mini, find, new);
 		return ;
 	}
-	tmp = ft_strjoin(find, "=");
 	while (check && st->next != NULL)
 	{
-		check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
+		check = ft_strcmp(find, (char *)st->content);
 		if (check == 0)
 			break ;
 		st = st->next;
 	}
-	check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
+	check = ft_strcmp(find, (char *)st->content);
 	if (check == 0)
 		modifievaluelst(&st, find, new);
 	else
 		addvaluelst(mini, find, new);
-	return (free(tmp));
 }
 
 int	ft_checkexport(char **cmd, t_mini *mini, size_t j)
