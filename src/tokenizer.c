@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 00:30:51 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:25:03 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ t_token	*ft_tokenizer(char *input, t_mini *mini)
 	j = 0;
 	i = 0;
 	inpt_size = input_size(input, mini);
-	printf("%d\n", inpt_size);
 	mini->tabcmd = ft_calloc(sizeof (char *), (inpt_size + 1));
 	while (input[i] != '\0')
 	{

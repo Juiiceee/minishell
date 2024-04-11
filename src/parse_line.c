@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:32:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 00:33:29 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:27:47 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,44 +50,7 @@ char	*str_parse(char *input, int *index)
 	return (tmp);
 }
 
-char	*var_dquote(char *tmp, t_mini *mini, int *index)
-{
-	int		i;
-	int		j;
-	char	*newtmp;
-	char	*buff;
-
-	i = 0;
-	(void)*index;
-	while (tmp[i] != '$')
-		i++;
-	j = i + 1;
-	if (tmp[j] == '?')
-	{
-		buff = ft_substr(tmp, j + 1, ft_strlen(tmp) - (j + 1));
-		tmp = ft_substr(tmp, 0, i);
-		newtmp = ft_itoa(mini->exitstatus);
-		tmp = free_and_join(tmp, newtmp);
-		tmp = free_and_join(tmp, buff);
-		return (tmp);
-	}
-	while (ft_isalnum(tmp[j]) && tmp[j])
-		j++;
-	newtmp = ft_substr(tmp, i + 1, j - i - 1);
-	buff = ft_substr(tmp, j, ft_strlen(tmp) - j);
-	tmp = ft_substr(tmp, 0, i);
-	if (!pathenv(mini, newtmp))
-	{
-		tmp = free_and_join(tmp, buff);
-		return (free(newtmp), tmp);
-	}
-	newtmp = ft_strdup(pathenv(mini, newtmp));
-	tmp = free_and_join(tmp, newtmp);
-	tmp = free_and_join(tmp, buff);
-	return (tmp);
-}
-
-char	*dquote_parse(char *input, int *index, t_mini *mini)
+char	*dquote_parse(char *str, int *index, t_mini *mini)
 {
 	int		i;
 	int		j;
@@ -95,23 +58,23 @@ char	*dquote_parse(char *input, int *index, t_mini *mini)
 
 	i = 0;
 	j = -1;
-	while (input[++i])
-		if (input[i] == '"')
+	while (str[++i])
+		if (str[i] == '"')
 			break ;
-	if (input[i] == '\0')
-		return (*index = *index + i, ft_printerr("Dquote is badly closed, followed string as been voided : %s\n", input), NULL);
+	if (str[i] == '\0')
+		return (*index = *index + i, ft_printerr("Dquote is badly closed, followed string as been voided : %s\n", str), NULL);
 	if (*index != 0)
 	{
-		if (isspace(input[-1]))
-			tmp = ft_substr(input, 0, i);
+		if (isspace(str[-1]))
+			tmp = ft_substr(str, 0, i);
 		else
-			tmp = ft_substr(input, 1, i - 1);
+			tmp = ft_substr(str, 1, i - 1);
 	}
 	else
-		tmp = ft_substr(input, 0, i);
-	while (input[++j] != 0 && tmp[j] != 0)
-		if (input[j] == '$'
-			&& (ft_isalnum(input[j + 1]) || input[j + 1] == '?'))
+		tmp = ft_substr(str, 0, i);
+	while (str[++j] != 0 && str[j + 1] != '"' && (tmp[0] != 0 || tmp[j] != 0))
+		if (str[j] == '$'
+			&& (ft_isalnum(str[j + 1]) || str[j + 1] == '?'))
 			tmp = var_dquote(tmp, mini, index);
 	return (*index = *index + i + 1, tmp);
 }

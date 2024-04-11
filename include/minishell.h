@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/11 00:31:38 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:13:07 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ int				execcd(t_mini *mini, char *path);
 // parse_line.c
 char			*squote_parse(char *input, int *index);
 char			*dquote_parse(char *input, int *index, t_mini *mini);
-char			*var_dquote(char *tmp, t_mini *mini, int *index);
 char			*str_parse(char *input, int *index);
 char			*punct_parse(char *input, int *i, t_mini *mini, int *j);
 
@@ -245,5 +244,8 @@ int				utilsft_exec(t_mini *mini, t_exec *tmp_exe);
 // validation.c
 int				input_validation(t_mini *mini);
 void			free_inpt_error(t_mini *mini);
+
+// var_dquote.c
+char			*var_dquote(char *tmp, t_mini *mini, int *index);
 
 #endif
