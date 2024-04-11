@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:36:30 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 15:38:39 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 11:47:32 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,12 @@ int	ft_checkexport(char **cmd, t_mini *mini, size_t j)
 			printexe(1, ft_substr(cmd[j], 0, i)), 1);
 	}
 	if (ft_isdigit(cmd[j][0]))
+	{
+		while (cmd[j][i] && cmd[j][i] != '=')
+			i++;
 		return (mini->exitstatus = 1,
 			printexe(1, ft_substr(cmd[j], 0, i)), 1);
+	}
 	while (cmd[j][i] != '=' && cmd[j][i])
 	{
 		if (ft_alphaunderscore(cmd[j][i]))

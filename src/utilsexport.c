@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:19:46 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 16:34:27 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/11 11:39:55 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	ft_alphaunderscore(char c)
 void	printexe(int i, char *str)
 {
 	if (i == 1)
-		return (ft_putstr_fd("'", 2), ft_putstr_fd(str, 2),
-			ft_putstr_fd("': not a valid identifier", 2), free(str));
+		return (ft_putstr_fd("`", 2), ft_putstr_fd(str, 2),
+			ft_putstr_fd("': not a valid identifier\n", 2), free(str));
 	else if (i == 2)
 		return (ft_putstr_fd("exit: ", 2), ft_putstr_fd(str, 2),
 			ft_putstr_fd(": numeric argument required\n", 2));
