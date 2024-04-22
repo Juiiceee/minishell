@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:14:42 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 14:36:01 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:49:42 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_token	*listing_token(char **tmp)
 		if (tmp[i][0] == '>' || tmp[i][0] == '<')
 		{
 			new = tokenizing_redirect(tmp, &i);
-			i += is_splitted(tmp[i]);
+			i += is_splitted(tmp, &i);
 		}
 		else if (tmp[i][0] == '|')
 			new = tokenizing_pipe(tmp, &i);

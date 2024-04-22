@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 14:56:59 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:58:14 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,19 @@ t_token	*tok_lstlast(t_token *lst)
 	return (lst);
 }
 
-int	is_splitted(char *tmp)
+int	is_splitted(char **tmp, int *i)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	if (tmp[0] == '>' || tmp[0] == '<')
+	j = 0;
+	if (tmp[*i][0] == '>' || tmp[*i][0] == '<')
 	{
-		while (tmp[i] == '>' || tmp[i] == '<')
-			i++;
-		if (i == (int)ft_strlen(tmp))
+		while (tmp[*i][j] == '>' || tmp[*i][j] == '<')
+			j++;
+		if (j == (int)ft_strlen(tmp[*i]) && !tmp[*i][j] && tmp[*i + 1])
 			return (2);
 		else
-			return (free(tmp), 1);
+			return (free(tmp[*i]), 1);
 	}
 	return (1);
 }

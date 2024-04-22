@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/11 14:34:45 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:53:13 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ char			*pipe_sign(char *input, int *i);
 t_token			*tok_lstnew(char **content, t_type data);
 void			tok_lstadd_back(t_token **lst, t_token *new);
 t_token			*tok_lstlast(t_token *lst);
-int				is_splitted(char *tmp);
+int				is_splitted(char **tmp, int *i);
 
 // lst_exe.c
 t_exec			*exe_lstnew(t_token *tmp);
