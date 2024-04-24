@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:00:02 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/22 18:40:26 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:12:14 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_token	*tokenizing_redirect(char **tmp, int *i)
 	while (tmp[*i][j] == '>' || tmp[*i][j] == '<')
 		j++;
 	if (j > 2 || (!tmp[*i][j] && !tmp[*i + 1]))
+		return (tok_lstnew(ft_subtab(tmp, *i, 1), DONT_EXIST));
+	if (tmp[*i + 1][0] == '<' || tmp[*i + 1][0] == '>')
 		return (tok_lstnew(ft_subtab(tmp, *i, 1), DONT_EXIST));
 	else if (j == (int)ft_strlen(tmp[*i]))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   running.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:53:08 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 16:13:02 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/24 15:35:53 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	insiderunning(t_mini *mini)
 	if (input_validation(mini))
 		return (free_inpt_error(mini), 0);
 	if (checkisdir(mini))
-		return (free(mini->input), 0);
+		return (free_inpt_error(mini), 0);
 	ft_parse_exec(mini);
 	ft_exec(mini);
 	dup2(mini->clear_fd[0], 0);
@@ -83,6 +83,8 @@ void	running(t_mini *mini)
 			ft_envclean(&mini->env);
 			rl_clear_history();
 			printf("exit\n");
+			close(mini->clear_fd[0]);
+			close(mini->clear_fd[1]);
 			break ;
 		}
 	}

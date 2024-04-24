@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/22 18:58:14 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:17:13 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	is_splitted(char **tmp, int *i)
 			j++;
 		if (j == (int)ft_strlen(tmp[*i]) && !tmp[*i][j] && tmp[*i + 1])
 			return (2);
-		else
+		else if (tmp[*i][j])
 			return (free(tmp[*i]), 1);
 	}
 	return (1);

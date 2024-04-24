@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsexec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:10:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/11 11:56:19 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/24 15:38:03 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	free_child(t_mini *mini)
 	rl_clear_history();
 	ft_execlear(&mini->exe, *ft_free);
 	ft_lstclear(&mini->env, *free);
+	close(mini->clear_fd[0]);
+	close(mini->clear_fd[1]);
 }
 
 int	utilsparsingcom(char **envpath, int *i, t_exec *cmd)
