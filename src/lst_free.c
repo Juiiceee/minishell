@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:06:55 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/03/13 00:00:29 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:12:43 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ void	ft_execlear(t_exec **lst, void (*del)(char **))
 		sav = actual->next;
 		if (actual->cmd)
 			(*del)(actual->cmd);
+		if (actual->is_fdin == 1)
+			close(actual->fdin);
 		if (actual->in)
 			(*del)(actual->in);
+		if (actual->is_fdout == 1)
+			close(actual->fdout);
 		if (actual->out)
 			(*del)(actual->out);
 		free(actual);

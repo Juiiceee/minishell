@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:39:20 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/02 14:13:22 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:03:49 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,20 @@ void	unset(t_mini *mini, char *find)
 {
 	int		check;
 	t_list	*st;
-	char	*tmp;
 
 	st = mini->env;
 	check = 1;
 	if (!st || !st->content)
 		return ;
-	tmp = ft_strjoin(find, "=");
 	while (check && st->next)
 	{
-		check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
+		check = ft_strncmp(find, (char *)st->content, ft_strlen(find));
 		if (check == 0)
 			break ;
 		st = st->next;
 	}
-	check = ft_strncmp(tmp, (char *)st->content, ft_strlen(tmp));
+	check = ft_strncmp(find, (char *)st->content, ft_strlen(find));
 	if (check == 0)
 		free_list_element(&mini->env, st);
-	return (free(tmp), free(find));
+	return (free(find));
 }

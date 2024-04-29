@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:13:45 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/22 18:53:13 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:47:37 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,7 @@ int				utilsft_exec(t_mini *mini, t_exec *tmp_exe);
 // validation.c
 int				input_validation(t_mini *mini);
 void			free_inpt_error(t_mini *mini);
+int				exec_validation(t_mini *mini);
 
 // exit_status.c
 void			child_exit_signal(t_mini *mini, int status);

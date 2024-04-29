@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsexport.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:19:46 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/11 11:39:55 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/29 15:01:21 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 void	exportvalueseul(t_mini *mini, char *find)
 {
 	t_list	*st;
+	char	*tmp;
 
 	st = mini->env;
 	if (!st || !st->content)
 		return ;
 	if (!pathenv(mini, find))
+	{
+		tmp = ft_substr(find, 0, ft_strlen(find) - 1);
+		if (!tmp)
+			return ;
+		unset(mini, tmp);
 		ft_lstadd_back(&mini->env, ft_lstnew(ft_strdup(find)));
+	}
 	return ;
 }
 

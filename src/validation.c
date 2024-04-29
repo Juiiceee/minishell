@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:42:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/24 16:10:35 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:52:55 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,25 @@ int	input_validation(t_mini *mini)
 		else if ((tmp->data_type == PIPE) && (!tmp->next
 				|| tmp->next->data_type == PIPE))
 			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int	exec_validation(t_mini *mini)
+{
+	t_exec	*tmp;
+
+	tmp = mini->exe;
+	while (tmp)
+	{
+		if	(tmp->cmd == NULL)
+		{
+			ft_execlear(&mini->exe, *ft_free);
+			free(mini->input);
+			ft_tokclean(&mini->lst);
+			return (1);
+		}	
 		tmp = tmp->next;
 	}
 	return (0);
