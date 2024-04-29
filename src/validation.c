@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:42:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/29 13:52:55 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:10:05 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	exec_validation(t_mini *mini)
 	tmp = mini->exe;
 	while (tmp)
 	{
-		if	(tmp->cmd == NULL)
+		if (tmp->cmd == NULL)
 		{
 			ft_execlear(&mini->exe, *ft_free);
 			free(mini->input);

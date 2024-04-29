@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:30:36 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 12:33:51 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/29 15:09:24 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	wait_child(t_mini *mini)
 	}
 	if (mini->exe_size != 1 || mini->exe->builtin != 1)
 		child_exit_signal(mini, status);
+	signal(SIGINT, recosigint);
 }
 
 void	ft_exec(t_mini *mini)
