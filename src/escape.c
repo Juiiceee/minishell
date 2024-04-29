@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:35:23 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/11 13:08:49 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/29 15:33:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int	escape_word(char *input, int *i, t_mini *mini)
 	int	j;
 
 	j = *i;
-	if (input[j] == '$')
-		return (escape_dolar(input, i, mini));
 	while (input[j])
 	{
+		if (input[j] == '$')
+			return (escape_dolar(input, i, mini));
 		if (input[j] == '|' || input[j] == '<'
 			|| input[j] == '>'
 			|| (ft_isspace(input[j])))
