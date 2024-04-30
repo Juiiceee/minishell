@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:42:29 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/04/29 15:10:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/04/30 11:46:32 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	input_validation(t_mini *mini)
 	t_token	*tmp;
 
 	tmp = mini->lst;
-	if (!tmp || !ft_strlen(mini->lst->global[0]))
+	if (!tmp || (mini->lst->global && !ft_strlen(mini->lst->global[0])))
 		return (1);
 	if (mini->lst->data_type == PIPE)
 		return (1);
