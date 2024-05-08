@@ -1,4 +1,4 @@
-# Minishell
+# Minishell 🇫🇷
 
 ## Description
 Minishell est un projet de développement d'un shell basique en langage C. Il permet d'exécuter des commandes internes et externes, de gérer les redirections, les pipes, les variables d'environnement, etc.
@@ -27,7 +27,7 @@ Minishell est un projet de développement d'un shell basique en langage C. Il pe
 - Mathieu
 - Louis
 
-# Minishell
+# Minishell 🇬🇧
 
 ## Description
 Minishell is a C language project for developing a basic shell. It allows executing internal and external commands, managing input/output redirections, pipes, environment variables, etc.
