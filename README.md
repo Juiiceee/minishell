@@ -24,8 +24,8 @@ Minishell est un projet de développement d'un shell basique en langage C. Il pe
 - Utilisez les redirections et les pipes pour gérer les entrées/sorties.
 
 ## Auteurs
-- Mathieu
-- Louis
+- [Mathieu](https://github.com/Me-mathix)
+- [Louis](https://github.com/Juiiceee)
 
 # Minishell 🇬🇧
 
@@ -53,5 +53,5 @@ Minishell is a C language project for developing a basic shell. It allows execut
 - Use redirections and pipes to manage input/output.
 
 ## Authors
-- Mathieu
-- Louis
+- [Mathieu](https://github.com/Me-mathix)
+- [Louis](https://github.com/Juiiceee)
