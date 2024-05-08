@@ -4,11 +4,11 @@
 Minishell est un projet de développement d'un shell basique en langage C. Il permet d'exécuter des commandes internes et externes, de gérer les redirections, les pipes, les variables d'environnement, etc.
 
 ## Fonctionnalités
-- Exécution de commandes internes telles que `cd`, `echo`, `pwd`, etc.
+- Exécution de commandes internes telles que `cd`, `echo`, `pwd`, `export`, `unset` , `env`, etc.
 - Exécution de commandes externes en utilisant `execve`
-- Gestion des redirections d'entrée et de sortie avec les symboles `<`, `>`, `>>`
+- Gestion des redirections d'entrée et de sortie avec les symboles `<<`, `<`, `>`, `>>`
 - Gestion des pipes avec le symbole `|`
-- Gestion des variables d'environnement avec `getenv` et `setenv`
+- Gestion des variables d'environnement avec `getenv`, `export`, `unset` , `env`
 - Gestion des signaux avec `signal`
 
 ## Installation
@@ -33,11 +33,11 @@ Minishell est un projet de développement d'un shell basique en langage C. Il pe
 Minishell is a C language project for developing a basic shell. It allows executing internal and external commands, managing input/output redirections, pipes, environment variables, etc.
 
 ## Features
-- Execution of internal commands such as `cd`, `echo`, `pwd`, etc.
+- Execution of internal commands such as `cd`, `echo`, `pwd`, `export`, `unset` , `env`, etc.
 - Execution of external commands using `execve`
-- Handling input and output redirections with `<`, `>`, `>>` symbols
+- Handling input and output redirections with `<<`, `<`, `>`, `>>`
 - Handling pipes with `|`
-- Managing environment variables with `getenv` and `setenv`
+- Managing environment variables with `getenv`, `export`, `unset` , `env`
 - Handling signals with `signal`
 
 ## Installation
