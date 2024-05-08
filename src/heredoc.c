@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:20:19 by lbehr             #+#    #+#             */
-/*   Updated: 2024/04/10 11:44:38 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/05/08 14:11:04 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	heredoc(char *limiter, t_mini *mini)
 	while (1)
 	{
 		line = readline("> ");
-		if (!ft_strncmp(line, limiter, ft_strlen(limiter))
+		if (!ft_strcmp(line, limiter)
 			|| g_signalexit == 130)
 			break ;
 		if (ft_strchr(line, '$'))
